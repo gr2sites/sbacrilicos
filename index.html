@@ -239,17 +239,6 @@
     .frete-box .frete-prazo   { font-size: .82rem; color: #64748b; }
     .frete-error { background: #fef2f2; border-left: 4px solid var(--red); border-radius: 10px; padding: .9rem; margin-top: .8rem; color: var(--red); font-size: .88rem; }
 
-    .pay-tabs { display: flex; gap: .8rem; margin-bottom: 1.2rem; }
-    .pay-tab {
-      flex: 1; padding: .9rem; border-radius: 12px;
-      border: 2px solid var(--border); background: none;
-      cursor: pointer; font-weight: 700; color: #64748b;
-      transition: .2s; display: flex; align-items: center; justify-content: center; gap: .5rem;
-      font-size: .9rem;
-    }
-    .pay-tab.active { border-color: var(--gold); background: var(--gold-light); color: var(--gold-dark); }
-    .pay-tab i { font-size: 1.1rem; }
-
     .pix-block { text-align: center; padding: 1rem 0; }
     .pix-qr {
       width: 160px; height: 160px; background: #f1f5f9;
@@ -311,7 +300,6 @@
 
     @media(max-width: 576px) {
       .hero h1 { font-size: 1.8rem; }
-      .pay-tabs { flex-direction: column; }
       .checkout-title { font-size: 1.4rem; }
       .cart-text { display: none; }
     }
@@ -589,60 +577,18 @@
           </div>
         </div>
 
-        <!-- Pagamento -->
+        <!-- Pagamento PIX -->
         <div class="card-section">
-          <div class="card-section-title"><i class="bi bi-credit-card-2-front-fill"></i> Forma de Pagamento</div>
+          <div class="card-section-title"><i class="bi bi-qr-code-scan"></i> Pagamento via PIX</div>
 
-          <div class="pay-tabs">
-            <button class="pay-tab active" id="tabCard" onclick="setPayTab('card')">
-              <i class="bi bi-credit-card-fill"></i> Cartão de Crédito
-            </button>
-            <button class="pay-tab" id="tabPix" onclick="setPayTab('pix')">
-              <i class="bi bi-qr-code-scan"></i> PIX
-            </button>
-          </div>
-
-          <!-- Cartão -->
-          <div id="panelCard">
-            <div class="row g-2">
-              <div class="col-12">
-                <label class="form-label">Número do Cartão</label>
-                <input type="text" class="form-control" id="cardNumber"
-                  placeholder="0000 0000 0000 0000" maxlength="19" oninput="maskCard(this)">
-              </div>
-              <div class="col-12">
-                <label class="form-label">Nome no Cartão</label>
-                <input type="text" class="form-control" id="cardName"
-                  placeholder="NOME SOBRENOME" oninput="this.value=this.value.toUpperCase()">
-              </div>
-              <div class="col-6">
-                <label class="form-label">Validade</label>
-                <input type="text" class="form-control" id="cardExp"
-                  placeholder="MM/AA" maxlength="5" oninput="maskExp(this)">
-              </div>
-              <div class="col-6">
-                <label class="form-label">CVV</label>
-                <input type="text" class="form-control" id="cardCvv"
-                  placeholder="000" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'')">
-              </div>
-              <div class="col-12">
-                <label class="form-label">Parcelas</label>
-                <select class="form-select" id="parcelas"></select>
-              </div>
-            </div>
-          </div>
-
-          <!-- PIX -->
-          <div id="panelPix" style="display:none;">
-            <div class="pix-block">
-              <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code ou copie a chave PIX abaixo.</p>
-              <div class="pix-qr">📱</div>
-              <div class="pix-key">00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD</div>
-              <button class="btn-copy" onclick="copyPix()"><i class="bi bi-clipboard"></i> Copiar Chave PIX</button>
-              <p style="color:var(--green);font-size:.82rem;margin-top:.8rem;">
-                <i class="bi bi-shield-lock-fill"></i> Pagamento instantâneo via Banco Central do Brasil
-              </p>
-            </div>
+          <div class="pix-block">
+            <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code ou copie a chave PIX abaixo.</p>
+            <div class="pix-qr">📱</div>
+            <div class="pix-key">00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD</div>
+            <button class="btn-copy" onclick="copyPix()"><i class="bi bi-clipboard"></i> Copiar Chave PIX</button>
+            <p style="color:var(--green);font-size:.82rem;margin-top:.8rem;">
+              <i class="bi bi-shield-lock-fill"></i> Pagamento instantâneo via Banco Central do Brasil
+            </p>
           </div>
         </div>
 
@@ -769,7 +715,6 @@
 // ============================================================
 let cart = {};
 let freightCost = 0;
-let payTab = 'card';
 const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP)
 
 // ============================================================
@@ -873,7 +818,6 @@ function goToCheckout() {
   freightCost = 0;
   document.getElementById('freteResultado').innerHTML = '';
   buildCheckoutSummary();
-  buildParcelas();
   showPage('checkout');
 }
 
@@ -903,31 +847,11 @@ function buildCheckoutSummary() {
   document.getElementById('sideTotalVal').textContent = 'R$ ' + fmt(total);
 }
 
-function buildParcelas() {
-  const ids = Object.keys(cart);
-  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
-  const total = subtotal + freightCost;
-  let html = '';
-  for (let i = 1; i <= 12; i++) {
-    const val = i <= 3 ? total / i : (total * (1 + 0.0199 * i)) / i;
-    html += `<option value="${i}">${i}× de R$ ${fmt(val)}${i <= 3 ? ' sem juros' : ' c/ juros (1,99% a.m.)'}</option>`;
-  }
-  document.getElementById('parcelas').innerHTML = html;
-}
-
 // ============================================================
-//  PAGAMENTO
+//  PAGAMENTO PIX
 // ============================================================
-function setPayTab(tab) {
-  payTab = tab;
-  document.getElementById('tabCard').classList.toggle('active', tab === 'card');
-  document.getElementById('tabPix').classList.toggle('active', tab === 'pix');
-  document.getElementById('panelCard').style.display = tab === 'card' ? 'block' : 'none';
-  document.getElementById('panelPix').style.display  = tab === 'pix'  ? 'block' : 'none';
-}
-
 function copyPix() {
-  navigator.clipboard.writeText('00020126580014br.gov.bcb.pix...')
+  navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD')
     .then(() => toast('Chave PIX copiada!', 'success'));
 }
 
@@ -939,17 +863,6 @@ function finalizarPedido() {
   const email = document.getElementById('emailCliente').value.trim();
   if (!nome)  { toast('Preencha o nome completo.', 'error'); return; }
   if (!email) { toast('Preencha o e-mail.', 'error'); return; }
-
-  if (payTab === 'card') {
-    const num   = document.getElementById('cardNumber').value.replace(/\s/g,'');
-    const cname = document.getElementById('cardName').value.trim();
-    const exp   = document.getElementById('cardExp').value;
-    const cvv   = document.getElementById('cardCvv').value;
-    if (num.length < 16) { toast('Número do cartão inválido.', 'error'); return; }
-    if (!cname)          { toast('Digite o nome no cartão.', 'error'); return; }
-    if (exp.length < 5)  { toast('Validade inválida.', 'error'); return; }
-    if (cvv.length < 3)  { toast('CVV inválido.', 'error'); return; }
-  }
 
   const ids = Object.keys(cart);
   const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
@@ -996,7 +909,6 @@ function calcularFrete() {
           <div style="font-size:.75rem;color:#94a3b8;margin-top:.4rem">* Estimativa calculada por CEP de origem e destino.</div>
         </div>`;
       buildCheckoutSummary();
-      buildParcelas();
     } catch(e) {
       resultEl.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular. Verifique o CEP.</div>`;
     }
@@ -1075,15 +987,7 @@ function maskCep(el) {
   if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
   el.value = v;
 }
-function maskCard(el) {
-  let v = el.value.replace(/\D/g,'').slice(0,16);
-  el.value = v.replace(/(.{4})/g,'$1 ').trim();
-}
-function maskExp(el) {
-  let v = el.value.replace(/\D/g,'').slice(0,4);
-  if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
-  el.value = v;
-}
+
 function maskPhone(el) {
   let v = el.value.replace(/\D/g,'').slice(0,11);
   if (v.length > 10) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
