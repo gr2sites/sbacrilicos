@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formas de Acrílico Premium</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-dark: #B8960F;
+      --gold-light: #FFF8E7;
+      --navy: #0f172a;
+      --text: #334155;
+      --bg: #f4f6fa;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-top: 70px;
+    }
+
+    /* ===== HEADER SEM MENU ===== */
+    .top-header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: var(--white);
+      box-shadow: 0 4px 12px rgba(0,0,0,.10);
+      z-index: 1050;
+      height: 70px;
+    }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
+    .logo-img {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: #fff; font-weight: 800; flex-shrink: 0;
+    }
+    .logo-text { font-size: 1.05rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
+    .logo-sub  { font-size: .7rem; color: var(--gold); letter-spacing: .05em; font-weight: 600; }
+
+    .btn-cart {
+      position: relative; background: none; border: 2px solid var(--gold);
+      border-radius: 50px; padding: 7px 18px; cursor: pointer;
+      color: var(--gold); font-size: .95rem; font-weight: 700;
+      display: flex; align-items: center; gap: .4rem; transition: .2s;
+    }
+    .btn-cart:hover { background: var(--gold); color: #fff; }
+    .btn-cart i { font-size: 1.1rem; }
+    .cart-badge {
+      background: var(--gold); color: #fff;
+      font-size: .65rem; font-weight: 700;
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===== PAGES ===== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 60%, #0f172a 100%);
+      padding: 5rem 1rem 4rem; text-align: center; color: #fff;
+    }
+    .hero-badge {
+      display: inline-block; background: rgba(212,175,55,.15);
+      border: 1px solid rgba(212,175,55,.4);
+      color: var(--gold); font-size: .8rem; font-weight: 700;
+      letter-spacing: .1em; padding: 5px 16px; border-radius: 50px; margin-bottom: 1.2rem;
+    }
+    .hero h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.15; margin-bottom: .8rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: #94a3b8; font-size: 1.05rem; max-width: 480px; margin: 0 auto 2rem; line-height: 1.6; }
+    .btn-gold {
+      background: var(--gold); color: var(--navy); border: none;
+      padding: 13px 36px; border-radius: 10px;
+      font-weight: 700; font-size: 1rem; cursor: pointer; transition: .2s;
+      display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--gold-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,.4); }
+
+    /* ===== PRODUTOS ===== */
+    .section { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 { font-size: 2rem; font-weight: 800; color: var(--navy); }
+    .section-title p  { color: #64748b; margin-top: .5rem; font-size: 1rem; }
+    .title-bar { width: 60px; height: 4px; background: var(--gold); margin: .8rem auto 0; border-radius: 2px; }
+
+    .product-card {
+      background: var(--white); border-radius: 20px;
+      overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform .3s, box-shadow .3s;
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,.13); }
+
+    .product-img-wrap {
+      width: 100%; height: 230px;
+      background: linear-gradient(135deg, #e8f4fb, #d0eaf7);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .p-emoji { font-size: 5rem; display: none; }
+    .badge-new {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--gold); color: var(--navy);
+      font-size: .7rem; font-weight: 800; padding: 3px 10px;
+      border-radius: 50px; letter-spacing: .05em;
+    }
+
+    .product-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .product-sku  { font-size: .72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .3rem; }
+    .product-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+    .product-dims { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .8rem; }
+    .dim-badge { background: #f1f5f9; color: #475569; font-size: .75rem; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
+    .product-desc { color: #64748b; font-size: .88rem; flex: 1; margin-bottom: 1rem; line-height: 1.5; }
+    .product-price { font-size: 1.6rem; font-weight: 800; color: var(--gold); margin-bottom: .3rem; }
+    .product-price-note { font-size: .78rem; color: #94a3b8; margin-bottom: 1rem; }
+
+    .qty-row { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
+    .qty-label { font-size: .82rem; font-weight: 600; color: var(--navy); }
+    .qty-control { display: flex; align-items: center; gap: .5rem; background: #f1f5f9; border-radius: 10px; padding: 4px; }
+    .qty-btn {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: none; background: var(--white);
+      color: var(--gold); font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; transition: .2s; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .qty-btn:hover { background: var(--gold); color: #fff; }
+    .qty-val { font-weight: 700; font-size: 1rem; min-width: 28px; text-align: center; color: var(--navy); }
+
+    .btn-add {
+      width: 100%; padding: 12px; border: none; border-radius: 12px;
+      background: var(--gold); color: #fff; font-weight: 700;
+      font-size: .95rem; cursor: pointer; transition: .2s;
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+    }
+    .btn-add:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-add.added { background: var(--green); }
+
+    /* ===== CARRINHO OFFCANVAS ===== */
+    .offcanvas-header { border-bottom: 1px solid var(--border); }
+    .offcanvas-title { font-weight: 800; color: var(--navy); font-size: 1.1rem; }
+
+    .cart-item {
+      display: flex; gap: .8rem; padding: .9rem 0;
+      border-bottom: 1px solid var(--border); align-items: flex-start;
+    }
+    .cart-item-emoji { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name  { font-weight: 700; font-size: .92rem; color: var(--navy); margin-bottom: .2rem; }
+    .cart-item-unit  { font-size: .78rem; color: #94a3b8; }
+    .cart-item-price { color: var(--gold); font-weight: 800; font-size: .95rem; margin-top: .3rem; }
+    .cart-qty-row { display: flex; align-items: center; gap: .4rem; margin-top: .4rem; }
+    .cart-qty-btn {
+      width: 26px; height: 26px; border-radius: 7px;
+      border: 1.5px solid var(--gold); background: none;
+      color: var(--gold); font-weight: 700; cursor: pointer; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center; transition: .15s;
+    }
+    .cart-qty-btn:hover { background: var(--gold); color: #fff; }
+    .cart-qty-val { font-weight: 700; min-width: 22px; text-align: center; font-size: .9rem; }
+    .btn-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: .95rem; padding: 2px 6px; }
+    .cart-empty { text-align: center; padding: 3rem 1rem; color: #94a3b8; }
+    .cart-empty i { font-size: 3.5rem; margin-bottom: .8rem; display: block; }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .cart-total-label { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+    .cart-total-val   { font-weight: 800; color: var(--gold); font-size: 1.2rem; }
+    .btn-checkout-main {
+      width: 100%; padding: 14px; background: var(--gold);
+      border: none; border-radius: 12px; color: #fff;
+      font-weight: 800; font-size: 1rem; cursor: pointer; transition: .2s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .btn-checkout-main:hover { background: var(--gold-dark); }
+
+    /* ===== CHECKOUT ===== */
+    .checkout-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: none; border: 1.5px solid var(--border); border-radius: 8px;
+      padding: 7px 16px; color: var(--text); font-size: .88rem;
+      font-weight: 600; cursor: pointer; transition: .2s; margin-bottom: 1.5rem;
+    }
+    .back-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .checkout-title { font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 1.8rem; display: flex; align-items: center; gap: .6rem; }
+    .checkout-title i { color: var(--gold); }
+
+    .card-section {
+      background: var(--white); border-radius: 18px;
+      padding: 1.5rem; margin-bottom: 1.2rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,.07);
+    }
+    .card-section-title {
+      font-size: 1rem; font-weight: 800; color: var(--navy);
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .card-section-title i { color: var(--gold); font-size: 1.1rem; }
+
+    .order-line { display: flex; justify-content: space-between; align-items: center; padding: .55rem 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
+    .order-line:last-child { border: none; }
+    .order-line.total { font-weight: 800; font-size: 1.1rem; color: var(--navy); border-top: 2px solid var(--gold); padding-top: .8rem; margin-top: .3rem; }
+    .order-line.total span:last-child { color: var(--gold); }
+    .order-line span:first-child { color: #475569; }
+    .order-line span:last-child  { font-weight: 700; color: var(--navy); }
+
+    .form-label { font-weight: 700; font-size: .83rem; color: var(--navy); margin-bottom: .3rem; display: block; }
+    .form-control, .form-select {
+      border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 10px 13px; font-size: .93rem; width: 100%;
+      background: #fff; color: var(--navy); transition: border .2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); outline: none;
+    }
+
+    .frete-box {
+      background: #f0fdf4; border-left: 4px solid var(--green);
+      border-radius: 10px; padding: 1rem; margin-top: .8rem;
+    }
+    .frete-box .frete-servico { font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
+    .frete-box .frete-price   { font-size: 1.15rem; font-weight: 800; color: var(--green); }
+    .frete-box .frete-prazo   { font-size: .82rem; color: #64748b; }
+    .frete-error { background: #fef2f2; border-left: 4px solid var(--red); border-radius: 10px; padding: .9rem; margin-top: .8rem; color: var(--red); font-size: .88rem; }
+
+    .pay-tabs { display: flex; gap: .8rem; margin-bottom: 1.2rem; }
+    .pay-tab {
+      flex: 1; padding: .9rem; border-radius: 12px;
+      border: 2px solid var(--border); background: none;
+      cursor: pointer; font-weight: 700; color: #64748b;
+      transition: .2s; display: flex; align-items: center; justify-content: center; gap: .5rem;
+      font-size: .9rem;
+    }
+    .pay-tab.active { border-color: var(--gold); background: var(--gold-light); color: var(--gold-dark); }
+    .pay-tab i { font-size: 1.1rem; }
+
+    .pix-block { text-align: center; padding: 1rem 0; }
+    .pix-qr {
+      width: 160px; height: 160px; background: #f1f5f9;
+      border-radius: 14px; margin: 1rem auto;
+      display: flex; align-items: center; justify-content: center; font-size: 4.5rem;
+    }
+    .pix-key {
+      background: #f1f5f9; border-radius: 10px;
+      padding: .8rem 1rem; font-size: .78rem; color: var(--navy);
+      word-break: break-all; margin: .8rem 0; text-align: left;
+    }
+    .btn-copy {
+      border: 1.5px solid var(--gold); background: none;
+      color: var(--gold); border-radius: 8px; padding: 6px 16px;
+      font-size: .83rem; font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .btn-copy:hover { background: var(--gold); color: #fff; }
+
+    .sticky-summary { position: sticky; top: 82px; }
+
+    .btn-confirm {
+      width: 100%; padding: 15px; background: var(--gold);
+      border: none; border-radius: 14px; color: #fff;
+      font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: .2s;
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      margin-top: 1.2rem; box-shadow: 0 4px 14px rgba(212,175,55,.4);
+    }
+    .btn-confirm:hover { background: var(--gold-dark); transform: translateY(-2px); }
+
+    /* ===== SUCCESS ===== */
+    .success-wrap { max-width: 580px; margin: 3rem auto; padding: 2rem 1.5rem; text-align: center; }
+    .success-icon { font-size: 5rem; color: var(--green); margin-bottom: 1rem; animation: pop .5s ease; }
+    @keyframes pop { from{transform:scale(.5);opacity:0} to{transform:scale(1);opacity:1} }
+    .success-wrap h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: .5rem; }
+    .success-wrap p  { color: #64748b; margin-bottom: 1.5rem; }
+
+    /* ===== TOAST ===== */
+    .toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 3000; display: flex; flex-direction: column; gap: .5rem; }
+    .toast-msg {
+      background: var(--navy); color: #fff; border-radius: 12px;
+      padding: .85rem 1.2rem; font-size: .88rem;
+      display: flex; align-items: center; gap: .5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      animation: slideIn .3s ease; min-width: 220px;
+    }
+    .toast-msg.success { background: var(--green); }
+    .toast-msg.error   { background: var(--red); }
+    @keyframes slideIn { from{transform:translateX(120px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+    .site-footer {
+      text-align: center; padding: 2rem 1rem;
+      background: var(--navy); color: #64748b; font-size: .85rem; margin-top: 3rem;
+    }
+    .site-footer span { color: var(--gold); }
+
+    .cep-result-item { padding: .7rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; border-radius: 8px; transition: .15s; font-size: .9rem; }
+    .cep-result-item:hover { background: var(--gold-light); }
+    .cep-search-result { max-height: 280px; overflow-y: auto; margin-top: .5rem; }
+
+    @media(max-width: 576px) {
+      .hero h1 { font-size: 1.8rem; }
+      .pay-tabs { flex-direction: column; }
+      .checkout-title { font-size: 1.4rem; }
+      .cart-text { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER SEM MENU ===== -->
+<header class="top-header">
+  <div class="nav-container">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-img">A</div>
+      <div>
+        <div class="logo-text">Acrílico Premium</div>
+        <div class="logo-sub">Formas Profissionais</div>
+      </div>
+    </div>
+    <button class="btn-cart" onclick="openCart()">
+      <i class="bi bi-cart3"></i>
+      <span class="cart-text">Carrinho</span>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== TOASTS ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============================================================
+     PAGE HOME
+============================================================ -->
+<div class="page active" id="pageHome">
+
+  <div class="hero">
+    <div class="hero-badge">✦ QUALIDADE PREMIUM</div>
+    <h1>Formas de <span>Acrílico</span><br>para Profissionais</h1>
+    <p>Alta transparência, durabilidade excepcional e precisão em cada dimensão. Ideal para produções em escala.</p>
+    <button class="btn-gold" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">
+      <i class="bi bi-bag2-fill"></i> Ver Produtos
+    </button>
+  </div>
+
+  <div class="section" id="produtos">
+    <div class="section-title">
+      <h2>Nossos Produtos</h2>
+      <p>Escolha a forma ideal para a sua produção</p>
+      <div class="title-bar"></div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- PRODUTO 1 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="Imagens/produto-01.jpeg" alt="Forma Acrílico 30x10x10"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="p-emoji">🧊</div>
+            <span class="badge-new">PREMIUM</span>
+          </div>
+          <div class="product-body">
+            <div class="product-sku">SKU: AC-30-10-10</div>
+            <div class="product-title">Forma de Acrílico 30×10×10</div>
+            <div class="product-dims">
+              <span class="dim-badge">30 cm comp.</span>
+              <span class="dim-badge">10 cm larg.</span>
+              <span class="dim-badge">10 cm alt.</span>
+            </div>
+            <div class="product-desc">Ideal para produções de menor volume. Acrílico cristal de alta qualidade com acabamento impecável e fácil desmolde.</div>
+            <div class="product-price">R$ 89,90</div>
+            <div class="product-price-note">À vista · Frete calculado no checkout</div>
+            <div class="qty-row">
+              <span class="qty-label">Qtd:</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('p1',-1)">−</button>
+                <span class="qty-val" id="qty-p1">1</span>
+                <button class="qty-btn" onclick="changeQty('p1',1)">+</button>
+              </div>
+            </div>
+            <button class="btn-add" id="btn-p1" onclick="addToCart('p1','Forma Acrílico 30×10×10',89.90,'🧊')">
+              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUTO 2 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="Imagens/produto-02.jpeg" alt="Forma Acrílico 30x20x10"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="p-emoji">🔷</div>
+            <span class="badge-new">PREMIUM</span>
+          </div>
+          <div class="product-body">
+            <div class="product-sku">SKU: AC-30-20-10</div>
+            <div class="product-title">Forma de Acrílico 30×20×10</div>
+            <div class="product-dims">
+              <span class="dim-badge">30 cm comp.</span>
+              <span class="dim-badge">20 cm larg.</span>
+              <span class="dim-badge">10 cm alt.</span>
+            </div>
+            <div class="product-desc">Formato intermediário, perfeito para produções variadas. Alta transparência e resistência a impactos e temperatura.</div>
+            <div class="product-price">R$ 129,90</div>
+            <div class="product-price-note">À vista · Frete calculado no checkout</div>
+            <div class="qty-row">
+              <span class="qty-label">Qtd:</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('p2',-1)">−</button>
+                <span class="qty-val" id="qty-p2">1</span>
+                <button class="qty-btn" onclick="changeQty('p2',1)">+</button>
+              </div>
+            </div>
+            <button class="btn-add" id="btn-p2" onclick="addToCart('p2','Forma Acrílico 30×20×10',129.90,'🔷')">
+              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUTO 3 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="Imagens/produto-03.jpeg" alt="Forma Acrílico 30x30x10"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="p-emoji">🟦</div>
+            <span class="badge-new">PREMIUM</span>
+          </div>
+          <div class="product-body">
+            <div class="product-sku">SKU: AC-30-30-10</div>
+            <div class="product-title">Forma de Acrílico 30×30×10</div>
+            <div class="product-dims">
+              <span class="dim-badge">30 cm comp.</span>
+              <span class="dim-badge">30 cm larg.</span>
+              <span class="dim-badge">10 cm alt.</span>
+            </div>
+            <div class="product-desc">Formato grande para produções de alto volume. Máxima durabilidade e acabamento cristal sem bolhas ou imperfeições.</div>
+            <div class="product-price">R$ 179,90</div>
+            <div class="product-price-note">À vista · Frete calculado no checkout</div>
+            <div class="qty-row">
+              <span class="qty-label">Qtd:</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('p3',-1)">−</button>
+                <span class="qty-val" id="qty-p3">1</span>
+                <button class="qty-btn" onclick="changeQty('p3',1)">+</button>
+              </div>
+            </div>
+            <button class="btn-add" id="btn-p3" onclick="addToCart('p3','Forma Acrílico 30×30×10',179.90,'🟦')">
+              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p><span>✦ Acrílico Premium</span> &copy; 2025 — Qualidade que você pode tocar.</p>
+  </footer>
+</div>
+
+
+<!-- ============================================================
+     PAGE CHECKOUT
+============================================================ -->
+<div class="page" id="pageCheckout">
+  <div class="checkout-wrap">
+
+    <button class="back-btn" onclick="showPage('home')">
+      <i class="bi bi-arrow-left"></i> Voltar às Compras
+    </button>
+
+    <div class="checkout-title">
+      <i class="bi bi-bag-check-fill"></i> Finalizar Pedido
+    </div>
+
+    <div class="row g-4">
+
+      <!-- COLUNA PRINCIPAL -->
+      <div class="col-lg-7">
+
+        <!-- Resumo -->
+        <div class="card-section">
+          <div class="card-section-title"><i class="bi bi-receipt-cutoff"></i> Resumo do Pedido</div>
+          <div id="checkoutItems"></div>
+          <div class="order-line" style="margin-top:.5rem">
+            <span>Subtotal</span><span id="subtotalVal">—</span>
+          </div>
+          <div class="order-line">
+            <span>Frete</span><span id="freteVal">—</span>
+          </div>
+          <div class="order-line total">
+            <span>Total</span><span id="totalVal">—</span>
+          </div>
+        </div>
+
+        <!-- Endereço & Frete -->
+        <div class="card-section">
+          <div class="card-section-title"><i class="bi bi-geo-alt-fill"></i> Endereço de Entrega</div>
+
+          <div class="row g-2 mb-2">
+            <div class="col-8">
+              <label class="form-label">CEP</label>
+              <input type="text" class="form-control" id="cepInput" placeholder="00000-000" maxlength="9"
+                oninput="maskCep(this)" onblur="autoBuscarCep()">
+            </div>
+            <div class="col-4 d-flex align-items-end">
+              <button class="btn btn-outline-warning w-100 fw-bold" onclick="openCepModal()"
+                style="border-radius:10px;padding:9px 0;font-size:.82rem;">
+                <i class="bi bi-question-circle"></i> Não sei
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Logradouro</label>
+            <input type="text" class="form-control" id="logradouro" placeholder="Rua, Av...">
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-4">
+              <label class="form-label">Número</label>
+              <input type="text" class="form-control" id="numero" placeholder="123">
+            </div>
+            <div class="col-8">
+              <label class="form-label">Complemento</label>
+              <input type="text" class="form-control" id="complemento" placeholder="Apto, Bloco...">
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">Bairro</label>
+              <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Cidade / UF</label>
+              <input type="text" class="form-control" id="cidadeUf" placeholder="Cidade - SP">
+            </div>
+          </div>
+
+          <div class="row g-2 align-items-end">
+            <div class="col-7">
+              <label class="form-label">Tipo de Frete</label>
+              <select class="form-select" id="servicoFrete">
+                <option value="04014">SEDEX à vista</option>
+                <option value="04510">PAC à vista</option>
+              </select>
+            </div>
+            <div class="col-5">
+              <button class="btn btn-warning w-100 fw-bold" style="border-radius:10px;padding:10px 0;" onclick="calcularFrete()">
+                <i class="bi bi-truck"></i> Calcular Frete
+              </button>
+            </div>
+          </div>
+
+          <div id="freteResultado"></div>
+        </div>
+
+        <!-- Dados Pessoais -->
+        <div class="card-section">
+          <div class="card-section-title"><i class="bi bi-person-fill"></i> Seus Dados</div>
+          <div class="row g-2">
+            <div class="col-12">
+              <label class="form-label">Nome Completo *</label>
+              <input type="text" class="form-control" id="nomeCliente" placeholder="Seu nome completo">
+            </div>
+            <div class="col-12 col-sm-7">
+              <label class="form-label">E-mail *</label>
+              <input type="email" class="form-control" id="emailCliente" placeholder="email@exemplo.com">
+            </div>
+            <div class="col-12 col-sm-5">
+              <label class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" placeholder="(11) 99999-9999"
+                maxlength="15" oninput="maskPhone(this)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagamento -->
+        <div class="card-section">
+          <div class="card-section-title"><i class="bi bi-credit-card-2-front-fill"></i> Forma de Pagamento</div>
+
+          <div class="pay-tabs">
+            <button class="pay-tab active" id="tabCard" onclick="setPayTab('card')">
+              <i class="bi bi-credit-card-fill"></i> Cartão de Crédito
+            </button>
+            <button class="pay-tab" id="tabPix" onclick="setPayTab('pix')">
+              <i class="bi bi-qr-code-scan"></i> PIX
+            </button>
+          </div>
+
+          <!-- Cartão -->
+          <div id="panelCard">
+            <div class="row g-2">
+              <div class="col-12">
+                <label class="form-label">Número do Cartão</label>
+                <input type="text" class="form-control" id="cardNumber"
+                  placeholder="0000 0000 0000 0000" maxlength="19" oninput="maskCard(this)">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Nome no Cartão</label>
+                <input type="text" class="form-control" id="cardName"
+                  placeholder="NOME SOBRENOME" oninput="this.value=this.value.toUpperCase()">
+              </div>
+              <div class="col-6">
+                <label class="form-label">Validade</label>
+                <input type="text" class="form-control" id="cardExp"
+                  placeholder="MM/AA" maxlength="5" oninput="maskExp(this)">
+              </div>
+              <div class="col-6">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cardCvv"
+                  placeholder="000" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'')">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Parcelas</label>
+                <select class="form-select" id="parcelas"></select>
+              </div>
+            </div>
+          </div>
+
+          <!-- PIX -->
+          <div id="panelPix" style="display:none;">
+            <div class="pix-block">
+              <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code ou copie a chave PIX abaixo.</p>
+              <div class="pix-qr">📱</div>
+              <div class="pix-key">00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD</div>
+              <button class="btn-copy" onclick="copyPix()"><i class="bi bi-clipboard"></i> Copiar Chave PIX</button>
+              <p style="color:var(--green);font-size:.82rem;margin-top:.8rem;">
+                <i class="bi bi-shield-lock-fill"></i> Pagamento instantâneo via Banco Central do Brasil
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-confirm" onclick="finalizarPedido()">
+          <i class="bi bi-check-circle-fill"></i> Confirmar e Finalizar Pedido
+        </button>
+
+      </div><!-- /col-lg-7 -->
+
+      <!-- COLUNA LATERAL -->
+      <div class="col-lg-5">
+        <div class="sticky-summary">
+          <div class="card-section">
+            <div class="card-section-title"><i class="bi bi-bag-fill"></i> Itens no Pedido</div>
+            <div id="sideItems"></div>
+            <div style="border-top:2px solid var(--gold);margin-top:.8rem;padding-top:.9rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-weight:800;color:var(--navy);font-size:1.05rem;">Total:</span>
+                <span style="font-weight:800;color:var(--gold);font-size:1.25rem;" id="sideTotalVal">—</span>
+              </div>
+            </div>
+            <div style="background:#f0fdf4;border-radius:10px;padding:.7rem 1rem;margin-top:.8rem;font-size:.8rem;color:#16a34a;display:flex;align-items:center;gap:.4rem;">
+              <i class="bi bi-shield-fill-check"></i>
+              Compra protegida · Dados criptografados SSL
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PAGE SUCCESS
+============================================================ -->
+<div class="page" id="pageSuccess">
+  <div class="success-wrap">
+    <div class="success-icon"><i class="bi bi-check-circle-fill"></i></div>
+    <h2>Pedido Confirmado! 🎉</h2>
+    <p>Obrigado pela sua compra. A confirmação será enviada para o seu e-mail em breve.</p>
+
+    <div class="card-section text-start mb-3">
+      <div class="card-section-title"><i class="bi bi-receipt"></i> Resumo do Pedido</div>
+      <div id="successItems"></div>
+      <div style="border-top:2px solid var(--gold);padding-top:.8rem;margin-top:.5rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:800;color:var(--navy);">Total Pago:</span>
+        <span style="font-weight:800;color:var(--gold);font-size:1.2rem;" id="successTotal"></span>
+      </div>
+    </div>
+
+    <button class="btn-gold w-100" style="justify-content:center;padding:14px;border-radius:12px;font-size:1rem;" onclick="novaCompra()">
+      <i class="bi bi-arrow-repeat"></i> Fazer Novo Pedido
+    </button>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     OFFCANVAS: CARRINHO
+============================================================ -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width:400px;max-width:100%;">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="bi bi-cart3" style="color:var(--gold)"></i> Meu Carrinho</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column" style="padding:1.2rem;">
+    <div id="cartItems" style="flex:1;overflow-y:auto;"></div>
+    <div id="cartFooter" style="display:none;border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total do Carrinho:</span>
+        <span class="cart-total-val" id="cartTotalVal">R$ 0,00</span>
+      </div>
+      <button class="btn-checkout-main" onclick="goToCheckout()">
+        <i class="bi bi-bag-check-fill"></i> Finalizar Compra
+      </button>
+      <button class="back-btn w-100 mt-2 d-flex justify-content-center" data-bs-dismiss="offcanvas">
+        <i class="bi bi-arrow-left"></i> Continuar Comprando
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     MODAL: BUSCAR CEP
+============================================================ -->
+<div class="modal fade" id="cepModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:18px;overflow:hidden;">
+      <div class="modal-header" style="border-color:var(--border);">
+        <h5 class="modal-title fw-bold" style="color:var(--navy);">
+          <i class="bi bi-map-fill" style="color:var(--gold)"></i> Encontrar meu CEP
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p style="color:#64748b;font-size:.88rem;margin-bottom:.8rem;">
+          Digite seu endereço (rua e cidade) para encontrar o CEP:
+        </p>
+        <div class="input-group">
+          <input type="text" class="form-control" id="cepSearchInput"
+            placeholder="Ex: Rua das Flores, São Paulo"
+            onkeypress="if(event.key==='Enter')searchCep()">
+          <button class="btn btn-warning fw-bold px-3" onclick="searchCep()">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <div id="cepSearchResult" class="cep-search-result"></div>
+        <p style="font-size:.75rem;color:#94a3b8;margin-top:.8rem;">
+          Busca via ViaCEP · Dados fornecidos pelos Correios.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ============================================================
+//  ESTADO
+// ============================================================
+let cart = {};
+let freightCost = 0;
+let payTab = 'card';
+const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP)
+
+// ============================================================
+//  PÁGINAS
+// ============================================================
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const map = { home: 'pageHome', checkout: 'pageCheckout', success: 'pageSuccess' };
+  document.getElementById(map[name]).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+//  QUANTIDADE
+// ============================================================
+const pageQty = { p1: 1, p2: 1, p3: 1 };
+
+function changeQty(id, delta) {
+  pageQty[id] = Math.max(1, (pageQty[id] || 1) + delta);
+  document.getElementById('qty-' + id).textContent = pageQty[id];
+}
+
+// ============================================================
+//  CARRINHO
+// ============================================================
+function addToCart(id, name, price, emoji) {
+  const qty = pageQty[id] || 1;
+  if (cart[id]) cart[id].qty += qty;
+  else cart[id] = { name, price, qty, emoji };
+  updateCart();
+  toast(`${name} adicionado!`, 'success');
+  const btn = document.getElementById('btn-' + id);
+  btn.classList.add('added');
+  btn.innerHTML = '<i class="bi bi-check-lg"></i> Adicionado!';
+  setTimeout(() => {
+    btn.classList.remove('added');
+    btn.innerHTML = '<i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho';
+  }, 2000);
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const totalQty = ids.reduce((s, k) => s + cart[k].qty, 0);
+  document.getElementById('cartBadge').textContent = totalQty;
+
+  const cartItems  = document.getElementById('cartItems');
+  const cartFooter = document.getElementById('cartFooter');
+
+  if (!ids.length) {
+    cartItems.innerHTML = `<div class="cart-empty"><i class="bi bi-cart-x" style="color:#cbd5e1"></i><p>Carrinho vazio</p><small>Adicione produtos para continuar</small></div>`;
+    cartFooter.style.display = 'none';
+    return;
+  }
+
+  cartFooter.style.display = 'block';
+  cartItems.innerHTML = ids.map(k => {
+    const item = cart[k];
+    return `<div class="cart-item">
+      <div class="cart-item-emoji">${item.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-unit">R$ ${fmt(item.price)} / un.</div>
+        <div class="cart-item-price">R$ ${fmt(item.price * item.qty)}</div>
+        <div class="cart-qty-row">
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
+          <span class="cart-qty-val">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
+        </div>
+      </div>
+      <button class="btn-remove" onclick="removeFromCart('${k}')"><i class="bi bi-trash3"></i></button>
+    </div>`;
+  }).join('');
+
+  const total = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  document.getElementById('cartTotalVal').textContent = 'R$ ' + fmt(total);
+}
+
+function cartChangeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty = Math.max(1, cart[id].qty + delta);
+  updateCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  updateCart();
+}
+
+function openCart() {
+  updateCart();
+  new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
+}
+
+// ============================================================
+//  CHECKOUT
+// ============================================================
+function goToCheckout() {
+  if (!Object.keys(cart).length) { toast('Carrinho vazio!', 'error'); return; }
+  const oc = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
+  if (oc) oc.hide();
+  freightCost = 0;
+  document.getElementById('freteResultado').innerHTML = '';
+  buildCheckoutSummary();
+  buildParcelas();
+  showPage('checkout');
+}
+
+function buildCheckoutSummary() {
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+
+  document.getElementById('checkoutItems').innerHTML = ids.map(k =>
+    `<div class="order-line">
+      <span>${cart[k].emoji} ${cart[k].name} <strong>×${cart[k].qty}</strong></span>
+      <span>R$ ${fmt(cart[k].price * cart[k].qty)}</span>
+    </div>`).join('');
+
+  document.getElementById('sideItems').innerHTML = ids.map(k =>
+    `<div style="display:flex;gap:.7rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:1.6rem;flex-shrink:0">${cart[k].emoji}</span>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:.88rem;color:var(--navy)">${cart[k].name}</div>
+        <div style="color:var(--gold);font-size:.83rem;font-weight:700">×${cart[k].qty} — R$ ${fmt(cart[k].price * cart[k].qty)}</div>
+      </div>
+    </div>`).join('');
+
+  const total = subtotal + freightCost;
+  document.getElementById('subtotalVal').textContent = 'R$ ' + fmt(subtotal);
+  document.getElementById('freteVal').textContent = freightCost > 0 ? 'R$ ' + fmt(freightCost) : '—';
+  document.getElementById('totalVal').textContent = 'R$ ' + fmt(total);
+  document.getElementById('sideTotalVal').textContent = 'R$ ' + fmt(total);
+}
+
+function buildParcelas() {
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  const total = subtotal + freightCost;
+  let html = '';
+  for (let i = 1; i <= 12; i++) {
+    const val = i <= 3 ? total / i : (total * (1 + 0.0199 * i)) / i;
+    html += `<option value="${i}">${i}× de R$ ${fmt(val)}${i <= 3 ? ' sem juros' : ' c/ juros (1,99% a.m.)'}</option>`;
+  }
+  document.getElementById('parcelas').innerHTML = html;
+}
+
+// ============================================================
+//  PAGAMENTO
+// ============================================================
+function setPayTab(tab) {
+  payTab = tab;
+  document.getElementById('tabCard').classList.toggle('active', tab === 'card');
+  document.getElementById('tabPix').classList.toggle('active', tab === 'pix');
+  document.getElementById('panelCard').style.display = tab === 'card' ? 'block' : 'none';
+  document.getElementById('panelPix').style.display  = tab === 'pix'  ? 'block' : 'none';
+}
+
+function copyPix() {
+  navigator.clipboard.writeText('00020126580014br.gov.bcb.pix...')
+    .then(() => toast('Chave PIX copiada!', 'success'));
+}
+
+// ============================================================
+//  FINALIZAR
+// ============================================================
+function finalizarPedido() {
+  const nome  = document.getElementById('nomeCliente').value.trim();
+  const email = document.getElementById('emailCliente').value.trim();
+  if (!nome)  { toast('Preencha o nome completo.', 'error'); return; }
+  if (!email) { toast('Preencha o e-mail.', 'error'); return; }
+
+  if (payTab === 'card') {
+    const num   = document.getElementById('cardNumber').value.replace(/\s/g,'');
+    const cname = document.getElementById('cardName').value.trim();
+    const exp   = document.getElementById('cardExp').value;
+    const cvv   = document.getElementById('cardCvv').value;
+    if (num.length < 16) { toast('Número do cartão inválido.', 'error'); return; }
+    if (!cname)          { toast('Digite o nome no cartão.', 'error'); return; }
+    if (exp.length < 5)  { toast('Validade inválida.', 'error'); return; }
+    if (cvv.length < 3)  { toast('CVV inválido.', 'error'); return; }
+  }
+
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  const total = subtotal + freightCost;
+
+  document.getElementById('successItems').innerHTML = ids.map(k =>
+    `<div style="display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.9rem;">
+      <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
+      <span style="color:var(--gold);font-weight:700">R$ ${fmt(cart[k].price * cart[k].qty)}</span>
+    </div>`).join('');
+  document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
+
+  cart = {}; freightCost = 0;
+  updateCart();
+  showPage('success');
+}
+
+function novaCompra() { showPage('home'); }
+
+// ============================================================
+//  FRETE
+// ============================================================
+function calcularFrete() {
+  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
+  if (cep.length < 8) { toast('Digite um CEP válido.', 'error'); return; }
+  const servico  = document.getElementById('servicoFrete').value;
+  const resultEl = document.getElementById('freteResultado');
+  resultEl.innerHTML = '<div style="color:#64748b;padding:.7rem;font-style:italic"><i class="bi bi-arrow-repeat"></i> Calculando frete...</div>';
+
+  setTimeout(() => {
+    try {
+      const isSedex    = servico === '04014';
+      const base       = isSedex ? 29.90 : 18.50;
+      const regionDiff = Math.abs(parseInt(CEP_ORIGEM[0]) - parseInt(cep[0]));
+      const total      = Math.round((base + regionDiff * 9.80 + 3.50) * 100) / 100;
+      const prazoMin   = isSedex ? Math.max(1, Math.ceil(regionDiff / 2)) : (3 + regionDiff);
+      const prazoMax   = prazoMin + (isSedex ? 1 : 2);
+      freightCost = total;
+      resultEl.innerHTML = `
+        <div class="frete-box">
+          <div class="frete-servico"><i class="bi bi-truck"></i> ${isSedex ? 'SEDEX à Vista' : 'PAC à Vista'}</div>
+          <div class="frete-price">R$ ${fmt(total)}</div>
+          <div class="frete-prazo">${prazoMin} a ${prazoMax} dias úteis após a postagem</div>
+          <div style="font-size:.75rem;color:#94a3b8;margin-top:.4rem">* Estimativa calculada por CEP de origem e destino.</div>
+        </div>`;
+      buildCheckoutSummary();
+      buildParcelas();
+    } catch(e) {
+      resultEl.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular. Verifique o CEP.</div>`;
+    }
+  }, 1200);
+}
+
+// ============================================================
+//  VIACEP
+// ============================================================
+function autoBuscarCep() {
+  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
+  if (cep.length === 8) preencherEndereco(cep);
+}
+
+function preencherEndereco(cep) {
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(r => r.json())
+    .then(d => {
+      if (d.erro) { toast('CEP não encontrado.', 'error'); return; }
+      document.getElementById('logradouro').value = d.logradouro || '';
+      document.getElementById('bairro').value     = d.bairro || '';
+      document.getElementById('cidadeUf').value   = `${d.localidade} - ${d.uf}`;
+      toast('Endereço preenchido automaticamente!', 'success');
+    })
+    .catch(() => toast('Não foi possível consultar o CEP.', 'error'));
+}
+
+// ============================================================
+//  MODAL CEP
+// ============================================================
+function openCepModal() {
+  document.getElementById('cepSearchInput').value = '';
+  document.getElementById('cepSearchResult').innerHTML = '';
+  new bootstrap.Modal(document.getElementById('cepModal')).show();
+}
+
+function searchCep() {
+  const q = document.getElementById('cepSearchInput').value.trim();
+  if (!q) return;
+  const res = document.getElementById('cepSearchResult');
+  res.innerHTML = '<div style="padding:.6rem;color:#64748b">Buscando...</div>';
+
+  fetch(`https://viacep.com.br/ws/${encodeURIComponent(q)}/json/`)
+    .then(r => r.json())
+    .then(data => {
+      const arr = Array.isArray(data) ? data : (data.erro ? [] : [data]);
+      if (!arr.length) {
+        res.innerHTML = '<div style="padding:.6rem;color:var(--red)">Nenhum resultado. Tente: "Rua das Flores, São Paulo - SP".</div>';
+        return;
+      }
+      res.innerHTML = arr.slice(0, 8).map(d =>
+        `<div class="cep-result-item" onclick="selectCep('${d.cep}','${d.logradouro||''}','${d.bairro||''}','${d.localidade}','${d.uf}')">
+          <strong>${d.cep}</strong> — ${d.logradouro ? d.logradouro + ', ' : ''}${d.bairro||''}<br>
+          <small style="color:#64748b">${d.localidade} / ${d.uf}</small>
+        </div>`).join('');
+    })
+    .catch(() => {
+      res.innerHTML = '<div style="padding:.6rem;color:#64748b">Acesse <a href="https://buscacepinter.correios.com.br" target="_blank" style="color:var(--gold)">correios.com.br</a> para localizar seu CEP.</div>';
+    });
+}
+
+function selectCep(cep, logr, bairro, cidade, uf) {
+  document.getElementById('cepInput').value   = cep.replace(/(\d{5})(\d{3})/, '$1-$2');
+  document.getElementById('logradouro').value = logr;
+  document.getElementById('bairro').value     = bairro;
+  document.getElementById('cidadeUf').value   = `${cidade} - ${uf}`;
+  bootstrap.Modal.getInstance(document.getElementById('cepModal'))?.hide();
+  toast('CEP selecionado!', 'success');
+}
+
+// ============================================================
+//  MÁSCARAS
+// ============================================================
+function maskCep(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
+  el.value = v;
+}
+function maskCard(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function maskExp(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,4);
+  if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  el.value = v;
+}
+function maskPhone(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 10) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,6)}-${v.slice(6)}`;
+  else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  el.value = v;
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+function toast(msg, type = '') {
+  const c = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast-msg' + (type ? ' ' + type : '');
+  const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
+  el.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
+  c.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='.3s'; setTimeout(()=>el.remove(),300); }, 2800);
+}
+
+// ============================================================
+//  UTIL
+// ============================================================
+function fmt(n) {
+  return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// Init
+updateCart();
+</script>
+</body>
+</html>

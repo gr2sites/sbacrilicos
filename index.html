@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formas de Acrílico Premium</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-dark: #B8960F;
+      --gold-light: #F5E27A;
+      --navy: #0f172a;
+      --text: #334155;
+      --bg: #f4f6fa;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --header-h: 70px;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-top: var(--header-h);
+    }
+
+    /* ===== HEADER ===== */
+    .top-header {
+      position: fixed; top:0; left:0; width:100%;
+      background: var(--white);
+      box-shadow: 0 4px 12px rgba(0,0,0,.10);
+      z-index: 1050;
+      height: var(--header-h);
+    }
+    .nav-container {
+      max-width: 1200px; margin:0 auto;
+      padding: 0 24px; height: var(--header-h);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .logo-circle {
+      width:50px; height:50px; border-radius:50%;
+      background: linear-gradient(135deg,var(--gold),var(--gold-dark));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; color:#fff; font-weight:700;
+    }
+    .logo-text { font-size:1.1rem; font-weight:700; color:var(--navy); line-height:1.2; }
+    .logo-sub  { font-size:.72rem; color:var(--gold); letter-spacing:.04em; }
+
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:var(--gold); font-weight:600; text-decoration:none; font-size:.95rem; border-bottom:2px solid transparent; padding-bottom:2px; transition:.2s; }
+    .nav-links a:hover { color:var(--gold-dark); border-color:var(--gold); }
+
+    .btn-cart {
+      position:relative; background:none; border:none; cursor:pointer;
+      color:var(--gold); font-size:1.5rem; padding:4px 8px;
+    }
+    .cart-badge {
+      position:absolute; top:-4px; right:-4px;
+      background:var(--gold); color:#fff;
+      font-size:.65rem; font-weight:700;
+      width:18px; height:18px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    .hamburger-btn {
+      display:none; background:none; border:none; cursor:pointer;
+      width:32px; height:26px; flex-direction:column;
+      justify-content:space-between; padding:0;
+    }
+    .hamburger-btn span {
+      display:block; width:100%; height:3px;
+      background:var(--gold); border-radius:6px; transition:.3s;
+    }
+    .hamburger-btn.active span:nth-child(1){ transform:translateY(11px) rotate(45deg); }
+    .hamburger-btn.active span:nth-child(2){ opacity:0; }
+    .hamburger-btn.active span:nth-child(3){ transform:translateY(-11px) rotate(-45deg); }
+
+    /* ===== MOBILE NAV ===== */
+    @media(max-width:768px){
+      .hamburger-btn{ display:flex; }
+      .nav-links {
+        position:fixed; top:var(--header-h); left:-100%; width:100%;
+        height:calc(100vh - var(--header-h));
+        background:var(--white); flex-direction:column;
+        align-items:center; justify-content:flex-start; padding-top:2rem;
+        gap:0; transition:left .4s ease; z-index:1040;
+        box-shadow:0 12px 20px rgba(0,0,0,.15);
+      }
+      .nav-links.open { left:0; }
+      .nav-links li { width:100%; text-align:center; padding:14px 0; border-bottom:1px solid var(--border); }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 100%);
+      padding: 4rem 1rem; text-align:center; color:#fff;
+    }
+    .hero h1 { font-size:2.4rem; font-weight:800; margin-bottom:.5rem; }
+    .hero h1 span { color:var(--gold); }
+    .hero p { color:#94a3b8; font-size:1.1rem; max-width:500px; margin:0 auto 2rem; }
+    .hero .btn-gold {
+      background:var(--gold); color:var(--navy);
+      border:none; padding:12px 32px; border-radius:8px;
+      font-weight:700; font-size:1rem; cursor:pointer; transition:.2s;
+      text-decoration:none; display:inline-block;
+    }
+    .hero .btn-gold:hover { background:var(--gold-dark); color:#fff; }
+
+    /* ===== PRODUCTS ===== */
+    .section { max-width:1200px; margin:0 auto; padding:3rem 1rem; }
+    .section-title { text-align:center; margin-bottom:2.5rem; }
+    .section-title h2 { font-size:2rem; font-weight:800; color:var(--navy); }
+    .section-title p  { color:var(--text); margin-top:.4rem; }
+    .section-title .title-bar { width:60px; height:4px; background:var(--gold); margin:.7rem auto 0; border-radius:2px; }
+
+    .product-card {
+      background:var(--white); border-radius:20px;
+      overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,.08);
+      transition:transform .3s, box-shadow .3s; height:100%;
+      display:flex; flex-direction:column;
+    }
+    .product-card:hover { transform:translateY(-6px); box-shadow:0 12px 32px rgba(0,0,0,.15); }
+
+    .product-img {
+      width:100%; height:220px; object-fit:cover;
+      background: linear-gradient(135deg,#e8f4f8,#d4e9f5);
+      display:flex; align-items:center; justify-content:center;
+      font-size:5rem; color:var(--gold);
+    }
+
+    .product-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+    .product-title { font-size:1.1rem; font-weight:700; color:var(--navy); margin-bottom:.5rem; }
+    .product-desc  { color:#64748b; font-size:.9rem; flex:1; margin-bottom:1rem; }
+    .product-price { font-size:1.5rem; font-weight:700; color:var(--gold); margin-bottom:1rem; }
+    .product-price small { font-size:.8rem; color:#94a3b8; font-weight:400; }
+
+    .qty-control {
+      display:flex; align-items:center; gap:.6rem; margin-bottom:1rem;
+    }
+    .qty-btn {
+      width:34px; height:34px; border-radius:8px;
+      border:2px solid var(--gold); background:none;
+      color:var(--gold); font-size:1.1rem; font-weight:700;
+      cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center;
+    }
+    .qty-btn:hover { background:var(--gold); color:#fff; }
+    .qty-val { font-weight:700; font-size:1rem; min-width:28px; text-align:center; }
+
+    .btn-add {
+      width:100%; padding:11px; border:none; border-radius:10px;
+      background:var(--gold); color:#fff; font-weight:700;
+      font-size:.95rem; cursor:pointer; transition:.2s;
+    }
+    .btn-add:hover { background:var(--gold-dark); }
+    .btn-add.added { background:#22c55e; }
+
+    /* ===== CART OFFCANVAS ===== */
+    .offcanvas-header { border-bottom:1px solid var(--border); }
+    .offcanvas-title { font-weight:700; color:var(--navy); }
+
+    .cart-item { display:flex; gap:1rem; padding:.9rem 0; border-bottom:1px solid var(--border); align-items:center; }
+    .cart-item-info { flex:1; }
+    .cart-item-name { font-weight:600; font-size:.95rem; color:var(--navy); }
+    .cart-item-price { color:var(--gold); font-weight:700; font-size:.9rem; }
+    .cart-item-qty { display:flex; align-items:center; gap:.4rem; }
+    .cart-qty-btn { width:26px; height:26px; border-radius:6px; border:1.5px solid var(--gold); background:none; color:var(--gold); font-weight:700; cursor:pointer; font-size:.9rem; transition:.2s; }
+    .cart-qty-btn:hover { background:var(--gold); color:#fff; }
+    .btn-remove { background:none; border:none; color:#ef4444; cursor:pointer; font-size:1rem; }
+
+    .cart-empty { text-align:center; padding:3rem 1rem; color:#94a3b8; }
+    .cart-total { font-size:1.2rem; font-weight:700; color:var(--navy); }
+    .btn-checkout { width:100%; padding:13px; background:var(--gold); border:none; border-radius:10px; color:#fff; font-weight:700; font-size:1rem; cursor:pointer; transition:.2s; }
+    .btn-checkout:hover { background:var(--gold-dark); }
+
+    /* ===== CHECKOUT PAGE ===== */
+    .checkout-wrap { max-width:900px; margin:0 auto; padding:2rem 1rem; }
+    .checkout-title { font-size:1.8rem; font-weight:800; color:var(--navy); margin-bottom:1.5rem; }
+    .order-summary { background:var(--white); border-radius:16px; padding:1.5rem; box-shadow:0 4px 16px rgba(0,0,0,.07); }
+    .order-line { display:flex; justify-content:space-between; align-items:center; padding:.6rem 0; border-bottom:1px solid var(--border); }
+    .order-line:last-child { border:none; font-weight:700; font-size:1.1rem; color:var(--navy); }
+    .order-line span:last-child { color:var(--gold); font-weight:700; }
+
+    .payment-section { background:var(--white); border-radius:16px; padding:1.5rem; margin-top:1.5rem; box-shadow:0 4px 16px rgba(0,0,0,.07); }
+    .payment-tabs { display:flex; gap:1rem; margin-bottom:1.5rem; }
+    .pay-tab {
+      flex:1; padding:.9rem; border-radius:10px; border:2px solid var(--border);
+      background:none; cursor:pointer; font-weight:600; color:var(--text);
+      transition:.2s; display:flex; align-items:center; justify-content:center; gap:.5rem;
+    }
+    .pay-tab.active { border-color:var(--gold); background:#FFF8E7; color:var(--gold-dark); }
+    .pay-tab i { font-size:1.1rem; }
+
+    .form-label { font-weight:600; font-size:.88rem; color:var(--navy); margin-bottom:.3rem; }
+    .form-control { border:1.5px solid var(--border); border-radius:8px; padding:10px 12px; font-size:.95rem; }
+    .form-control:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.15); outline:none; }
+
+    /* PIX block */
+    .pix-block { text-align:center; padding:1.5rem; }
+    .pix-qr  { width:180px; height:180px; background:#f1f5f9; border-radius:12px; margin:1rem auto; display:flex; align-items:center; justify-content:center; font-size:5rem; }
+    .pix-key { background:#f1f5f9; border-radius:8px; padding:.8rem 1rem; font-size:.85rem; color:var(--navy); margin:.8rem 0; word-break:break-all; }
+
+    /* Freight block */
+    .frete-section { background:var(--white); border-radius:16px; padding:1.5rem; margin-top:1.5rem; box-shadow:0 4px 16px rgba(0,0,0,.07); }
+    .frete-result { background:#f0fdf4; border-left:4px solid #22c55e; border-radius:8px; padding:1rem; margin-top:1rem; }
+    .frete-error  { background:#fef2f2; border-left:4px solid #ef4444; border-radius:8px; padding:1rem; margin-top:1rem; color:#dc2626; }
+
+    /* CEP search modal */
+    .cep-search-result { max-height:300px; overflow-y:auto; }
+    .cep-result-item { padding:.7rem 1rem; border-bottom:1px solid var(--border); cursor:pointer; border-radius:8px; transition:.15s; }
+    .cep-result-item:hover { background:#FFF8E7; }
+
+    /* ===== SUCCESS PAGE ===== */
+    .success-wrap { max-width:600px; margin:3rem auto; padding:2rem 1rem; text-align:center; }
+    .success-icon { font-size:5rem; color:#22c55e; margin-bottom:1rem; }
+    .success-wrap h2 { font-size:2rem; font-weight:800; color:var(--navy); margin-bottom:.5rem; }
+
+    /* ===== PAGES CONTROL ===== */
+    .page { display:none; }
+    .page.active { display:block; }
+
+    /* ===== TOASTS ===== */
+    .toast-container { position:fixed; bottom:1.5rem; right:1.5rem; z-index:2000; }
+    .toast-msg {
+      background:var(--navy); color:#fff; border-radius:10px;
+      padding:.8rem 1.2rem; font-size:.9rem; margin-top:.5rem;
+      display:flex; align-items:center; gap:.5rem;
+      animation: slideIn .3s ease;
+    }
+    .toast-msg.success { background:#22c55e; }
+    @keyframes slideIn { from{transform:translateX(100px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+    /* ===== FOOTER ===== */
+    footer { text-align:center; padding:2rem; background:#e8edf5; color:#64748b; font-size:.9rem; margin-top:2rem; }
+
+    @media(max-width:576px){
+      .hero h1 { font-size:1.7rem; }
+      .payment-tabs { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="top-header">
+  <div class="nav-container">
+    <a href="#" class="logo" onclick="showPage('home')">
+      <div class="logo-circle">A</div>
+      <div>
+        <div class="logo-text">Acrílico Premium</div>
+        <div class="logo-sub">Formas Profissionais</div>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navMenu">
+      <li><a href="#" onclick="showPage('home');closeMenu()">Início</a></li>
+      <li><a href="#" onclick="showPage('home');scrollTo(0,800);closeMenu()">Produtos</a></li>
+      <li><a href="#" onclick="showPage('home');scrollTo(0,9999);closeMenu()">Contato</a></li>
+    </ul>
+
+    <div style="display:flex;align-items:center;gap:.5rem;">
+      <button class="btn-cart" onclick="openCart()" aria-label="Carrinho">
+        <i class="bi bi-cart3"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== PAGE: HOME ===== -->
+<div class="page active" id="pageHome">
+  <div class="hero">
+    <h1>Formas de <span>Acrílico</span><br>Premium</h1>
+    <p>Qualidade superior para suas produções. Precisão e durabilidade em cada detalhe.</p>
+    <a href="#produtos" class="btn-gold" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">
+      <i class="bi bi-bag2"></i> Ver Produtos
+    </a>
+  </div>
+
+  <div class="section" id="produtos">
+    <div class="section-title">
+      <h2>Nossos Produtos</h2>
+      <p>Formas de acrílico de alta precisão para uso profissional</p>
+      <div class="title-bar"></div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Produto 1 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img">🧊</div>
+          <div class="product-body">
+            <div class="product-title">Forma de Acrílico 30×10×10</div>
+            <div class="product-desc">
+              Ideal para produções de menor volume. Acrílico cristal de alta qualidade, fácil de desformar. Dimensões: 30cm × 10cm × 10cm.
+            </div>
+            <div class="product-price">R$ 89,90 <small>/ unidade</small></div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty('p1',-1)">−</button>
+              <span class="qty-val" id="qty-p1">1</span>
+              <button class="qty-btn" onclick="changeQty('p1',1)">+</button>
+            </div>
+            <button class="btn-add" id="btn-p1" onclick="addToCart('p1','Forma Acrílico 30×10×10',89.90,'🧊')">
+              <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img">🔷</div>
+          <div class="product-body">
+            <div class="product-title">Forma de Acrílico 30×20×10</div>
+            <div class="product-desc">
+              Formato intermediário, perfeito para produções variadas. Alta transparência e resistência. Dimensões: 30cm × 20cm × 10cm.
+            </div>
+            <div class="product-price">R$ 129,90 <small>/ unidade</small></div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty('p2',-1)">−</button>
+              <span class="qty-val" id="qty-p2">1</span>
+              <button class="qty-btn" onclick="changeQty('p2',1)">+</button>
+            </div>
+            <button class="btn-add" id="btn-p2" onclick="addToCart('p2','Forma Acrílico 30×20×10',129.90,'🔷')">
+              <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produto 3 -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img">🟦</div>
+          <div class="product-body">
+            <div class="product-title">Forma de Acrílico 30×30×10</div>
+            <div class="product-desc">
+              Formato grande para produções de alto volume. Máxima durabilidade e acabamento impecável. Dimensões: 30cm × 30cm × 10cm.
+            </div>
+            <div class="product-price">R$ 179,90 <small>/ unidade</small></div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty('p3',-1)">−</button>
+              <span class="qty-val" id="qty-p3">1</span>
+              <button class="qty-btn" onclick="changeQty('p3',1)">+</button>
+            </div>
+            <button class="btn-add" id="btn-p3" onclick="addToCart('p3','Forma Acrílico 30×30×10',179.90,'🟦')">
+              <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p><i class="bi bi-gem" style="color:var(--gold)"></i> Acrílico Premium &copy; 2025 — Qualidade que você pode tocar.</p>
+  </footer>
+</div>
+
+<!-- ===== PAGE: CHECKOUT ===== -->
+<div class="page" id="pageCheckout">
+  <div class="checkout-wrap">
+    <button class="btn btn-outline-secondary btn-sm mb-3" onclick="showPage('home')">
+      <i class="bi bi-arrow-left"></i> Voltar às Compras
+    </button>
+    <div class="checkout-title"><i class="bi bi-bag-check" style="color:var(--gold)"></i> Finalizar Pedido</div>
+
+    <div class="row g-4">
+      <!-- Coluna esquerda: resumo + frete + pagamento -->
+      <div class="col-lg-7">
+
+        <!-- Resumo do pedido -->
+        <div class="order-summary mb-3">
+          <h5 style="font-weight:700;color:var(--navy);margin-bottom:1rem;"><i class="bi bi-receipt"></i> Resumo do Pedido</h5>
+          <div id="checkoutItems"></div>
+          <div class="order-line mt-2">
+            <span>Subtotal</span><span id="subtotalVal">R$ 0,00</span>
+          </div>
+          <div class="order-line">
+            <span>Frete</span><span id="freteVal">—</span>
+          </div>
+          <div class="order-line">
+            <span>Total</span><span id="totalVal">—</span>
+          </div>
+        </div>
+
+        <!-- Dados de entrega -->
+        <div class="frete-section">
+          <h5 style="font-weight:700;color:var(--navy);margin-bottom:1rem;"><i class="bi bi-geo-alt"></i> Endereço de Entrega</h5>
+
+          <div class="row g-2 mb-2">
+            <div class="col-8">
+              <label class="form-label">CEP</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="cepInput" placeholder="00000-000" maxlength="9" oninput="maskCep(this)">
+                <button class="btn btn-outline-secondary" onclick="buscarCep()" title="Buscar CEP"><i class="bi bi-search"></i></button>
+              </div>
+            </div>
+            <div class="col-4 d-flex align-items-end">
+              <button class="btn btn-sm btn-outline-warning w-100" onclick="openCepModal()" title="Não sei meu CEP">
+                <i class="bi bi-question-circle"></i> Não sei
+              </button>
+            </div>
+          </div>
+
+          <div class="row g-2 mb-2">
+            <div class="col-12">
+              <label class="form-label">Logradouro</label>
+              <input type="text" class="form-control" id="logradouro" placeholder="Rua, Av...">
+            </div>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-4">
+              <label class="form-label">Número</label>
+              <input type="text" class="form-control" id="numero" placeholder="123">
+            </div>
+            <div class="col-8">
+              <label class="form-label">Complemento</label>
+              <input type="text" class="form-control" id="complemento" placeholder="Apto, Bloco...">
+            </div>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <label class="form-label">Bairro</label>
+              <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Cidade / UF</label>
+              <input type="text" class="form-control" id="cidadeUf" placeholder="Cidade - SP">
+            </div>
+          </div>
+
+          <div class="row g-2 mb-2">
+            <div class="col-7">
+              <label class="form-label">Tipo de Serviço</label>
+              <select class="form-control" id="servicoFrete">
+                <option value="04014">SEDEX à vista</option>
+                <option value="04510">PAC à vista</option>
+              </select>
+            </div>
+            <div class="col-5 d-flex align-items-end">
+              <button class="btn btn-warning w-100 fw-bold" onclick="calcularFrete()">
+                <i class="bi bi-truck"></i> Calcular Frete
+              </button>
+            </div>
+          </div>
+
+          <div id="freteResultado"></div>
+        </div>
+
+        <!-- Dados pessoais -->
+        <div class="payment-section">
+          <h5 style="font-weight:700;color:var(--navy);margin-bottom:1rem;"><i class="bi bi-person"></i> Seus Dados</h5>
+          <div class="row g-2">
+            <div class="col-12">
+              <label class="form-label">Nome Completo</label>
+              <input type="text" class="form-control" id="nomeCliente" placeholder="Seu nome">
+            </div>
+            <div class="col-7">
+              <label class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="emailCliente" placeholder="email@exemplo.com">
+            </div>
+            <div class="col-5">
+              <label class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" placeholder="(11) 99999-9999">
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagamento -->
+        <div class="payment-section">
+          <h5 style="font-weight:700;color:var(--navy);margin-bottom:1rem;"><i class="bi bi-credit-card"></i> Forma de Pagamento</h5>
+
+          <div class="payment-tabs">
+            <button class="pay-tab active" id="tabCard" onclick="setPayTab('card')">
+              <i class="bi bi-credit-card-2-front"></i> Cartão de Crédito
+            </button>
+            <button class="pay-tab" id="tabPix" onclick="setPayTab('pix')">
+              <i class="bi bi-qr-code"></i> PIX
+            </button>
+          </div>
+
+          <!-- Cartão -->
+          <div id="panelCard">
+            <div class="row g-2">
+              <div class="col-12">
+                <label class="form-label">Número do Cartão</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="maskCard(this)">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Nome no Cartão</label>
+                <input type="text" class="form-control" id="cardName" placeholder="NOME SOBRENOME">
+              </div>
+              <div class="col-6">
+                <label class="form-label">Validade</label>
+                <input type="text" class="form-control" id="cardExp" placeholder="MM/AA" maxlength="5" oninput="maskExp(this)">
+              </div>
+              <div class="col-6">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cardCvv" placeholder="000" maxlength="3">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Parcelas</label>
+                <select class="form-control" id="parcelas"></select>
+              </div>
+            </div>
+          </div>
+
+          <!-- PIX -->
+          <div id="panelPix" style="display:none;">
+            <div class="pix-block">
+              <p style="color:#64748b;">Escaneie o QR Code ou copie a chave PIX para efetuar o pagamento.</p>
+              <div class="pix-qr">📱</div>
+              <div class="pix-key">00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd6520204000053039865802BR5925ACRÍLICO PREMIUM LTDA6008BRASILIA62070503***6304ABCD</div>
+              <button class="btn btn-outline-warning btn-sm" onclick="copyPix()"><i class="bi bi-clipboard"></i> Copiar Chave</button>
+              <p class="mt-2" style="color:#22c55e;font-size:.85rem;"><i class="bi bi-shield-check"></i> Pagamento 100% seguro via Banco Central</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-checkout mt-3" onclick="finalizarPedido()">
+          <i class="bi bi-check-circle"></i> Confirmar Pedido
+        </button>
+      </div>
+
+      <!-- Coluna direita: mini resumo -->
+      <div class="col-lg-5">
+        <div class="order-summary" style="position:sticky;top:80px;">
+          <h5 style="font-weight:700;color:var(--navy);margin-bottom:1rem;"><i class="bi bi-bag"></i> Itens no Pedido</h5>
+          <div id="sideItems"></div>
+          <div style="border-top:2px solid var(--gold);margin-top:1rem;padding-top:.8rem;">
+            <div class="d-flex justify-content-between fw-bold" style="font-size:1.1rem;color:var(--navy);">
+              <span>Total:</span>
+              <span style="color:var(--gold)" id="sideTotalVal">R$ 0,00</span>
+            </div>
+          </div>
+          <div class="mt-2 p-2" style="background:#f0fdf4;border-radius:8px;font-size:.8rem;color:#16a34a;">
+            <i class="bi bi-shield-fill-check"></i> Compra protegida · Dados criptografados
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: SUCCESS ===== -->
+<div class="page" id="pageSuccess">
+  <div class="success-wrap">
+    <div class="success-icon"><i class="bi bi-check-circle-fill"></i></div>
+    <h2>Pedido Confirmado!</h2>
+    <p style="color:#64748b;margin-bottom:1.5rem;">Obrigado pela sua compra. Em breve você receberá a confirmação por e-mail.</p>
+    <div class="order-summary text-start mb-3">
+      <h6 style="font-weight:700;color:var(--navy);margin-bottom:1rem;">Resumo do Pedido</h6>
+      <div id="successItems"></div>
+      <div style="border-top:1.5px solid var(--gold);padding-top:.7rem;margin-top:.7rem;">
+        <div class="d-flex justify-content-between fw-bold">
+          <span>Total Pago:</span><span style="color:var(--gold)" id="successTotal"></span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-gold w-100 p-3" style="border-radius:10px;font-weight:700;border:none;font-size:1rem;cursor:pointer;" onclick="novaCompra()">
+      <i class="bi bi-arrow-repeat"></i> Fazer Novo Pedido
+    </button>
+  </div>
+</div>
+
+<!-- ===== CART OFFCANVAS ===== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width:380px;max-width:100%;">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="bi bi-cart3"></i> Meu Carrinho</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="cartItems" style="flex:1;overflow-y:auto;"></div>
+    <div id="cartFooter" style="border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;display:none;">
+      <div class="d-flex justify-content-between cart-total mb-3">
+        <span>Total:</span>
+        <span style="color:var(--gold)" id="cartTotalVal">R$ 0,00</span>
+      </div>
+      <button class="btn-checkout" onclick="goToCheckout()"><i class="bi bi-bag-check"></i> Finalizar Compra</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: BUSCAR CEP ===== -->
+<div class="modal fade" id="cepModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:16px;">
+      <div class="modal-header" style="border-color:var(--border);">
+        <h5 class="modal-title fw-bold"><i class="bi bi-map"></i> Encontrar meu CEP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p style="color:#64748b;font-size:.9rem;">Digite seu endereço para encontrar o CEP:</p>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" id="cepSearchInput" placeholder="Ex: Rua das Flores, São Paulo" onkeypress="if(event.key==='Enter')searchCep()">
+          <button class="btn btn-warning" onclick="searchCep()"><i class="bi bi-search"></i></button>
+        </div>
+        <div id="cepSearchResult" class="cep-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ===========================
+//  ESTADO GLOBAL
+// ===========================
+let cart = {};          // { id: {name, price, qty, emoji} }
+let freightCost = 0;
+let payTab = 'card';
+
+// ===========================
+//  PÁGINA
+// ===========================
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const map = { home:'pageHome', checkout:'pageCheckout', success:'pageSuccess' };
+  document.getElementById(map[name]).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===========================
+//  MENU MOBILE
+// ===========================
+function toggleMenu() {
+  const btn  = document.getElementById('hamburgerBtn');
+  const menu = document.getElementById('navMenu');
+  btn.classList.toggle('active');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburgerBtn').classList.remove('active');
+  document.getElementById('navMenu').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const menu = document.getElementById('navMenu');
+  const btn  = document.getElementById('hamburgerBtn');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+});
+
+// ===========================
+//  QUANTIDADE (LISTA)
+// ===========================
+const pageQty = {};
+function changeQty(id, delta) {
+  if (!pageQty[id]) pageQty[id] = 1;
+  pageQty[id] = Math.max(1, pageQty[id] + delta);
+  document.getElementById('qty-' + id).textContent = pageQty[id];
+}
+
+// ===========================
+//  CARRINHO
+// ===========================
+function addToCart(id, name, price, emoji) {
+  const qty = pageQty[id] || 1;
+  if (cart[id]) {
+    cart[id].qty += qty;
+  } else {
+    cart[id] = { name, price, qty, emoji };
+  }
+  updateCart();
+  toast(`${name} adicionado ao carrinho!`, 'success');
+
+  const btn = document.getElementById('btn-' + id);
+  btn.classList.add('added');
+  btn.innerHTML = '<i class="bi bi-check-lg"></i> Adicionado!';
+  setTimeout(() => {
+    btn.classList.remove('added');
+    btn.innerHTML = '<i class="bi bi-cart-plus"></i> Adicionar ao Carrinho';
+  }, 1800);
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const badge = document.getElementById('cartBadge');
+  const totalQty = ids.reduce((s,k) => s + cart[k].qty, 0);
+  badge.textContent = totalQty;
+
+  // Offcanvas items
+  const cartItems = document.getElementById('cartItems');
+  const cartFooter = document.getElementById('cartFooter');
+
+  if (!ids.length) {
+    cartItems.innerHTML = '<div class="cart-empty"><i class="bi bi-cart-x" style="font-size:3rem;color:#cbd5e1"></i><p class="mt-2">Carrinho vazio</p></div>';
+    cartFooter.style.display = 'none';
+    return;
+  }
+
+  cartFooter.style.display = 'block';
+  cartItems.innerHTML = ids.map(k => {
+    const item = cart[k];
+    return `<div class="cart-item">
+      <span style="font-size:2rem">${item.emoji}</span>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">R$ ${fmt(item.price * item.qty)}</div>
+        <div class="cart-item-qty mt-1">
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
+          <span style="font-weight:700;min-width:24px;text-align:center">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
+        </div>
+      </div>
+      <button class="btn-remove" onclick="removeFromCart('${k}')" title="Remover"><i class="bi bi-trash3"></i></button>
+    </div>`;
+  }).join('');
+
+  const total = ids.reduce((s,k) => s + cart[k].price * cart[k].qty, 0);
+  document.getElementById('cartTotalVal').textContent = 'R$ ' + fmt(total);
+}
+
+function cartChangeQty(id, delta) {
+  cart[id].qty = Math.max(1, cart[id].qty + delta);
+  updateCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  updateCart();
+}
+
+function openCart() {
+  updateCart();
+  new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
+}
+
+// ===========================
+//  CHECKOUT
+// ===========================
+function goToCheckout() {
+  if (!Object.keys(cart).length) { toast('Carrinho vazio!'); return; }
+  bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'))?.hide();
+  buildCheckoutSummary();
+  buildParcelas();
+  showPage('checkout');
+}
+
+function buildCheckoutSummary() {
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s,k) => s + cart[k].price * cart[k].qty, 0);
+
+  // Items no resumo principal
+  document.getElementById('checkoutItems').innerHTML = ids.map(k => `
+    <div class="order-line">
+      <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
+      <span>R$ ${fmt(cart[k].price * cart[k].qty)}</span>
+    </div>`).join('');
+
+  // Itens na coluna lateral
+  document.getElementById('sideItems').innerHTML = ids.map(k => `
+    <div style="display:flex;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:1.5rem">${cart[k].emoji}</span>
+      <div style="flex:1;font-size:.9rem">
+        <div style="font-weight:600;color:var(--navy)">${cart[k].name}</div>
+        <div style="color:var(--gold)">×${cart[k].qty} — R$ ${fmt(cart[k].price * cart[k].qty)}</div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('subtotalVal').textContent = 'R$ ' + fmt(subtotal);
+  document.getElementById('freteVal').textContent = freightCost ? 'R$ ' + fmt(freightCost) : '—';
+  const total = subtotal + freightCost;
+  document.getElementById('totalVal').textContent = 'R$ ' + fmt(total);
+  document.getElementById('sideTotalVal').textContent = 'R$ ' + fmt(total);
+}
+
+function buildParcelas() {
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s,k) => s + cart[k].price * cart[k].qty, 0);
+  const total = subtotal + freightCost;
+  let html = '';
+  for (let i = 1; i <= 12; i++) {
+    const val = total / i;
+    html += `<option value="${i}">${i}x de R$ ${fmt(val)}${i <= 3 ? ' sem juros' : ' com juros'}</option>`;
+  }
+  document.getElementById('parcelas').innerHTML = html;
+}
+
+// ===========================
+//  PAGAMENTO TABS
+// ===========================
+function setPayTab(tab) {
+  payTab = tab;
+  document.getElementById('tabCard').classList.toggle('active', tab === 'card');
+  document.getElementById('tabPix').classList.toggle('active', tab === 'pix');
+  document.getElementById('panelCard').style.display = tab === 'card' ? 'block' : 'none';
+  document.getElementById('panelPix').style.display  = tab === 'pix'  ? 'block' : 'none';
+}
+
+function copyPix() {
+  navigator.clipboard.writeText('00020126580014br.gov.bcb.pix...').then(() => toast('Chave PIX copiada!','success'));
+}
+
+// ===========================
+//  FINALIZAR PEDIDO
+// ===========================
+function finalizarPedido() {
+  const nome = document.getElementById('nomeCliente').value.trim();
+  const email = document.getElementById('emailCliente').value.trim();
+
+  if (!nome || !email) { toast('Preencha nome e e-mail para continuar.'); return; }
+
+  if (payTab === 'card') {
+    const num = document.getElementById('cardNumber').value.replace(/\s/g,'');
+    const exp = document.getElementById('cardExp').value;
+    const cvv = document.getElementById('cardCvv').value;
+    if (num.length < 16 || exp.length < 5 || cvv.length < 3) {
+      toast('Verifique os dados do cartão.'); return;
+    }
+  }
+
+  // Página de sucesso
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s,k) => s + cart[k].price * cart[k].qty, 0);
+  const total = subtotal + freightCost;
+
+  document.getElementById('successItems').innerHTML = ids.map(k => `
+    <div class="d-flex justify-content-between" style="padding:.4rem 0;border-bottom:1px solid var(--border);">
+      <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
+      <span style="color:var(--gold);font-weight:600">R$ ${fmt(cart[k].price * cart[k].qty)}</span>
+    </div>`).join('');
+  document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
+
+  cart = {};
+  freightCost = 0;
+  updateCart();
+  showPage('success');
+}
+
+function novaCompra() { showPage('home'); }
+
+// ===========================
+//  FRETE
+// ===========================
+const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP)
+
+function calcularFrete() {
+  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
+  if (cep.length < 8) { toast('Digite um CEP válido.'); return; }
+
+  const resultDiv = document.getElementById('freteResultado');
+  const servico = document.getElementById('servicoFrete').value;
+  resultDiv.innerHTML = '<div style="color:#64748b;font-style:italic;padding:.7rem 0"><i class="bi bi-arrow-repeat"></i> Calculando frete...</div>';
+
+  // Simulação baseada nos critérios reais dos Correios
+  setTimeout(() => {
+    try {
+      const isседex = servico === '04014';
+      let base = isседex ? 28.50 : 18.50;
+      const regionDiff = Math.abs(parseInt(CEP_ORIGEM[0]) - parseInt(cep[0]));
+      const regionFactor = regionDiff * 9.50;
+      let total = base + regionFactor + 3.20; // 3.20 kg aprox caixa
+
+      // Arredonda para centavos
+      total = Math.round(total * 100) / 100;
+      let prazo = isседex ? (1 + Math.ceil(regionDiff / 2)) : (3 + regionDiff);
+
+      freightCost = total;
+
+      resultDiv.innerHTML = `
+        <div class="frete-result">
+          <strong><i class="bi bi-truck"></i> ${isседex ? 'SEDEX' : 'PAC'}</strong><br>
+          <span style="font-size:1.1rem;color:var(--gold);font-weight:700">R$ ${fmt(total)}</span>
+          <span style="color:#64748b;font-size:.9rem"> · ${prazo} a ${prazo+1} dias úteis</span>
+          <div style="color:#64748b;font-size:.78rem;margin-top:.3rem">* Estimativa com base no peso e destino.</div>
+        </div>`;
+
+      buildCheckoutSummary();
+      buildParcelas();
+    } catch(e) {
+      resultDiv.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular frete. Verifique o CEP.</div>`;
+    }
+  }, 1200);
+}
+
+// ===========================
+//  BUSCA DE CEP (ViaCEP)
+// ===========================
+function buscarCep() {
+  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
+  if (cep.length < 8) { toast('Digite um CEP com 8 dígitos.'); return; }
+
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(r => r.json())
+    .then(d => {
+      if (d.erro) { toast('CEP não encontrado.'); return; }
+      document.getElementById('logradouro').value = d.logradouro || '';
+      document.getElementById('bairro').value     = d.bairro || '';
+      document.getElementById('cidadeUf').value   = `${d.localidade} - ${d.uf}`;
+      toast('Endereço preenchido automaticamente!', 'success');
+    })
+    .catch(() => toast('Não foi possível buscar o CEP.'));
+}
+
+// ===========================
+//  MODAL: NÃO SEI MEU CEP
+// ===========================
+function openCepModal() {
+  document.getElementById('cepSearchInput').value = '';
+  document.getElementById('cepSearchResult').innerHTML = '';
+  new bootstrap.Modal(document.getElementById('cepModal')).show();
+}
+
+function searchCep() {
+  const q = document.getElementById('cepSearchInput').value.trim();
+  if (!q) return;
+  const res = document.getElementById('cepSearchResult');
+  res.innerHTML = '<div style="color:#64748b;padding:.5rem">Buscando...</div>';
+
+  fetch(`https://viacep.com.br/ws/${encodeURIComponent(q)}/json/`)
+    .then(r => r.json())
+    .then(data => {
+      const arr = Array.isArray(data) ? data : [data];
+      if (!arr.length || arr[0].erro) {
+        res.innerHTML = '<div style="color:#ef4444;padding:.5rem">Nenhum resultado encontrado. Tente mais detalhes.</div>';
+        return;
+      }
+      res.innerHTML = arr.slice(0,10).map(d => `
+        <div class="cep-result-item" onclick="selectCep('${d.cep}','${d.logradouro}','${d.bairro}','${d.localidade}','${d.uf}')">
+          <strong>${d.cep}</strong> — ${d.logradouro}, ${d.bairro}<br>
+          <small style="color:#64748b">${d.localidade} / ${d.uf}</small>
+        </div>`).join('');
+    })
+    .catch(() => {
+      // Fallback: instrução manual
+      res.innerHTML = '<div style="color:#64748b;padding:.5rem">Acesse <a href="https://buscacepinter.correios.com.br" target="_blank">buscacepinter.correios.com.br</a> para localizar seu CEP.</div>';
+    });
+}
+
+function selectCep(cep, logr, bairro, cidade, uf) {
+  document.getElementById('cepInput').value = cep.replace('-','').replace(/^(\d{5})(\d{3})$/,'$1-$2');
+  document.getElementById('logradouro').value = logr;
+  document.getElementById('bairro').value     = bairro;
+  document.getElementById('cidadeUf').value   = `${cidade} - ${uf}`;
+  bootstrap.Modal.getInstance(document.getElementById('cepModal'))?.hide();
+  toast('CEP selecionado!', 'success');
+}
+
+// ===========================
+//  MÁSCARAS
+// ===========================
+function maskCep(el) {
+  let v = el.value.replace(/\D/g,'');
+  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
+  el.value = v;
+}
+function maskCard(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function maskExp(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,4);
+  if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  el.value = v;
+}
+
+// ===========================
+//  TOAST
+// ===========================
+function toast(msg, type='') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast-msg' + (type ? ' ' + type : '');
+  el.innerHTML = `<i class="bi bi-${type==='success'?'check-circle-fill':'info-circle-fill'}"></i> ${msg}`;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// ===========================
+//  UTILITÁRIOS
+// ===========================
+function fmt(n) {
+  return n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+// Init
+updateCart();
+</script>
+</body>
+</html>
