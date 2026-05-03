@@ -44,10 +44,22 @@
     }
     .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
     .logo-img {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; color: #fff; font-weight: 800; flex-shrink: 0;
+      width: 100px; height: 100px; border-radius: 50%;
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 800;
+      flex-shrink: 0;
+      overflow: hidden; /* Garante que a imagem não ultrapasse o container circular */
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
     .logo-text { font-size: 1.05rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
     .logo-sub  { font-size: .7rem; color: var(--gold); letter-spacing: .05em; font-weight: 600; }
@@ -349,7 +361,9 @@
 <header class="top-header">
   <div class="nav-container">
     <div class="logo" onclick="showPage('home')">
-      <div class="logo-img">SB</div>
+      <div class="logo-img">
+        <img src="imagens/img_menu.png" alt="Logo Formas de Acrílico Premium">
+      </div>
       <div>
         
       </div>
