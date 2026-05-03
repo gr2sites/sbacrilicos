@@ -238,13 +238,53 @@
     .frete-box .frete-price   { font-size: 1.15rem; font-weight: 800; color: var(--green); }
     .frete-box .frete-prazo   { font-size: .82rem; color: #64748b; }
     .frete-error { background: #fef2f2; border-left: 4px solid var(--red); border-radius: 10px; padding: .9rem; margin-top: .8rem; color: var(--red); font-size: .88rem; }
+    
+    /* Estilos para os campos de dimensões do pacote */
+    .dimensoes-box {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: .8rem;
+      border: 1px solid var(--border);
+    }
+    .dimensoes-title {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .dimensoes-title i {
+      color: var(--gold);
+      font-size: 1rem;
+    }
 
     .pix-block { text-align: center; padding: 1rem 0; }
+    
+    /* ALTERAÇÃO: Centralização e tamanho do QR Code */
     .pix-qr {
-      width: 160px; height: 160px; background: #f1f5f9;
-      border-radius: 14px; margin: 1rem auto;
-      display: flex; align-items: center; justify-content: center; font-size: 4.5rem;
+      width: 180px;
+      height: 180px;
+      margin: 1rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 8px;
     }
+    
+    .pix-qr img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    
     .pix-key {
       background: #f1f5f9; border-radius: 10px;
       padding: .8rem 1rem; font-size: .78rem; color: var(--navy);
@@ -256,8 +296,6 @@
       font-size: .83rem; font-weight: 700; cursor: pointer; transition: .2s;
     }
     .btn-copy:hover { background: var(--gold); color: #fff; }
-
-    .sticky-summary { position: sticky; top: 82px; }
 
     .btn-confirm {
       width: 100%; padding: 15px; background: var(--gold);
@@ -477,9 +515,7 @@
     </div>
 
     <div class="row g-4">
-
-      <!-- COLUNA PRINCIPAL -->
-      <div class="col-lg-7">
+      <div class="col-lg-12">
 
         <!-- Resumo -->
         <div class="card-section">
@@ -539,7 +575,35 @@
             </div>
           </div>
 
-          <div class="row g-2 align-items-end">
+          <!-- Dimensões do Pacote para Cálculo de Frete -->
+          <div class="dimensoes-box">
+            <div class="dimensoes-title">
+              <i class="bi bi-box-seam"></i> Dimensões do Pacote
+            </div>
+            <div class="row g-2">
+              <div class="col-6 col-md-3">
+                <label class="form-label"><i class="bi bi-arrow-left-right"></i> Comprimento (cm)</label>
+                <input type="number" class="form-control" id="packComprimento" placeholder="Ex: 30" value="30" step="0.5" min="1">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label"><i class="bi bi-arrow-left-right"></i> Largura (cm)</label>
+                <input type="number" class="form-control" id="packLargura" placeholder="Ex: 30" value="30" step="0.5" min="1">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label"><i class="bi bi-arrow-up-down"></i> Altura (cm)</label>
+                <input type="number" class="form-control" id="packAltura" placeholder="Ex: 15" value="15" step="0.5" min="1">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label"><i class="bi bi-weight"></i> Peso (kg)</label>
+                <input type="number" class="form-control" id="packPeso" placeholder="Ex: 1.5" value="1.5" step="0.1" min="0.1">
+              </div>
+            </div>
+            <small class="text-muted d-block mt-2">
+              <i class="bi bi-info-circle"></i> Informe as dimensões da embalagem para um cálculo mais preciso do frete.
+            </small>
+          </div>
+
+          <div class="row g-2 align-items-end mt-2">
             <div class="col-7">
               <label class="form-label">Tipo de Frete</label>
               <select class="form-select" id="servicoFrete">
@@ -582,10 +646,13 @@
           <div class="card-section-title"><i class="bi bi-qr-code-scan"></i> Pagamento via PIX</div>
 
           <div class="pix-block">
-            <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code ou copie a chave PIX abaixo.</p>
-            <div class="pix-qr">📱</div>
-            <div class="pix-key">00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD</div>
-            <button class="btn-copy" onclick="copyPix()"><i class="bi bi-clipboard"></i> Copiar Chave PIX</button>
+            <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code abaixo para pagar</p>
+            <div class="pix-qr">
+              <img src="imagens/QRcode.png" alt="QR Code para pagamento PIX">
+            </div>
+            <button class="btn-copy" onclick="copyPix()">
+              <i class="bi bi-clipboard"></i> Copiar Chave PIX
+            </button>
             <p style="color:var(--green);font-size:.82rem;margin-top:.8rem;">
               <i class="bi bi-shield-lock-fill"></i> Pagamento instantâneo via Banco Central do Brasil
             </p>
@@ -596,29 +663,8 @@
           <i class="bi bi-check-circle-fill"></i> Confirmar e Finalizar Pedido
         </button>
 
-      </div><!-- /col-lg-7 -->
-
-      <!-- COLUNA LATERAL -->
-      <div class="col-lg-5">
-        <div class="sticky-summary">
-          <div class="card-section">
-            <div class="card-section-title"><i class="bi bi-bag-fill"></i> Itens no Pedido</div>
-            <div id="sideItems"></div>
-            <div style="border-top:2px solid var(--gold);margin-top:.8rem;padding-top:.9rem;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-weight:800;color:var(--navy);font-size:1.05rem;">Total:</span>
-                <span style="font-weight:800;color:var(--gold);font-size:1.25rem;" id="sideTotalVal">—</span>
-              </div>
-            </div>
-            <div style="background:#f0fdf4;border-radius:10px;padding:.7rem 1rem;margin-top:.8rem;font-size:.8rem;color:#16a34a;display:flex;align-items:center;gap:.4rem;">
-              <i class="bi bi-shield-fill-check"></i>
-              Compra protegida · Dados criptografados SSL
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      </div><!-- /col-lg-12 -->
+    </div><!-- /row -->
   </div>
 </div>
 
@@ -715,7 +761,7 @@
 // ============================================================
 let cart = {};
 let freightCost = 0;
-const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP)
+const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP) - FIXO
 
 // ============================================================
 //  PÁGINAS
@@ -831,28 +877,20 @@ function buildCheckoutSummary() {
       <span>R$ ${fmt(cart[k].price * cart[k].qty)}</span>
     </div>`).join('');
 
-  document.getElementById('sideItems').innerHTML = ids.map(k =>
-    `<div style="display:flex;gap:.7rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);">
-      <span style="font-size:1.6rem;flex-shrink:0">${cart[k].emoji}</span>
-      <div style="flex:1;">
-        <div style="font-weight:700;font-size:.88rem;color:var(--navy)">${cart[k].name}</div>
-        <div style="color:var(--gold);font-size:.83rem;font-weight:700">×${cart[k].qty} — R$ ${fmt(cart[k].price * cart[k].qty)}</div>
-      </div>
-    </div>`).join('');
-
   const total = subtotal + freightCost;
   document.getElementById('subtotalVal').textContent = 'R$ ' + fmt(subtotal);
   document.getElementById('freteVal').textContent = freightCost > 0 ? 'R$ ' + fmt(freightCost) : '—';
   document.getElementById('totalVal').textContent = 'R$ ' + fmt(total);
-  document.getElementById('sideTotalVal').textContent = 'R$ ' + fmt(total);
 }
 
 // ============================================================
 //  PAGAMENTO PIX
 // ============================================================
 function copyPix() {
-  navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd652020400005303986 5802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD')
-    .then(() => toast('Chave PIX copiada!', 'success'));
+  const chavePix = '00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd6520204000053039865802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD';
+  navigator.clipboard.writeText(chavePix)
+    .then(() => toast('Chave PIX copiada!', 'success'))
+    .catch(() => toast('Erro ao copiar chave PIX', 'error'));
 }
 
 // ============================================================
@@ -883,34 +921,79 @@ function finalizarPedido() {
 function novaCompra() { showPage('home'); }
 
 // ============================================================
-//  FRETE
+//  FRETE - Cálculo mais preciso com dimensões do pacote
 // ============================================================
 function calcularFrete() {
   const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
   if (cep.length < 8) { toast('Digite um CEP válido.', 'error'); return; }
-  const servico  = document.getElementById('servicoFrete').value;
+  
+  // Obter dimensões do pacote
+  let comprimento = parseFloat(document.getElementById('packComprimento').value);
+  let largura = parseFloat(document.getElementById('packLargura').value);
+  let altura = parseFloat(document.getElementById('packAltura').value);
+  let peso = parseFloat(document.getElementById('packPeso').value);
+  
+  // Validar dimensões
+  if (isNaN(comprimento) || comprimento < 1) comprimento = 30;
+  if (isNaN(largura) || largura < 1) largura = 30;
+  if (isNaN(altura) || altura < 1) altura = 15;
+  if (isNaN(peso) || peso < 0.1) peso = 1.5;
+  
+  const servico = document.getElementById('servicoFrete').value;
   const resultEl = document.getElementById('freteResultado');
   resultEl.innerHTML = '<div style="color:#64748b;padding:.7rem;font-style:italic"><i class="bi bi-arrow-repeat"></i> Calculando frete...</div>';
 
+  // Simular cálculo de frete considerando dimensões e peso
   setTimeout(() => {
     try {
-      const isSedex    = servico === '04014';
-      const base       = isSedex ? 29.90 : 18.50;
+      const isSedex = servico === '04014';
+      
+      // Calcular volume (em dm³) para influenciar no frete
+      const volume = (comprimento * largura * altura) / 1000;
+      
+      // Calcular peso cúbico (relação volume/peso)
+      const pesoCubico = volume * 250; // Fator de cubagem padrão dos Correios
+      const pesoFinal = Math.max(peso, pesoCubico); // Usa o maior entre peso real e peso cúbico
+      
+      // Base do frete conforme serviço
+      let base = isSedex ? 29.90 : 18.50;
+      
+      // Fatores de correção baseados nas dimensões e peso
+      const fatorVolume = Math.min(2.5, Math.max(1, volume / 5));
+      const fatorPeso = Math.min(2, Math.max(1, pesoFinal / 1.5));
+      const fatorDimensoes = (comprimento + largura + altura) / 60;
+      
+      // Diferença regional baseada no primeiro dígito do CEP
       const regionDiff = Math.abs(parseInt(CEP_ORIGEM[0]) - parseInt(cep[0]));
-      const total      = Math.round((base + regionDiff * 9.80 + 3.50) * 100) / 100;
-      const prazoMin   = isSedex ? Math.max(1, Math.ceil(regionDiff / 2)) : (3 + regionDiff);
-      const prazoMax   = prazoMin + (isSedex ? 1 : 2);
+      
+      // Cálculo final mais preciso
+      let total = base;
+      total = total * fatorVolume;
+      total = total * fatorPeso;
+      total = total * (0.8 + fatorDimensoes * 0.4);
+      total = total + (regionDiff * 8.50);
+      
+      // Arredondar
+      total = Math.round(total * 100) / 100;
+      
+      // Prazo de entrega estimado
+      const prazoMin = isSedex ? Math.max(1, Math.ceil(regionDiff / 1.5)) : (3 + Math.ceil(regionDiff / 1.5));
+      const prazoMax = prazoMin + (isSedex ? 1 : 3);
+      
       freightCost = total;
+      
       resultEl.innerHTML = `
         <div class="frete-box">
           <div class="frete-servico"><i class="bi bi-truck"></i> ${isSedex ? 'SEDEX à Vista' : 'PAC à Vista'}</div>
           <div class="frete-price">R$ ${fmt(total)}</div>
-          <div class="frete-prazo">${prazoMin} a ${prazoMax} dias úteis após a postagem</div>
-          <div style="font-size:.75rem;color:#94a3b8;margin-top:.4rem">* Estimativa calculada por CEP de origem e destino.</div>
+          <div class="frete-prazo">${prazoMin} a ${prazoMax} dias úteis</div>
+          <div style="font-size:.75rem;color:#94a3b8;margin-top:.4rem">
+            <i class="bi bi-box-seam"></i> Dimensões: ${comprimento}×${largura}×${altura} cm | Peso: ${peso.toFixed(1)} kg
+          </div>
         </div>`;
       buildCheckoutSummary();
     } catch(e) {
-      resultEl.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular. Verifique o CEP.</div>`;
+      resultEl.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular. Verifique os dados.</div>`;
     }
   }, 1200);
 }
