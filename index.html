@@ -348,6 +348,29 @@
     .cep-result-item:hover { background: var(--gold-light); }
     .cep-search-result { max-height: 280px; overflow-y: auto; margin-top: .5rem; }
 
+    /* Estilo para o botão do WhatsApp na página de sucesso */
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: .2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    .btn-whatsapp:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+    }
+
     @media(max-width: 576px) {
       .hero h1 { font-size: 1.8rem; }
       .checkout-title { font-size: 1.4rem; }
@@ -691,7 +714,7 @@
   <div class="success-wrap">
     <div class="success-icon"><i class="bi bi-check-circle-fill"></i></div>
     <h2>Pedido Confirmado! 🎉</h2>
-    <p>Obrigado pela sua compra. A confirmação será enviada para o seu e-mail em breve.</p>
+    <p>Obrigado pela sua compra. Agora encaminhe todos os dados junto com o comprovante de pagamento para WhatsApp.</p>
 
     <div class="card-section text-start mb-3">
       <div class="card-section-title"><i class="bi bi-receipt"></i> Resumo do Pedido</div>
@@ -702,7 +725,11 @@
       </div>
     </div>
 
-    <button class="btn-gold w-100" style="justify-content:center;padding:14px;border-radius:12px;font-size:1rem;" onclick="novaCompra()">
+    <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
+      <i class="bi bi-whatsapp"></i> Enviar Pedido via WhatsApp
+    </button>
+
+    <button class="btn-gold w-100" style="justify-content:center;padding:14px;border-radius:12px;font-size:1rem;margin-top:1rem;" onclick="novaCompra()">
       <i class="bi bi-arrow-repeat"></i> Fazer Novo Pedido
     </button>
   </div>
@@ -776,7 +803,9 @@
 // ============================================================
 let cart = {};
 let freightCost = 0;
+let ultimoPedidoData = null;
 const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP) - FIXO
+const NUMERO_WHATSAPP = '5516993987295'; // Número do lojista (sem + e sem espaços)
 
 // ============================================================
 //  PÁGINAS
@@ -899,9 +928,124 @@ function buildCheckoutSummary() {
 }
 
 // ============================================================
+//  FUNÇÃO PARA CONSTRUIR MENSAGEM DO PEDIDO
+// ============================================================
+function construirMensagemPedido() {
+  const nome = document.getElementById('nomeCliente').value.trim();
+  const email = document.getElementById('emailCliente').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  
+  const endereco = {
+    cep: document.getElementById('cepInput').value,
+    logradouro: document.getElementById('logradouro').value,
+    numero: document.getElementById('numero').value,
+    complemento: document.getElementById('complemento').value,
+    bairro: document.getElementById('bairro').value,
+    cidadeUf: document.getElementById('cidadeUf').value
+  };
+
+  const dimensoes = {
+    comprimento: document.getElementById('packComprimento').value,
+    largura: document.getElementById('packLargura').value,
+    altura: document.getElementById('packAltura').value,
+    peso: document.getElementById('packPeso').value
+  };
+
+  const servicoFrete = document.getElementById('servicoFrete').value;
+  const nomeFrete = servicoFrete === '04014' ? 'SEDEX' : 'PAC';
+  
+  const ids = Object.keys(cart);
+  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  const total = subtotal + freightCost;
+
+  // Data e hora atual
+  const now = new Date();
+  const dataHora = now.toLocaleString('pt-BR');
+
+  // Construir mensagem formatada
+  let mensagem = `🛍️ *NOVO PEDIDO - FORMAS DE ACRÍLICO* 🛍️\n`;
+  mensagem += `📅 Data: ${dataHora}\n`;
+  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  
+  mensagem += `👤 *DADOS DO CLIENTE*\n`;
+  mensagem += `Nome: ${nome}\n`;
+  mensagem += `E-mail: ${email}\n`;
+  if (telefone) mensagem += `Telefone: ${telefone}\n`;
+  mensagem += `\n`;
+  
+  mensagem += `📍 *ENDEREÇO DE ENTREGA*\n`;
+  mensagem += `CEP: ${endereco.cep || 'Não informado'}\n`;
+  mensagem += `Logradouro: ${endereco.logradouro || 'Não informado'}\n`;
+  mensagem += `Número: ${endereco.numero || 'Não informado'}\n`;
+  if (endereco.complemento) mensagem += `Complemento: ${endereco.complemento}\n`;
+  mensagem += `Bairro: ${endereco.bairro || 'Não informado'}\n`;
+  mensagem += `Cidade/UF: ${endereco.cidadeUf || 'Não informado'}\n`;
+  mensagem += `\n`;
+  
+  mensagem += `📦 *DIMENSÕES DO PACOTE*\n`;
+  mensagem += `Comprimento: ${dimensoes.comprimento} cm\n`;
+  mensagem += `Largura: ${dimensoes.largura} cm\n`;
+  mensagem += `Altura: ${dimensoes.altura} cm\n`;
+  mensagem += `Peso: ${dimensoes.peso} kg\n`;
+  mensagem += `\n`;
+  
+  mensagem += `🚚 *FRETE*\n`;
+  mensagem += `Tipo: ${nomeFrete}\n`;
+  mensagem += `Valor: R$ ${fmt(freightCost)}\n`;
+  mensagem += `\n`;
+  
+  mensagem += `🛒 *ITENS DO PEDIDO*\n`;
+  ids.forEach(k => {
+    const item = cart[k];
+    mensagem += `${item.emoji} ${item.name} x${item.qty} = R$ ${fmt(item.price * item.qty)}\n`;
+  });
+  mensagem += `\n`;
+  
+  mensagem += `💰 *RESUMO FINANCEIRO*\n`;
+  mensagem += `Subtotal: R$ ${fmt(subtotal)}\n`;
+  mensagem += `Frete: R$ ${fmt(freightCost)}\n`;
+  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  mensagem += `*TOTAL DO PEDIDO: R$ ${fmt(total)}*\n`;
+  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  
+  mensagem += `💳 *PAGAMENTO*\n`;
+  mensagem += `Forma: PIX\n`;
+  mensagem += `Chave PIX (CNPJ): 53361593000188\n`;
+  mensagem += `\n`;
+  
+  mensagem += `✅ *PRÓXIMOS PASSOS*\n`;
+  mensagem += `1. Realize o pagamento via PIX\n`;
+  mensagem += `2. Envie o comprovante anexado\n`;
+  mensagem += `3. Aguarde a confirmação do pedido\n`;
+  mensagem += `\n`;
+  mensagem += `📱 *EMPRESA: SB Acrilicos*\n`;
+  mensagem += `🔗 Site: www.sbacrilicos.com.br`;
+
+  return mensagem;
+}
+
+// ============================================================
+//  ENVIAR PEDIDO VIA WHATSAPP (Link wa.me)
+// ============================================================
+function enviarPedidoWhatsApp() {
+  if (!ultimoPedidoData) {
+    toast('Nenhum pedido encontrado para enviar.', 'error');
+    return;
+  }
+  
+  const mensagem = construirMensagemPedido();
+  const mensagemCodificada = encodeURIComponent(mensagem);
+  const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagemCodificada}`;
+  
+  // Abrir WhatsApp em nova aba/janela
+  window.open(urlWhatsApp, '_blank');
+  
+  toast('Abrindo WhatsApp para enviar o pedido!', 'success');
+}
+
+// ============================================================
 //  PAGAMENTO PIX
 // ============================================================
-// ALTERAÇÃO: Chave PIX atualizada para 53361593000188 (não aparece na interface)
 function copyPix() {
   const chavePix = '53361593000188';
   navigator.clipboard.writeText(chavePix)
@@ -910,18 +1054,48 @@ function copyPix() {
 }
 
 // ============================================================
-//  FINALIZAR
+//  FINALIZAR - Com salvamento dos dados e envio via WhatsApp
 // ============================================================
 function finalizarPedido() {
-  const nome  = document.getElementById('nomeCliente').value.trim();
+  const nome = document.getElementById('nomeCliente').value.trim();
   const email = document.getElementById('emailCliente').value.trim();
-  if (!nome)  { toast('Preencha o nome completo.', 'error'); return; }
+  
+  if (!nome) { toast('Preencha o nome completo.', 'error'); return; }
   if (!email) { toast('Preencha o e-mail.', 'error'); return; }
 
   const ids = Object.keys(cart);
+  if (ids.length === 0) { toast('Carrinho vazio!', 'error'); return; }
+
   const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
   const total = subtotal + freightCost;
 
+  // Salvar dados do pedido para uso posterior
+  ultimoPedidoData = {
+    nome: nome,
+    email: email,
+    telefone: document.getElementById('telefone').value,
+    endereco: {
+      cep: document.getElementById('cepInput').value,
+      logradouro: document.getElementById('logradouro').value,
+      numero: document.getElementById('numero').value,
+      complemento: document.getElementById('complemento').value,
+      bairro: document.getElementById('bairro').value,
+      cidadeUf: document.getElementById('cidadeUf').value
+    },
+    dimensoes: {
+      comprimento: document.getElementById('packComprimento').value,
+      largura: document.getElementById('packLargura').value,
+      altura: document.getElementById('packAltura').value,
+      peso: document.getElementById('packPeso').value
+    },
+    servicoFrete: document.getElementById('servicoFrete').value,
+    freightCost: freightCost,
+    itens: { ...cart },
+    subtotal: subtotal,
+    total: total
+  };
+
+  // Preencher página de sucesso
   document.getElementById('successItems').innerHTML = ids.map(k =>
     `<div style="display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.9rem;">
       <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
@@ -929,12 +1103,24 @@ function finalizarPedido() {
     </div>`).join('');
   document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
 
-  cart = {}; freightCost = 0;
+  // Limpar carrinho
+  cart = {};
+  freightCost = 0;
   updateCart();
+  
+  // Mostrar página de sucesso (com botão do WhatsApp)
   showPage('success');
+  
+  // Opcional: auto abrir WhatsApp após 2 segundos
+  setTimeout(() => {
+    enviarPedidoWhatsApp();
+  }, 2000);
 }
 
-function novaCompra() { showPage('home'); }
+function novaCompra() { 
+  ultimoPedidoData = null;
+  showPage('home'); 
+}
 
 // ============================================================
 //  FRETE - Cálculo mais preciso com dimensões do pacote
