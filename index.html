@@ -53,7 +53,7 @@
       color: #fff;
       font-weight: 800;
       flex-shrink: 0;
-      overflow: hidden; /* Garante que a imagem não ultrapasse o container circular */
+      overflow: hidden;
     }
     .logo-img img {
       width: 100%;
@@ -900,8 +900,9 @@ function buildCheckoutSummary() {
 // ============================================================
 //  PAGAMENTO PIX
 // ============================================================
+// ALTERAÇÃO: Chave PIX atualizada para 53361593000188 (não aparece na interface)
 function copyPix() {
-  const chavePix = '00020126580014br.gov.bcb.pix0136a5d07dba-7e58-4b8c-a6d3-3fa8e7dd6520204000053039865802BR5925ACRILICO PREMIUM LTDA6009SAO PAULO62070503***6304ABCD';
+  const chavePix = '53361593000188';
   navigator.clipboard.writeText(chavePix)
     .then(() => toast('Chave PIX copiada!', 'success'))
     .catch(() => toast('Erro ao copiar chave PIX', 'error'));
