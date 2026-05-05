@@ -29,7 +29,7 @@
       padding-top: 70px;
     }
 
-    /* ===== HEADER SEM MENU ===== */
+    /* ===== HEADER COM MENU HAMBURGUER ===== */
     .top-header {
       position: fixed; top: 0; left: 0; width: 100%;
       background: var(--white);
@@ -45,7 +45,6 @@
     .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
     .logo-img {
       width: 100px; height: 100px; border-radius: 50%;
-      
       display: flex;
       align-items: center;
       justify-content: center;
@@ -63,6 +62,102 @@
     }
     .logo-text { font-size: 1.05rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
     .logo-sub  { font-size: .7rem; color: var(--gold); letter-spacing: .05em; font-weight: 600; }
+
+    /* ===== MENU HAMBURGUER ===== */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--gold);
+      font-size: 1.3rem;
+      transition: all 0.2s ease;
+    }
+    .menu-toggle:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .nav-link-custom {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .nav-link-custom:hover {
+      background: var(--gold-light);
+      color: var(--gold-dark);
+    }
+    .nav-link-custom.active {
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    /* Menu mobile (offcanvas lateral) */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--white);
+      box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+      z-index: 1060;
+      transition: left 0.3s ease;
+      padding: 80px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .mobile-menu.open {
+      left: 0;
+    }
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1055;
+      display: none;
+    }
+    .mobile-menu-overlay.open {
+      display: block;
+    }
+    .mobile-menu .nav-link-custom {
+      display: block;
+      padding: 12px 16px;
+      font-size: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu .nav-link-custom:last-child {
+      border-bottom: none;
+    }
+    .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--navy);
+    }
 
     .btn-cart {
       position: relative; background: none; border: 2px solid var(--gold);
@@ -251,7 +346,6 @@
     .frete-box .frete-prazo   { font-size: .82rem; color: #64748b; }
     .frete-error { background: #fef2f2; border-left: 4px solid var(--red); border-radius: 10px; padding: .9rem; margin-top: .8rem; color: var(--red); font-size: .88rem; }
     
-    /* Estilos para os campos de dimensões do pacote */
     .dimensoes-box {
       background: #f8f9fa;
       border-radius: 12px;
@@ -275,7 +369,6 @@
 
     .pix-block { text-align: center; padding: 1rem 0; }
     
-    /* ALTERAÇÃO: Centralização e tamanho do QR Code */
     .pix-qr {
       width: 180px;
       height: 180px;
@@ -348,7 +441,6 @@
     .cep-result-item:hover { background: var(--gold-light); }
     .cep-search-result { max-height: 280px; overflow-y: auto; margin-top: .5rem; }
 
-    /* Estilo para o botão do WhatsApp na página de sucesso */
     .btn-whatsapp {
       background: #25D366;
       color: #fff;
@@ -371,16 +463,30 @@
       transform: translateY(-2px);
     }
 
-    @media(max-width: 576px) {
+    /* ===== RESPONSIVIDADE ===== */
+    @media(max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
       .hero h1 { font-size: 1.8rem; }
       .checkout-title { font-size: 1.4rem; }
       .cart-text { display: none; }
+      .btn-cart { padding: 7px 12px; }
+    }
+
+    @media(max-width: 576px) {
+      .hero h1 { font-size: 1.5rem; }
+      .section { padding: 2rem 1rem; }
+      .product-img-wrap { height: 180px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== HEADER SEM MENU ===== -->
+<!-- ===== HEADER COM MENU HAMBURGUER ===== -->
 <header class="top-header">
   <div class="nav-container">
     <div class="logo" onclick="showPage('home')">
@@ -388,9 +494,22 @@
         <img src="imagens/img_menu.png" alt="Logo Formas de Acrílico Premium">
       </div>
       <div>
-        
+        <div class="logo-text"></div>
+        <div class="logo-sub"></div>
       </div>
     </div>
+    
+    <!-- Menu Desktop -->
+    <div class="nav-menu">
+      
+      <button class="nav-link-custom" onclick="window.location.href='galeria.html'">Galeria</button>
+    </div>
+
+    <!-- Botão Menu Hamburguer (mobile) -->
+    <button class="menu-toggle" onclick="toggleMobileMenu()">
+      <i class="bi bi-list"></i>
+    </button>
+
     <button class="btn-cart" onclick="openCart()">
       <i class="bi bi-cart3"></i>
       <span class="cart-text">Carrinho</span>
@@ -398,6 +517,18 @@
     </button>
   </div>
 </header>
+
+<!-- Menu Mobile (Offcanvas lateral) -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" onclick="closeMobileMenu()">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <button class="nav-link-custom" onclick="window.location.href='galeria.html'">
+    <i class="bi bi-images"></i> Galeria
+  </button>
+</div>
 
 <!-- ===== TOASTS ===== -->
 <div class="toast-container" id="toastContainer"></div>
@@ -408,10 +539,9 @@
 <div class="page active" id="pageHome">
 
   <div class="hero">
-    <div class="hero-badge">✦ QUALIDADE PREMIUM</div>
+    <div class="hero-badge"></div>
     <h1>Formas de <span>Acrílico</span><br>para Profissionais</h1>
     <p>Alta transparência, durabilidade excepcional e precisão em cada dimensão. Ideal para produções em escala.</p>
-   
   </div>
 
   <div class="section" id="produtos">
@@ -441,7 +571,7 @@
               <span class="dim-badge">10 cm alt.</span>
             </div>
             <div class="product-desc">Ideal para produções de menor volume. Acrílico cristal de alta qualidade com acabamento impecável e fácil desmolde.</div>
-            <div class="product-price">R$ 139,90</div>
+            <div class="product-price">R$ 89,90</div>
             <div class="product-price-note">À vista · Frete calculado no checkout</div>
             <div class="qty-row">
               <span class="qty-label">Qtd:</span>
@@ -476,7 +606,7 @@
               <span class="dim-badge">10 cm alt.</span>
             </div>
             <div class="product-desc">Formato intermediário, perfeito para produções variadas. Alta transparência e resistência a impactos e temperatura.</div>
-            <div class="product-price">R$ 159,90</div>
+            <div class="product-price">R$ 129,90</div>
             <div class="product-price-note">À vista · Frete calculado no checkout</div>
             <div class="qty-row">
               <span class="qty-label">Qtd:</span>
@@ -511,7 +641,7 @@
               <span class="dim-badge">10 cm alt.</span>
             </div>
             <div class="product-desc">Formato grande para produções de alto volume. Máxima durabilidade e acabamento cristal sem bolhas ou imperfeições.</div>
-            <div class="product-price">R$ 139,90</div>
+            <div class="product-price">R$ 179,90</div>
             <div class="product-price-note">À vista · Frete calculado no checkout</div>
             <div class="qty-row">
               <span class="qty-label">Qtd:</span>
@@ -804,8 +934,39 @@
 let cart = {};
 let freightCost = 0;
 let ultimoPedidoData = null;
-const CEP_ORIGEM = '14780000'; // CEP da loja (Cajuru-SP) - FIXO
-const NUMERO_WHATSAPP = '5516993987295'; // Número do lojista (sem + e sem espaços)
+const CEP_ORIGEM = '14780000';
+const NUMERO_WHATSAPP = '5516993987295';
+
+// ============================================================
+//  MENU MOBILE
+// ============================================================
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  menu.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showPageAndCloseMenu(pageName) {
+  closeMobileMenu();
+  if (pageName === 'home') {
+    showPage('home');
+  } else if (pageName === 'produtos') {
+    showPage('home');
+    setTimeout(() => {
+      document.getElementById('produtos').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+}
 
 // ============================================================
 //  PÁGINAS
@@ -958,11 +1119,9 @@ function construirMensagemPedido() {
   const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
   const total = subtotal + freightCost;
 
-  // Data e hora atual
   const now = new Date();
   const dataHora = now.toLocaleString('pt-BR');
 
-  // Construir mensagem formatada
   let mensagem = `🛍️ *NOVO PEDIDO - FORMAS DE ACRÍLICO* 🛍️\n`;
   mensagem += `📅 Data: ${dataHora}\n`;
   mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
@@ -1025,7 +1184,7 @@ function construirMensagemPedido() {
 }
 
 // ============================================================
-//  ENVIAR PEDIDO VIA WHATSAPP (Link wa.me)
+//  ENVIAR PEDIDO VIA WHATSAPP
 // ============================================================
 function enviarPedidoWhatsApp() {
   if (!ultimoPedidoData) {
@@ -1037,7 +1196,6 @@ function enviarPedidoWhatsApp() {
   const mensagemCodificada = encodeURIComponent(mensagem);
   const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagemCodificada}`;
   
-  // Abrir WhatsApp em nova aba/janela
   window.open(urlWhatsApp, '_blank');
   
   toast('Abrindo WhatsApp para enviar o pedido!', 'success');
@@ -1054,7 +1212,7 @@ function copyPix() {
 }
 
 // ============================================================
-//  FINALIZAR - Com salvamento dos dados e envio via WhatsApp
+//  FINALIZAR
 // ============================================================
 function finalizarPedido() {
   const nome = document.getElementById('nomeCliente').value.trim();
@@ -1069,7 +1227,6 @@ function finalizarPedido() {
   const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
   const total = subtotal + freightCost;
 
-  // Salvar dados do pedido para uso posterior
   ultimoPedidoData = {
     nome: nome,
     email: email,
@@ -1095,7 +1252,6 @@ function finalizarPedido() {
     total: total
   };
 
-  // Preencher página de sucesso
   document.getElementById('successItems').innerHTML = ids.map(k =>
     `<div style="display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.9rem;">
       <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
@@ -1103,15 +1259,12 @@ function finalizarPedido() {
     </div>`).join('');
   document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
 
-  // Limpar carrinho
   cart = {};
   freightCost = 0;
   updateCart();
   
-  // Mostrar página de sucesso (com botão do WhatsApp)
   showPage('success');
   
-  // Opcional: auto abrir WhatsApp após 2 segundos
   setTimeout(() => {
     enviarPedidoWhatsApp();
   }, 2000);
@@ -1123,19 +1276,17 @@ function novaCompra() {
 }
 
 // ============================================================
-//  FRETE - Cálculo mais preciso com dimensões do pacote
+//  FRETE
 // ============================================================
 function calcularFrete() {
   const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
   if (cep.length < 8) { toast('Digite um CEP válido.', 'error'); return; }
   
-  // Obter dimensões do pacote
   let comprimento = parseFloat(document.getElementById('packComprimento').value);
   let largura = parseFloat(document.getElementById('packLargura').value);
   let altura = parseFloat(document.getElementById('packAltura').value);
   let peso = parseFloat(document.getElementById('packPeso').value);
   
-  // Validar dimensões
   if (isNaN(comprimento) || comprimento < 1) comprimento = 30;
   if (isNaN(largura) || largura < 1) largura = 30;
   if (isNaN(altura) || altura < 1) altura = 15;
@@ -1145,40 +1296,27 @@ function calcularFrete() {
   const resultEl = document.getElementById('freteResultado');
   resultEl.innerHTML = '<div style="color:#64748b;padding:.7rem;font-style:italic"><i class="bi bi-arrow-repeat"></i> Calculando frete...</div>';
 
-  // Simular cálculo de frete considerando dimensões e peso
   setTimeout(() => {
     try {
       const isSedex = servico === '04014';
-      
-      // Calcular volume (em dm³) para influenciar no frete
       const volume = (comprimento * largura * altura) / 1000;
+      const pesoCubico = volume * 250;
+      const pesoFinal = Math.max(peso, pesoCubico);
       
-      // Calcular peso cúbico (relação volume/peso)
-      const pesoCubico = volume * 250; // Fator de cubagem padrão dos Correios
-      const pesoFinal = Math.max(peso, pesoCubico); // Usa o maior entre peso real e peso cúbico
-      
-      // Base do frete conforme serviço
       let base = isSedex ? 29.90 : 18.50;
-      
-      // Fatores de correção baseados nas dimensões e peso
       const fatorVolume = Math.min(2.5, Math.max(1, volume / 5));
       const fatorPeso = Math.min(2, Math.max(1, pesoFinal / 1.5));
       const fatorDimensoes = (comprimento + largura + altura) / 60;
-      
-      // Diferença regional baseada no primeiro dígito do CEP
       const regionDiff = Math.abs(parseInt(CEP_ORIGEM[0]) - parseInt(cep[0]));
       
-      // Cálculo final mais preciso
       let total = base;
       total = total * fatorVolume;
       total = total * fatorPeso;
       total = total * (0.8 + fatorDimensoes * 0.4);
       total = total + (regionDiff * 8.50);
       
-      // Arredondar
       total = Math.round(total * 100) / 100;
       
-      // Prazo de entrega estimado
       const prazoMin = isSedex ? Math.max(1, Math.ceil(regionDiff / 1.5)) : (3 + Math.ceil(regionDiff / 1.5));
       const prazoMax = prazoMin + (isSedex ? 1 : 3);
       
