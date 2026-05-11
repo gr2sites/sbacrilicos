@@ -531,7 +531,7 @@
 </div>
 
 <!-- ===== TOASTS ===== -->
-<div class="toast-container" id="toastContainer">Premium</div>
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- ============================================================
      PAGE HOME
@@ -581,7 +581,7 @@
                 <button class="qty-btn" onclick="changeQty('p1',1)">+</button>
               </div>
             </div>
-            <button class="btn-add" id="btn-p1" onclick="addToCart('p1','Forma Acrílico 30×10×10',89.90,'🧊')">
+            <button class="btn-add" id="btn-p1" onclick="addToCart('p1','Forma Acrílico 30×10×10',139.90,'🧊')">
               <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
             </button>
           </div>
@@ -616,7 +616,7 @@
                 <button class="qty-btn" onclick="changeQty('p2',1)">+</button>
               </div>
             </div>
-            <button class="btn-add" id="btn-p2" onclick="addToCart('p2','Forma Acrílico 30×20×10',129.90,'🔷')">
+            <button class="btn-add" id="btn-p2" onclick="addToCart('p2','Forma Acrílico 30×20×10',159.90,'🔷')">
               <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
             </button>
           </div>
@@ -651,7 +651,7 @@
                 <button class="qty-btn" onclick="changeQty('p3',1)">+</button>
               </div>
             </div>
-            <button class="btn-add" id="btn-p3" onclick="addToCart('p3','Forma Acrílico 30×30×10',179.90,'🟦')">
+            <button class="btn-add" id="btn-p3" onclick="addToCart('p3','Forma Acrílico 30×30×10',239.90,'🟦')">
               <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
             </button>
           </div>
@@ -1115,9 +1115,9 @@ function construirMensagemPedido() {
   const servicoFrete = document.getElementById('servicoFrete').value;
   const nomeFrete = servicoFrete === '04014' ? 'SEDEX' : 'PAC';
   
-  const ids = Object.keys(cart);
-  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
-  const total = subtotal + freightCost;
+  const ids = Object.keys(ultimoPedidoData?.itens || {});
+  const subtotal = ultimoPedidoData?.subtotal || 0;
+  const total = ultimoPedidoData?.total || 0;
 
   const now = new Date();
   const dataHora = now.toLocaleString('pt-BR');
@@ -1150,19 +1150,21 @@ function construirMensagemPedido() {
   
   mensagem += `🚚 *FRETE*\n`;
   mensagem += `Tipo: ${nomeFrete}\n`;
-  mensagem += `Valor: R$ ${fmt(freightCost)}\n`;
+  mensagem += `Valor: R$ ${fmt(ultimoPedidoData?.freightCost || 0)}\n`;
   mensagem += `\n`;
   
   mensagem += `🛒 *ITENS DO PEDIDO*\n`;
-  ids.forEach(k => {
-    const item = cart[k];
-    mensagem += `${item.emoji} ${item.name} x${item.qty} = R$ ${fmt(item.price * item.qty)}\n`;
-  });
+  if (ultimoPedidoData?.itens) {
+    Object.keys(ultimoPedidoData.itens).forEach(k => {
+      const item = ultimoPedidoData.itens[k];
+      mensagem += `${item.emoji} ${item.name} x${item.qty} = R$ ${fmt(item.price * item.qty)}\n`;
+    });
+  }
   mensagem += `\n`;
   
   mensagem += `💰 *RESUMO FINANCEIRO*\n`;
   mensagem += `Subtotal: R$ ${fmt(subtotal)}\n`;
-  mensagem += `Frete: R$ ${fmt(freightCost)}\n`;
+  mensagem += `Frete: R$ ${fmt(ultimoPedidoData?.freightCost || 0)}\n`;
   mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n`;
   mensagem += `*TOTAL DO PEDIDO: R$ ${fmt(total)}*\n`;
   mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
@@ -1260,6 +1262,7 @@ function finalizarPedido() {
   document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
 
   cart = {};
+  const oldFreight = freightCost;
   freightCost = 0;
   updateCart();
   
