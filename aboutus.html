@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nós - S&B Laser</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-dark: #B8960F;
+      --gold-light: #FFF8E7;
+      --navy: #0f172a;
+      --text: #334155;
+      --bg: #f4f6fa;
+      --white: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-top: 70px;
+    }
+
+    /* ===== HEADER COM MENU HAMBURGUER ===== */
+    .top-header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: var(--white);
+      box-shadow: 0 4px 12px rgba(0,0,0,.10);
+      z-index: 1050;
+      height: 70px;
+    }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
+    .logo-img {
+      width: 100px; height: 100px; border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 800;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .logo-text { font-size: 1.05rem; font-weight: 800; color: var(--navy); line-height: 1.2; }
+    .logo-sub  { font-size: .7rem; color: var(--gold); letter-spacing: .05em; font-weight: 600; }
+
+    /* ===== MENU HAMBURGUER ===== */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--gold);
+      font-size: 1.3rem;
+      transition: all 0.2s ease;
+    }
+    .menu-toggle:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .nav-link-custom {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .nav-link-custom:hover {
+      background: var(--gold-light);
+      color: var(--gold-dark);
+    }
+    .nav-link-custom.active {
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    /* Menu mobile (offcanvas lateral) */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: var(--white);
+      box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+      z-index: 1060;
+      transition: left 0.3s ease;
+      padding: 80px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .mobile-menu.open {
+      left: 0;
+    }
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1055;
+      display: none;
+    }
+    .mobile-menu-overlay.open {
+      display: block;
+    }
+    .mobile-menu .nav-link-custom {
+      display: block;
+      padding: 12px 16px;
+      font-size: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu .nav-link-custom:last-child {
+      border-bottom: none;
+    }
+    .close-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--navy);
+    }
+
+    .btn-cart {
+      position: relative; background: none; border: 2px solid var(--gold);
+      border-radius: 50px; padding: 7px 18px; cursor: pointer;
+      color: var(--gold); font-size: .95rem; font-weight: 700;
+      display: flex; align-items: center; gap: .4rem; transition: .2s;
+      text-decoration: none;
+    }
+    .btn-cart:hover { background: var(--gold); color: #fff; }
+    .btn-cart i { font-size: 1.1rem; }
+
+    /* ===== SEÇÃO SOBRE NÓS ===== */
+    .about-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Hero da página */
+    .about-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 60%, #0f172a 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 24px;
+      margin-bottom: 3rem;
+      color: #fff;
+    }
+    .about-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .about-hero h1 span {
+      color: var(--gold);
+    }
+    .about-hero p {
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* Container do Slideshow */
+    .slideshow-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      background: #000;
+    }
+
+    .slides-wrapper {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Animações de entrada para cada slide */
+    .slide.animate-left {
+      animation: slideInFromLeft 0.6s ease-out forwards;
+    }
+
+    .slide.animate-right {
+      animation: slideInFromRight 0.6s ease-out forwards;
+    }
+
+    @keyframes slideInFromLeft {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInFromRight {
+      0% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Botões de navegação */
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: var(--gold);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .slide-btn:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    .prev-btn {
+      left: 20px;
+    }
+
+    .next-btn {
+      right: 20px;
+    }
+
+    /* Indicadores (dots) */
+    .dots-container {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    /* Cards de conteúdo */
+    .about-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform 0.3s ease;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .about-card-content {
+      flex: 2;
+      min-width: 250px;
+    }
+
+    .about-card-image {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .about-card-image img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .about-card i {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .about-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .about-card p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .products-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .products-list li {
+      list-style: none;
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #64748b;
+    }
+
+    .products-list li i {
+      font-size: 1rem;
+      color: var(--gold);
+      margin: 0;
+    }
+
+    .values-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .values-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .values-list li i {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin: 0;
+    }
+
+    .commitment-box {
+      background: linear-gradient(135deg, var(--gold-light), #fff);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      border: 1px solid var(--gold);
+    }
+
+    .commitment-box h4 {
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Botão Voltar */
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--text);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+      margin-top: 2rem;
+      text-decoration: none;
+    }
+    .back-home-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--navy);
+      color: #64748b;
+      font-size: .85rem;
+      margin-top: 3rem;
+    }
+    .site-footer span { color: var(--gold); }
+    .site-footer a {
+      color: #64748b;
+      text-decoration: none;
+    }
+    .site-footer a:hover {
+      color: var(--gold);
+    }
+
+    @media(max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .about-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .slides-wrapper {
+        height: 300px;
+      }
+      .about-hero h1 {
+        font-size: 1.8rem;
+      }
+      .slide-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media(max-width: 576px) {
+      .slides-wrapper {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER COM MENU HAMBURGUER ===== -->
+<header class="top-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <div class="logo-img">
+        <img src="imagens/img_menu.png" alt="Logo S&B Laser">
+      </div>
+      <div>
+        <div class="logo-text"></div>
+        <div class="logo-sub"></div>
+      </div>
+    </a>
+
+    <!-- Menu Desktop -->
+    <div class="nav-menu">
+      <button class="nav-link-custom" onclick="window.location.href='index.html'">Início</button>
+      <button class="nav-link-custom" onclick="window.location.href='galeria.html'">Galeria</button>
+      <button class="nav-link-custom active" onclick="window.location.href='aboutus.html'">Sobre Nós</button>
+    </div>
+
+    <!-- Botão Menu Hamburguer (mobile) -->
+    <button class="menu-toggle" onclick="toggleMobileMenu()">
+      <i class="bi bi-list"></i>
+    </button>
+
+    
+  </div>
+</header>
+
+<!-- Menu Mobile -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" onclick="closeMobileMenu()">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <button class="nav-link-custom" onclick="window.location.href='index.html'">
+    <i class="bi bi-house"></i> Início
+  </button>
+  <button class="nav-link-custom" onclick="window.location.href='galeria.html'">
+    <i class="bi bi-images"></i> Galeria
+  </button>
+  <button class="nav-link-custom active" onclick="window.location.href='aboutus.html'">
+    <i class="bi bi-building"></i> Sobre Nós
+  </button>
+</div>
+
+<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+<main>
+  <div class="about-section">
+    
+   
+ 
+
+   
+    <!-- 1. Nossa História -->
+    <div class="about-card">
+      <div class="about-card-content">
+        <i class="bi bi-house-heart-fill"></i>
+        <h3>🏠 Nossa História</h3>
+        <p>A <strong>Sousa & Benelli</strong> nasceu como uma empresa familiar, com o propósito de criar produtos personalizados que levassem significado e valor para outras famílias.</p>
+        <p style="margin-top: 1rem;">Com o tempo, evoluímos e hoje atuamos como <strong>S&B Laser</strong>, mantendo viva nossa essência: <strong>tradição, cuidado e dedicação em cada detalhe</strong>.</p>
+      </div>
+      <div class="about-card-image">
+        <img src="imagens/sobre-historia.jpg" alt="Nossa História S&B Laser"
+          onerror="this.src='https://via.placeholder.com/250x250?text=Família+S%26B+Laser'">
+      </div>
+    </div>
+
+    <!-- 2. Nossos Produtos e Serviços -->
+    <div class="about-card">
+      <div class="about-card-content">
+        <i class="bi bi-bag-check-fill"></i>
+        <h3>📦 Nossos Produtos e Serviços</h3>
+        <p>Produzimos itens que valorizam e destacam o seu produto artesanal:</p>
+        <ul class="products-list">
+          <li><i class="bi bi-check-circle-fill"></i> Cake boards</li>
+          <li><i class="bi bi-check-circle-fill"></i> Topos de bolo</li>
+          <li><i class="bi bi-check-circle-fill"></i> Bandejas em acrílico</li>
+          <li><i class="bi bi-check-circle-fill"></i> Expositores personalizados</li>
+          <li><i class="bi bi-check-circle-fill"></i> Tags em MDF ou acrílico</li>
+          <li><i class="bi bi-check-circle-fill"></i> Colherinhas em madeira com gravação de logomarca</li>
+        </ul>
+        <p style="margin-top: 1rem;">Trabalhamos com <strong>gravação a laser de alta qualidade</strong> em materiais como MDF, bambu, madeira, couro e acrílico, garantindo personalização única para sua marca.</p>
+      </div>
+      <div class="about-card-image">
+        <img src="imagens/sobre-produtos.jpg" alt="Nossos Produtos S&B Laser"
+          onerror="this.src='https://via.placeholder.com/250x250?text=Produtos+S%26B+Laser'">
+      </div>
+    </div>
+
+    <!-- 3. Nosso Compromisso -->
+    <div class="about-card">
+      <div class="about-card-content">
+        <i class="bi bi-gem-fill"></i>
+        <h3>💎 Nosso Compromisso</h3>
+        <p>Cada peça é feita com <strong>atenção e carinho</strong>, passando por um processo cuidadoso desde o desenvolvimento até a entrega final.</p>
+        <p style="margin-top: 1rem;">Nosso time de designers trabalha com um olhar minucioso para valorizar ao máximo sua logomarca e seu produto.</p>
+        <p style="margin-top: 1rem;">Tudo é pensado para destacar ainda mais o seu trabalho artesanal — seja um bolo feito com amor ou uma lembrança especial de casamento ou batizado.</p>
+      </div>
+      <div class="about-card-image">
+        <img src="imagens/sobre-compromisso.jpg" alt="Nosso Compromisso S&B Laser"
+          onerror="this.src='https://via.placeholder.com/250x250?text=Compromisso+e+Qualidade'">
+      </div>
+    </div>
+
+    <!-- Frase de assinatura -->
+    <div class="commitment-box">
+      <h4><i class="bi bi-star-fill"></i> S&B Laser</h4>
+      <p style="font-size: 1.1rem; font-weight: 500;">— nossa família atendendo a sua, com qualidade, cuidado e excelência em cada detalhe.</p>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="index.html" class="back-home-btn">
+        <i class="bi bi-arrow-left"></i> Voltar para a Loja
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p><span>✦ S&B Laser</span> &copy; 2025 — Qualidade que você pode tocar.</p>
+  <p><span><a href="https://www.gr2sites.com.br" target="_blank">Site criado por GR2 sites e sistemas</a></span></p>
+</footer>
+
+<script>
+// ============================================================
+//  MENU MOBILE
+// ============================================================
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  menu.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ============================================================
+//  SLIDESHOW COM ANIMAÇÕES
+// ============================================================
+let currentIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+let autoPlayInterval;
+let animationTimeout = null;
+
+function applyAnimation(slideElement, animationType) {
+  slideElement.classList.remove('animate-left', 'animate-right');
+  void slideElement.offsetWidth;
+  if (animationType === 'left') {
+    slideElement.classList.add('animate-left');
+  } else if (animationType === 'right') {
+    slideElement.classList.add('animate-right');
+  }
+}
+
+function showSlide(index, withAnimation = true) {
+  if (index < 0) index = 0;
+  if (index >= slides.length) index = slides.length - 1;
+  
+  const currentSlide = slides[currentIndex];
+  const newSlide = slides[index];
+  
+  if (currentIndex === index) return;
+  
+  if (currentSlide) {
+    currentSlide.classList.remove('active');
+    currentSlide.classList.remove('animate-left', 'animate-right');
+  }
+  
+  currentIndex = index;
+  
+  if (withAnimation) {
+    const animationType = newSlide.getAttribute('data-animation');
+    applyAnimation(newSlide, animationType);
+  }
+  
+  newSlide.classList.add('active');
+  updateDots();
+}
+
+function changeSlide(direction) {
+  if (animationTimeout) clearTimeout(animationTimeout);
+  let newIndex = currentIndex + direction;
+  if (newIndex < 0) newIndex = slides.length - 1;
+  if (newIndex >= slides.length) newIndex = 0;
+  showSlide(newIndex, true);
+  resetAutoPlay();
+}
+
+function currentSlide(index) {
+  if (animationTimeout) clearTimeout(animationTimeout);
+  showSlide(index, true);
+  resetAutoPlay();
+}
+
+function updateDots() {
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentIndex);
+  });
+}
+
+function startAutoPlay() {
+  if (autoPlayInterval) clearInterval(autoPlayInterval);
+  autoPlayInterval = setInterval(() => {
+    let nextIndex = currentIndex + 1;
+    if (nextIndex >= slides.length) nextIndex = 0;
+    showSlide(nextIndex, true);
+  }, 5000);
+}
+
+function resetAutoPlay() {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+  }
+}
+
+function initSlideshow() {
+  slides.forEach((slide, i) => {
+    slide.classList.remove('active', 'animate-left', 'animate-right');
+    if (i === 0) {
+      slide.classList.add('active');
+      const animationType = slide.getAttribute('data-animation');
+      applyAnimation(slide, animationType);
+    }
+  });
+  currentIndex = 0;
+  updateDots();
+  startAutoPlay();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  initSlideshow();
+});
+</script>
+</body>
+</html>
