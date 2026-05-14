@@ -461,6 +461,35 @@
       color: var(--gold);
     }
 
+    /* ===== ANIMAÇÃO DE SLIDE-IN DA ESQUERDA (NOVO) ===== */
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-60px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-on-load {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.05s; }
+    .delay-2 { animation-delay: 0.15s; }
+    .delay-3 { animation-delay: 0.25s; }
+    .delay-4 { animation-delay: 0.35s; }
+    .delay-5 { animation-delay: 0.45s; }
+    .delay-6 { animation-delay: 0.55s; }
+    .delay-7 { animation-delay: 0.65s; }
+
     /* Footer */
     .site-footer {
       text-align: center;
@@ -563,12 +592,34 @@
 <main>
   <div class="about-section">
     
-   
- 
+    
+    
+    <!-- SLIDESHOW (MANTIDO COMENTADO COMO NO ORIGINAL) -->
+    <!--
+    <div class="slideshow-container">
+      <div class="slides-wrapper">
+        <div class="slide active" data-animation="left">
+          <img src="imagens/slide1.jpg" alt="Nossa Equipe">
+        </div>
+        <div class="slide" data-animation="right">
+          <img src="imagens/slide2.jpg" alt="Nossos Produtos">
+        </div>
+        <div class="slide" data-animation="left">
+          <img src="imagens/slide3.jpg" alt="Atendimento">
+        </div>
+      </div>
+      <button class="slide-btn prev-btn" onclick="changeSlide(-1)">❮</button>
+      <button class="slide-btn next-btn" onclick="changeSlide(1)">❯</button>
+      <div class="dots-container">
+        <div class="dot active" onclick="currentSlide(0)"></div>
+        <div class="dot" onclick="currentSlide(1)"></div>
+        <div class="dot" onclick="currentSlide(2)"></div>
+      </div>
+    </div>
+    -->
 
-   
-    <!-- 1. Nossa História -->
-    <div class="about-card">
+    <!-- 1. Nossa História com animação slide-in adicionada -->
+    <div class="about-card animate-on-load">
       <div class="about-card-content">
         <i class="bi bi-house-heart-fill"></i>
         <h3>Nossa História</h3>
@@ -581,8 +632,8 @@
       </div>
     </div>
 
-    <!-- 2. Nossos Produtos e Serviços -->
-    <div class="about-card">
+    <!-- 2. Nossos Produtos e Serviços com animação slide-in adicionada -->
+    <div class="about-card animate-on-load">
       <div class="about-card-content">
         <i class="bi bi-bag-check-fill"></i>
         <h3>Nossos Produtos e Serviços</h3>
@@ -603,8 +654,8 @@
       </div>
     </div>
 
-    <!-- 3. Nosso Compromisso -->
-    <div class="about-card">
+    <!-- 3. Nosso Compromisso com animação slide-in adicionada -->
+    <div class="about-card animate-on-load">
       <div class="about-card-content">
         <i class="bi bi-hand-thumbs-up-fill"></i>
         <h3>Nosso Compromisso</h3>
@@ -618,14 +669,15 @@
       </div>
     </div>
 
-    <!-- Frase de assinatura -->
-    <div class="commitment-box">
+    <!-- Frase de assinatura com animação slide-in adicionada -->
+    <div class="commitment-box animate-on-load">
       <h4><i class="bi bi-star-fill"></i> S&B Acrilicos</h4>
       <p style="font-size: 1.1rem; font-weight: 500;">— nossa família atendendo a sua, com qualidade, cuidado e excelência em cada detalhe.</p>
     </div>
 
+    <!-- Botão voltar com animação slide-in adicionada -->
     <div style="text-align: center;">
-      <a href="index.html" class="back-home-btn">
+      <a href="index.html" class="back-home-btn animate-on-load">
         <i class="bi bi-arrow-left"></i> Voltar para a Loja
       </a>
     </div>
@@ -658,7 +710,7 @@ function closeMobileMenu() {
 }
 
 // ============================================================
-//  SLIDESHOW COM ANIMAÇÕES
+//  SLIDESHOW COM ANIMAÇÕES (MANTIDO ORIGINAL)
 // ============================================================
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
@@ -739,6 +791,7 @@ function resetAutoPlay() {
 }
 
 function initSlideshow() {
+  if (slides.length === 0) return;
   slides.forEach((slide, i) => {
     slide.classList.remove('active', 'animate-left', 'animate-right');
     if (i === 0) {
@@ -752,8 +805,36 @@ function initSlideshow() {
   startAutoPlay();
 }
 
+// ============================================================
+//  ANIMAÇÃO DE SLIDE-IN PARA ELEMENTOS DA PÁGINA (NOVO)
+// ============================================================
+function applySlideInAnimations() {
+  const elements = document.querySelectorAll('.animate-on-load');
+  
+  elements.forEach((element, index) => {
+    let delayClass = '';
+    if (index === 0) delayClass = 'delay-1';
+    else if (index === 1) delayClass = 'delay-2';
+    else if (index === 2) delayClass = 'delay-3';
+    else if (index === 3) delayClass = 'delay-4';
+    else if (index === 4) delayClass = 'delay-5';
+    else if (index === 5) delayClass = 'delay-6';
+    else delayClass = 'delay-7';
+    
+    element.classList.add(delayClass);
+    
+    setTimeout(() => {
+      element.classList.add('slide-in-left');
+    }, 50);
+  });
+}
+
+// ============================================================
+//  INICIALIZAÇÃO
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   initSlideshow();
+  applySlideInAnimations();
 });
 </script>
 </body>
