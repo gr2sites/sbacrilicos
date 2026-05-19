@@ -665,6 +665,41 @@
         </div>
       </div>
 
+      <!-- PRODUTO 4 (NOVO) -->
+      <div class="col-md-4">
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="imagens/produto-04.jpeg" alt="Forma Acrílico 40x30x10"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="p-emoji">🟦</div>
+            <span class="badge-new">PREMIUM</span>
+          </div>
+          <div class="product-body">
+            <div class="product-sku">SKU: AC-40-30-10</div>
+            <div class="product-title">Forma de Acrílico 40×30×10</div>
+            <div class="product-dims">
+              <span class="dim-badge">40 cm comp.</span>
+              <span class="dim-badge">30 cm larg.</span>
+              <span class="dim-badge">10 cm alt.</span>
+            </div>
+            <div class="product-desc">Formato超大 para produções industriais. Máxima capacidade com a mesma qualidade cristal e durabilidade excepcional.</div>
+            <div class="product-price">R$ 289,90</div>
+            <div class="product-price-note">À vista · Frete calculado no checkout</div>
+            <div class="qty-row">
+              <span class="qty-label">Qtd:</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('p4',-1)">−</button>
+                <span class="qty-val" id="qty-p4">1</span>
+                <button class="qty-btn" onclick="changeQty('p4',1)">+</button>
+              </div>
+            </div>
+            <button class="btn-add" id="btn-p4" onclick="addToCart('p4','Forma Acrílico 40×30×10',289.90,'🟦')">
+              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -988,7 +1023,7 @@ function showPage(name) {
 // ============================================================
 //  QUANTIDADE
 // ============================================================
-const pageQty = { p1: 1, p2: 1, p3: 1 };
+const pageQty = { p1: 1, p2: 1, p3: 1, p4: 1 };
 
 function changeQty(id, delta) {
   pageQty[id] = Math.max(1, (pageQty[id] || 1) + delta);
