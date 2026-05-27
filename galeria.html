@@ -159,15 +159,51 @@
       color: var(--navy);
     }
 
-    .btn-cart {
-      position: relative; background: none; border: 2px solid var(--gold);
-      border-radius: 50px; padding: 7px 18px; cursor: pointer;
-      color: var(--gold); font-size: .95rem; font-weight: 700;
-      display: flex; align-items: center; gap: .4rem; transition: .2s;
-      text-decoration: none;
+    /* ===== BOTÃO FLUTUANTE DO CARRINHO ===== */
+    .cart-float {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      color: var(--navy);
+      font-size: 1.6rem;
+      cursor: pointer;
+      z-index: 1040;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .btn-cart:hover { background: var(--gold); color: #fff; }
-    .btn-cart i { font-size: 1.1rem; }
+
+    .cart-float:hover {
+      transform: scale(1.08);
+      background: var(--gold-dark);
+      color: #fff;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.3);
+    }
+
+    .cart-badge-float {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--red);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
     /* ===== SEÇÃO PRINCIPAL ===== */
     .section { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
@@ -358,6 +394,42 @@
       color: var(--gold);
     }
 
+    /* ===== CARRINHO OFFCANVAS ===== */
+    .offcanvas-header { border-bottom: 1px solid var(--border); }
+    .offcanvas-title { font-weight: 800; color: var(--navy); font-size: 1.1rem; }
+
+    .cart-item {
+      display: flex; gap: .8rem; padding: .9rem 0;
+      border-bottom: 1px solid var(--border); align-items: flex-start;
+    }
+    .cart-item-emoji { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name  { font-weight: 700; font-size: .92rem; color: var(--navy); margin-bottom: .2rem; }
+    .cart-item-unit  { font-size: .78rem; color: #94a3b8; }
+    .cart-item-price { color: var(--gold); font-weight: 800; font-size: .95rem; margin-top: .3rem; }
+    .cart-qty-row { display: flex; align-items: center; gap: .4rem; margin-top: .4rem; }
+    .cart-qty-btn {
+      width: 26px; height: 26px; border-radius: 7px;
+      border: 1.5px solid var(--gold); background: none;
+      color: var(--gold); font-weight: 700; cursor: pointer; font-size: .9rem;
+      display: flex; align-items: center; justify-content: center; transition: .15s;
+    }
+    .cart-qty-btn:hover { background: var(--gold); color: #fff; }
+    .cart-qty-val { font-weight: 700; min-width: 22px; text-align: center; font-size: .9rem; }
+    .btn-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: .95rem; padding: 2px 6px; }
+    .cart-empty { text-align: center; padding: 3rem 1rem; color: #94a3b8; }
+    .cart-empty i { font-size: 3.5rem; margin-bottom: .8rem; display: block; }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; padding: .8rem 0; }
+    .cart-total-label { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+    .cart-total-val   { font-weight: 800; color: var(--gold); font-size: 1.2rem; }
+    .btn-checkout-main {
+      width: 100%; padding: 14px; background: var(--gold);
+      border: none; border-radius: 12px; color: #fff;
+      font-weight: 800; font-size: 1rem; cursor: pointer; transition: .2s;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .btn-checkout-main:hover { background: var(--gold-dark); }
+
     @media(max-width: 768px) {
       .nav-menu {
         display: none;
@@ -367,8 +439,13 @@
       }
       .gallery-filters { gap: 0.5rem; }
       .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
-      .cart-text { display: none; }
-      .btn-cart { padding: 7px 12px; }
+      .cart-float {
+        bottom: 70px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -382,8 +459,8 @@
         <img src="imagens/img_menu.png" alt="Logo Formas de Acrílico Premium">
       </div>
       <div>
-        <div class="logo-text"></div>
-        <div class="logo-sub"></div>
+        <div class="logo-text">S&B Laser</div>
+        <div class="logo-sub">Arte em Acrílico</div>
       </div>
     </a>
     
@@ -398,8 +475,6 @@
     <button class="menu-toggle" onclick="toggleMobileMenu()">
       <i class="bi bi-list"></i>
     </button>
-
-   
   </div>
 </header>
 
@@ -421,8 +496,37 @@
   </button>
 </div>
 
+<!-- ===== BOTÃO FLUTUANTE DO CARRINHO ===== -->
+<button class="cart-float" onclick="openCart()">
+  <i class="bi bi-cart3"></i>
+  <span class="cart-badge-float" id="cartBadgeFloat">0</span>
+</button>
+
 <!-- ===== TOAST CONTAINER ===== -->
 <div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== OFFCANVAS: CARRINHO ===== -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width:400px;max-width:100%;">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="bi bi-cart3" style="color:var(--gold)"></i> Meu Carrinho</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column" style="padding:1.2rem;">
+    <div id="cartItems" style="flex:1;overflow-y:auto;"></div>
+    <div id="cartFooter" style="display:none;border-top:1px solid var(--border);padding-top:1rem;margin-top:.5rem;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total do Carrinho:</span>
+        <span class="cart-total-val" id="cartTotalVal">R$ 0,00</span>
+      </div>
+      <button class="btn-checkout-main" onclick="goToCheckout()">
+        <i class="bi bi-bag-check-fill"></i> Finalizar Compra
+      </button>
+      <button class="back-home-btn w-100 mt-2 d-flex justify-content-center" data-bs-dismiss="offcanvas">
+        <i class="bi bi-arrow-left"></i> Continuar Comprando
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- ===== CONTEÚDO PRINCIPAL ===== -->
 <main>
@@ -433,9 +537,8 @@
       <div class="title-bar"></div>
     </div>
 
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- As imagens serão carregadas dinamicamente via JavaScript -->
-      </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- As imagens serão carregadas dinamicamente via JavaScript -->
     </div>
 
     <div style="text-align: center; margin-top: 2rem;">
@@ -460,7 +563,111 @@
   <p><span><a href="https://www.gr2sites.com.br" target="_blank">Site criado por GR2 sites e sistemas</a></span></p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// ============================================================
+//  CARRINHO (SISTEMA COMPARTILHADO COM O INDEX)
+// ============================================================
+let cart = {};
+
+// Carregar carrinho do localStorage ao iniciar
+function loadCart() {
+  const saved = localStorage.getItem('sbLaserCart');
+  if (saved) {
+    try {
+      cart = JSON.parse(saved);
+    } catch(e) { cart = {}; }
+  }
+  updateCart();
+}
+
+// Salvar carrinho no localStorage
+function saveCart() {
+  localStorage.setItem('sbLaserCart', JSON.stringify(cart));
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const totalQty = ids.reduce((s, k) => s + cart[k].qty, 0);
+  
+  // Atualiza badge flutuante
+  const badgeFloat = document.getElementById('cartBadgeFloat');
+  if (badgeFloat) badgeFloat.textContent = totalQty;
+
+  const cartItems = document.getElementById('cartItems');
+  const cartFooter = document.getElementById('cartFooter');
+
+  if (!cartItems) return;
+
+  if (!ids.length) {
+    cartItems.innerHTML = `<div class="cart-empty"><i class="bi bi-cart-x" style="color:#cbd5e1"></i><p>Carrinho vazio</p><small>Adicione produtos para continuar</small></div>`;
+    if (cartFooter) cartFooter.style.display = 'none';
+    saveCart();
+    return;
+  }
+
+  if (cartFooter) cartFooter.style.display = 'block';
+  cartItems.innerHTML = ids.map(k => {
+    const item = cart[k];
+    return `<div class="cart-item">
+      <div class="cart-item-emoji">${item.emoji || '🟦'}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-unit">R$ ${fmt(item.price)} / un.</div>
+        <div class="cart-item-price">R$ ${fmt(item.price * item.qty)}</div>
+        <div class="cart-qty-row">
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
+          <span class="cart-qty-val">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
+        </div>
+      </div>
+      <button class="btn-remove" onclick="removeFromCart('${k}')"><i class="bi bi-trash3"></i></button>
+    </div>`;
+  }).join('');
+
+  const total = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  const totalEl = document.getElementById('cartTotalVal');
+  if (totalEl) totalEl.textContent = 'R$ ' + fmt(total);
+  
+  saveCart();
+}
+
+function cartChangeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty = Math.max(1, cart[id].qty + delta);
+  updateCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  updateCart();
+}
+
+function openCart() {
+  updateCart();
+  new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
+}
+
+function goToCheckout() {
+  if (!Object.keys(cart).length) { toast('Carrinho vazio!', 'error'); return; }
+  window.location.href = 'index.html';
+}
+
+function fmt(n) {
+  return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function toast(msg, type = '') {
+  const c = document.getElementById('toastContainer');
+  if (!c) return;
+  const el = document.createElement('div');
+  el.className = 'toast-msg' + (type ? ' ' + type : '');
+  const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
+  el.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
+  c.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = '.3s'; setTimeout(() => el.remove(), 300); }, 2800);
+}
+
 // ============================================================
 //  MENU MOBILE
 // ============================================================
@@ -478,20 +685,6 @@ function closeMobileMenu() {
   menu.classList.remove('open');
   overlay.classList.remove('open');
   document.body.style.overflow = '';
-}
-
-// ============================================================
-//  TOAST
-// ============================================================
-function toast(msg, type = '') {
-  const c = document.getElementById('toastContainer');
-  if (!c) return;
-  const el = document.createElement('div');
-  el.className = 'toast-msg' + (type ? ' ' + type : '');
-  const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
-  el.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
-  c.appendChild(el);
-  setTimeout(() => { el.style.opacity = '0'; el.style.transition = '.3s'; setTimeout(() => el.remove(), 300); }, 2800);
 }
 
 // ============================================================
@@ -520,7 +713,7 @@ const galleryItems = [
     image: "imagens/produto-03.jpeg",
     description: "Formato grande para produções de alto volume"
   },
-  // Peças Prontas - Exemplos de trabalhos realizados
+  // Peças Prontas
   {
     id: 4,
     title: "Fita de cetin personalizada",
@@ -636,7 +829,6 @@ function getCategoryName(category) {
 function filterGallery(category) {
   currentFilter = category;
   
-  // Atualizar botões ativos
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('active');
   });
@@ -664,7 +856,6 @@ function closeGalleryModal() {
   document.body.style.overflow = '';
 }
 
-// Fechar modal com tecla ESC
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     closeGalleryModal();
@@ -675,9 +866,9 @@ document.addEventListener('keydown', function(event) {
 //  INICIALIZAÇÃO
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+  loadCart();
   renderGallery();
   
-  // Verificar se veio com parâmetro de filtro na URL
   const urlParams = new URLSearchParams(window.location.search);
   const filter = urlParams.get('categoria');
   if (filter && ['formas', 'pecas', 'detalhes'].includes(filter)) {
