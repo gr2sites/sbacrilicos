@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V23MD2553Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V23MD2553Y');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formas de Acrílico Premium</title>
+  <title>Galeria - Formas de Acrílico Premium</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <style>
@@ -214,92 +205,194 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    /* ===== PAGES ===== */
-    .page { display: none; }
-    .page.active { display: block; }
-
-    /* ===== HERO ===== */
-    .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 60%, #0f172a 100%);
-      padding: 5rem 1rem 4rem; text-align: center; color: #fff;
-    }
-    .hero-badge {
-      display: inline-block; background: rgba(212,175,55,.15);
-      border: 1px solid rgba(212,175,55,.4);
-      color: var(--gold); font-size: .8rem; font-weight: 700;
-      letter-spacing: .1em; padding: 5px 16px; border-radius: 50px; margin-bottom: 1.2rem;
-    }
-    .hero h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.15; margin-bottom: .8rem; }
-    .hero h1 span { color: var(--gold); }
-    .hero p { color: #94a3b8; font-size: 1.05rem; max-width: 480px; margin: 0 auto 2rem; line-height: 1.6; }
-    .btn-gold {
-      background: var(--gold); color: var(--navy); border: none;
-      padding: 13px 36px; border-radius: 10px;
-      font-weight: 700; font-size: 1rem; cursor: pointer; transition: .2s;
-      display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
-    }
-    .btn-gold:hover { background: var(--gold-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,.4); }
-
-    /* ===== PRODUTOS ===== */
+    /* ===== SEÇÃO PRINCIPAL ===== */
     .section { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
     .section-title { text-align: center; margin-bottom: 3rem; }
     .section-title h2 { font-size: 2rem; font-weight: 800; color: var(--navy); }
     .section-title p  { color: #64748b; margin-top: .5rem; font-size: 1rem; }
     .title-bar { width: 60px; height: 4px; background: var(--gold); margin: .8rem auto 0; border-radius: 2px; }
 
-    .product-card {
-      background: var(--white); border-radius: 20px;
-      overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.07);
-      transition: transform .3s, box-shadow .3s;
-      display: flex; flex-direction: column; height: 100%;
+    /* ===== ESTILOS DA GALERIA ===== */
+    .gallery-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
     }
-    .product-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(0,0,0,.13); }
-
-    .product-img-wrap {
-      width: 100%; height: 230px;
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      background: none;
+      border: 2px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: var(--bg);
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    .gallery-img-wrap {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
       background: linear-gradient(135deg, #e8f4fb, #d0eaf7);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .p-emoji { font-size: 5rem; display: none; }
-    .badge-new {
-      position: absolute; top: 14px; left: 14px;
-      background: var(--gold); color: var(--navy);
-      font-size: .7rem; font-weight: 800; padding: 3px 10px;
-      border-radius: 50px; letter-spacing: .05em;
+    .gallery-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-img-wrap img {
+      transform: scale(1.05);
+    }
+    .gallery-info {
+      padding: 1rem;
+      background: var(--white);
+    }
+    .gallery-title {
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+    .gallery-category {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .product-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .product-sku  { font-size: .72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .3rem; }
-    .product-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
-    .product-dims { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .8rem; }
-    .dim-badge { background: #f1f5f9; color: #475569; font-size: .75rem; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
-    .product-desc { color: #64748b; font-size: .88rem; flex: 1; margin-bottom: 1rem; line-height: 1.5; }
-    .product-price { font-size: 1.6rem; font-weight: 800; color: var(--gold); margin-bottom: .3rem; }
-    .product-price-note { font-size: .78rem; color: #94a3b8; margin-bottom: 1rem; }
-
-    .qty-row { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
-    .qty-label { font-size: .82rem; font-weight: 600; color: var(--navy); }
-    .qty-control { display: flex; align-items: center; gap: .5rem; background: #f1f5f9; border-radius: 10px; padding: 4px; }
-    .qty-btn {
-      width: 32px; height: 32px; border-radius: 8px;
-      border: none; background: var(--white);
-      color: var(--gold); font-size: 1.1rem; font-weight: 700;
-      cursor: pointer; transition: .2s; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    /* Modal da Galeria */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1100;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
     }
-    .qty-btn:hover { background: var(--gold); color: #fff; }
-    .qty-val { font-weight: 700; font-size: 1rem; min-width: 28px; text-align: center; color: var(--navy); }
-
-    .btn-add {
-      width: 100%; padding: 12px; border: none; border-radius: 12px;
-      background: var(--gold); color: #fff; font-weight: 700;
-      font-size: .95rem; cursor: pointer; transition: .2s;
-      display: flex; align-items: center; justify-content: center; gap: .4rem;
+    .gallery-modal.active {
+      display: flex;
     }
-    .btn-add:hover { background: var(--gold-dark); transform: translateY(-1px); }
-    .btn-add.added { background: var(--green); }
+    .gallery-modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    .gallery-modal-content img {
+      width: auto;
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      display: block;
+      margin: auto;
+    }
+    .close-modal {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #fff;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .close-modal:hover {
+      color: var(--gold);
+    }
+    .modal-caption {
+      text-align: center;
+      color: #fff;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Botão Voltar */
+    .back-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--text);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+    }
+    .back-home-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* TOAST */
+    .toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 3000; display: flex; flex-direction: column; gap: .5rem; }
+    .toast-msg {
+      background: var(--navy); color: #fff; border-radius: 12px;
+      padding: .85rem 1.2rem; font-size: .88rem;
+      display: flex; align-items: center; gap: .5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      animation: slideIn .3s ease; min-width: 220px;
+    }
+    .toast-msg.success { background: var(--green); }
+    .toast-msg.error   { background: var(--red); }
+    @keyframes slideIn { from{transform:translateX(120px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+    /* Footer */
+    .site-footer {
+      text-align: center; padding: 2rem 1rem;
+      background: var(--navy); color: #64748b; font-size: .85rem; margin-top: 3rem;
+    }
+    .site-footer span { color: var(--gold); }
+    .site-footer a {
+      color: #64748b;
+      text-decoration: none;
+    }
+    .site-footer a:hover {
+      color: var(--gold);
+    }
 
     /* ===== CARRINHO OFFCANVAS ===== */
     .offcanvas-header { border-bottom: 1px solid var(--border); }
@@ -337,173 +430,6 @@
     }
     .btn-checkout-main:hover { background: var(--gold-dark); }
 
-    /* ===== CHECKOUT ===== */
-    .checkout-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 3rem; }
-    .back-btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      background: none; border: 1.5px solid var(--border); border-radius: 8px;
-      padding: 7px 16px; color: var(--text); font-size: .88rem;
-      font-weight: 600; cursor: pointer; transition: .2s; margin-bottom: 1.5rem;
-    }
-    .back-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .checkout-title { font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 1.8rem; display: flex; align-items: center; gap: .6rem; }
-    .checkout-title i { color: var(--gold); }
-
-    .card-section {
-      background: var(--white); border-radius: 18px;
-      padding: 1.5rem; margin-bottom: 1.2rem;
-      box-shadow: 0 4px 18px rgba(0,0,0,.07);
-    }
-    .card-section-title {
-      font-size: 1rem; font-weight: 800; color: var(--navy);
-      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem;
-    }
-    .card-section-title i { color: var(--gold); font-size: 1.1rem; }
-
-    .order-line { display: flex; justify-content: space-between; align-items: center; padding: .55rem 0; border-bottom: 1px solid var(--border); font-size: .92rem; }
-    .order-line:last-child { border: none; }
-    .order-line.total { font-weight: 800; font-size: 1.1rem; color: var(--navy); border-top: 2px solid var(--gold); padding-top: .8rem; margin-top: .3rem; }
-    .order-line.total span:last-child { color: var(--gold); }
-    .order-line span:first-child { color: #475569; }
-    .order-line span:last-child  { font-weight: 700; color: var(--navy); }
-
-    .form-label { font-weight: 700; font-size: .83rem; color: var(--navy); margin-bottom: .3rem; display: block; }
-    .form-control, .form-select {
-      border: 1.5px solid var(--border); border-radius: 10px;
-      padding: 10px 13px; font-size: .93rem; width: 100%;
-      background: #fff; color: var(--navy); transition: border .2s;
-    }
-    .form-control:focus, .form-select:focus {
-      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); outline: none;
-    }
-
-    .frete-box {
-      background: #f0fdf4; border-left: 4px solid var(--green);
-      border-radius: 10px; padding: 1rem; margin-top: .8rem;
-    }
-    .frete-box .frete-servico { font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
-    .frete-box .frete-price   { font-size: 1.15rem; font-weight: 800; color: var(--green); }
-    .frete-box .frete-prazo   { font-size: .82rem; color: #64748b; }
-    .frete-error { background: #fef2f2; border-left: 4px solid var(--red); border-radius: 10px; padding: .9rem; margin-top: .8rem; color: var(--red); font-size: .88rem; }
-    
-    .dimensoes-box {
-      background: #f8f9fa;
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: .8rem;
-      border: 1px solid var(--border);
-    }
-    .dimensoes-title {
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: .8rem;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .dimensoes-title i {
-      color: var(--gold);
-      font-size: 1rem;
-    }
-
-    .pix-block { text-align: center; padding: 1rem 0; }
-    
-    .pix-qr {
-      width: 180px;
-      height: 180px;
-      margin: 1rem auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f8f9fa;
-      border-radius: 16px;
-      padding: 8px;
-    }
-    
-    .pix-qr img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-    
-    .pix-key {
-      background: #f1f5f9; border-radius: 10px;
-      padding: .8rem 1rem; font-size: .78rem; color: var(--navy);
-      word-break: break-all; margin: .8rem 0; text-align: left;
-    }
-    .btn-copy {
-      border: 1.5px solid var(--gold); background: none;
-      color: var(--gold); border-radius: 8px; padding: 6px 16px;
-      font-size: .83rem; font-weight: 700; cursor: pointer; transition: .2s;
-    }
-    .btn-copy:hover { background: var(--gold); color: #fff; }
-
-    .btn-confirm {
-      width: 100%; padding: 15px; background: var(--gold);
-      border: none; border-radius: 14px; color: #fff;
-      font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: .2s;
-      display: flex; align-items: center; justify-content: center; gap: .6rem;
-      margin-top: 1.2rem; box-shadow: 0 4px 14px rgba(212,175,55,.4);
-    }
-    .btn-confirm:hover { background: var(--gold-dark); transform: translateY(-2px); }
-
-    /* ===== SUCCESS ===== */
-    .success-wrap { max-width: 580px; margin: 3rem auto; padding: 2rem 1.5rem; text-align: center; }
-    .success-icon { font-size: 5rem; color: var(--green); margin-bottom: 1rem; animation: pop .5s ease; }
-    @keyframes pop { from{transform:scale(.5);opacity:0} to{transform:scale(1);opacity:1} }
-    .success-wrap h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: .5rem; }
-    .success-wrap p  { color: #64748b; margin-bottom: 1.5rem; }
-
-    /* ===== TOAST ===== */
-    .toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 3000; display: flex; flex-direction: column; gap: .5rem; }
-    .toast-msg {
-      background: var(--navy); color: #fff; border-radius: 12px;
-      padding: .85rem 1.2rem; font-size: .88rem;
-      display: flex; align-items: center; gap: .5rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,.2);
-      animation: slideIn .3s ease; min-width: 220px;
-    }
-    .toast-msg.success { background: var(--green); }
-    .toast-msg.error   { background: var(--red); }
-    @keyframes slideIn { from{transform:translateX(120px);opacity:0} to{transform:translateX(0);opacity:1} }
-
-    .site-footer {
-      text-align: center; padding: 2rem 1rem;
-      background: var(--navy); color: #64748b; font-size: .85rem; margin-top: 3rem;
-    }
-    .site-footer span { color: var(--gold); }
-
-    .cep-result-item { padding: .7rem 1rem; border-bottom: 1px solid var(--border); cursor: pointer; border-radius: 8px; transition: .15s; font-size: .9rem; }
-    .cep-result-item:hover { background: var(--gold-light); }
-    .cep-search-result { max-height: 280px; overflow-y: auto; margin-top: .5rem; }
-
-    .btn-whatsapp {
-      background: #25D366;
-      color: #fff;
-      border: none;
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: .2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .6rem;
-      width: 100%;
-      margin-top: 1rem;
-    }
-    .btn-whatsapp:hover {
-      background: #128C7E;
-      transform: translateY(-2px);
-    }
-
-    /* ===== RESPONSIVIDADE ===== */
     @media(max-width: 768px) {
       .nav-menu {
         display: none;
@@ -511,8 +437,8 @@
       .menu-toggle {
         display: block;
       }
-      .hero h1 { font-size: 1.8rem; }
-      .checkout-title { font-size: 1.4rem; }
+      .gallery-filters { gap: 0.5rem; }
+      .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
       .cart-float {
         bottom: 70px;
         right: 15px;
@@ -521,12 +447,6 @@
         font-size: 1.4rem;
       }
     }
-
-    @media(max-width: 576px) {
-      .hero h1 { font-size: 1.5rem; }
-      .section { padding: 2rem 1rem; }
-      .product-img-wrap { height: 180px; }
-    }
   </style>
 </head>
 <body>
@@ -534,20 +454,17 @@
 <!-- ===== HEADER COM MENU HAMBURGUER ===== -->
 <header class="top-header">
   <div class="nav-container">
-    <div class="logo" onclick="showPage('home')">
+    <a href="index.html" class="logo">
       <div class="logo-img">
         <img src="imagens/img_menu.png" alt="Logo Formas de Acrílico Premium">
       </div>
-      <div>
-        <div class="logo-text"></div>
-        <div class="logo-sub"></div>
-      </div>
-    </div>
+     
+    </a>
     
     <!-- Menu Desktop -->
     <div class="nav-menu">
-      <button class="nav-link-custom active" onclick="showPage('home')">Início</button>
-      <button class="nav-link-custom" onclick="window.location.href='galeria.html'">Galeria</button>
+      <button class="nav-link-custom" onclick="window.location.href='index.html'">Início</button>
+      <button class="nav-link-custom active" onclick="window.location.href='galeria.html'">Galeria</button>
       <button class="nav-link-custom" onclick="window.location.href='aboutus.html'">Sobre Nós</button>
     </div>
 
@@ -565,10 +482,10 @@
     <i class="bi bi-x-lg"></i>
   </button>
 
-  <button class="nav-link-custom active" onclick="showPage('home')">
+  <button class="nav-link-custom" onclick="window.location.href='index.html'">
     <i class="bi bi-house"></i> Início
   </button>
-  <button class="nav-link-custom" onclick="window.location.href='galeria.html'">
+  <button class="nav-link-custom active" onclick="window.location.href='galeria.html'">
     <i class="bi bi-images"></i> Galeria
   </button>
   <button class="nav-link-custom" onclick="window.location.href='aboutus.html'">
@@ -582,375 +499,10 @@
   <span class="cart-badge-float" id="cartBadgeFloat">0</span>
 </button>
 
-<!-- ===== TOASTS ===== -->
+<!-- ===== TOAST CONTAINER ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ============================================================
-     PAGE HOME
-============================================================ -->
-<div class="page active" id="pageHome">
-
-  <div class="section" id="produtos">
-    <div class="section-title">
-      <h2>Nossos Produtos</h2>
-      <p>Escolha a forma ideal para a sua produção</p>
-      <div class="title-bar"></div>
-    </div>
-
-    <div class="row g-4">
-
-      <!-- PRODUTO 1 -->
-      <div class="col-md-4">
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="imagens/produto-01.jpeg" alt="Forma Acrílico 30x10x10"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="p-emoji"><i class="bi bi-box"></i></div>
-            <span class="badge-new">PREMIUM</span>
-          </div>
-          <div class="product-body">
-            <div class="product-sku">SKU: AC-30-10-10</div>
-            <div class="product-title">Forma de Acrílico 30×10×10</div>
-            <div class="product-dims">
-              <span class="dim-badge">30 cm comp.</span>
-              <span class="dim-badge">10 cm larg.</span>
-              <span class="dim-badge">10 cm alt.</span>
-            </div>
-            <div class="product-desc">Ideal para produções de menor volume. Acrílico cristal de alta qualidade com acabamento impecável e fácil desmolde.</div>
-            <div class="product-price">R$ 139,90</div>
-            <div class="product-price-note">À vista · Frete calculado no checkout</div>
-            <div class="qty-row">
-              <span class="qty-label">Qtd:</span>
-              <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('p1',-1)">−</button>
-                <span class="qty-val" id="qty-p1">1</span>
-                <button class="qty-btn" onclick="changeQty('p1',1)">+</button>
-              </div>
-            </div>
-            <button class="btn-add" id="btn-p1" onclick="addToCart('p1','Forma Acrílico 30×10×10',139.90,'🟦')">
-              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUTO 2 -->
-      <div class="col-md-4">
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="imagens/produto-02.jpeg" alt="Forma Acrílico 30x20x10"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="p-emoji">🟦</div>
-            <span class="badge-new">PREMIUM</span>
-          </div>
-          <div class="product-body">
-            <div class="product-sku">SKU: AC-30-20-10</div>
-            <div class="product-title">Forma de Acrílico 30×20×10</div>
-            <div class="product-dims">
-              <span class="dim-badge">30 cm comp.</span>
-              <span class="dim-badge">20 cm larg.</span>
-              <span class="dim-badge">10 cm alt.</span>
-            </div>
-            <div class="product-desc">Formato intermediário, perfeito para produções variadas. Alta transparência e resistência a impactos e temperatura.</div>
-            <div class="product-price">R$ 159,90</div>
-            <div class="product-price-note">À vista · Frete calculado no checkout</div>
-            <div class="qty-row">
-              <span class="qty-label">Qtd:</span>
-              <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('p2',-1)">−</button>
-                <span class="qty-val" id="qty-p2">1</span>
-                <button class="qty-btn" onclick="changeQty('p2',1)">+</button>
-              </div>
-            </div>
-            <button class="btn-add" id="btn-p2" onclick="addToCart('p2','Forma Acrílico 30×20×10',159.90,'🟦')">
-              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUTO 3 -->
-      <div class="col-md-4">
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="imagens/produto-03.jpeg" alt="Forma Acrílico 30x30x10"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="p-emoji">🟦</div>
-            <span class="badge-new">PREMIUM</span>
-          </div>
-          <div class="product-body">
-            <div class="product-sku">SKU: AC-30-30-10</div>
-            <div class="product-title">Forma de Acrílico 30×30×10</div>
-            <div class="product-dims">
-              <span class="dim-badge">30 cm comp.</span>
-              <span class="dim-badge">30 cm larg.</span>
-              <span class="dim-badge">10 cm alt.</span>
-              <span class="dim-badge">4 mm.</span>
-            </div>
-            <div class="product-desc">Formato grande para produções de alto volume. Máxima durabilidade e acabamento cristal sem bolhas ou imperfeições.</div>
-            <div class="product-price">R$ 239,90</div>
-            <div class="product-price-note">À vista · Frete calculado no checkout</div>
-            <div class="qty-row">
-              <span class="qty-label">Qtd:</span>
-              <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('p3',-1)">−</button>
-                <span class="qty-val" id="qty-p3">1</span>
-                <button class="qty-btn" onclick="changeQty('p3',1)">+</button>
-              </div>
-            </div>
-            <button class="btn-add" id="btn-p3" onclick="addToCart('p3','Forma Acrílico 30×30×10',239.90,'🟦')">
-              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUTO 4 -->
-      <div class="col-md-4">
-        <div class="product-card">
-          <div class="product-img-wrap">
-            <img src="imagens/galeria-002.jfif" alt="Forma Acrílico 40x30x10"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="p-emoji">🟦</div>
-            <span class="badge-new">LINHA GOLD</span>
-          </div>
-          <div class="product-body">
-            <div class="product-sku">SKU: AC-30-10-10</div>
-            <div class="product-title">Forma de Acrílico 30×10×10</div>
-            <div class="product-dims">
-              <span class="dim-badge">30 cm comp.</span>
-              <span class="dim-badge">10 cm larg.</span>
-              <span class="dim-badge">10 cm alt.</span>
-            </div>
-            <div class="product-desc">Forma para produções artesanais. Máxima capacidade com a mesma qualidade cristal e durabilidade excepcional linha gold</div>
-            <div class="product-price">R$ 189,90</div>
-            <div class="product-price-note">À vista · Frete calculado no checkout</div>
-            <div class="qty-row">
-              <span class="qty-label">Qtd:</span>
-              <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('p4',-1)">−</button>
-                <span class="qty-val" id="qty-p4">1</span>
-                <button class="qty-btn" onclick="changeQty('p4',1)">+</button>
-              </div>
-            </div>
-            <button class="btn-add" id="btn-p4" onclick="addToCart('p4','Forma Acrílico 40×30×10',189.90,'🟦')">
-              <i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer class="site-footer">
-    <p><span>✦ SB Acrilicos</span> &copy; 2025 — Qualidade que você pode tocar.</p>
-    <p><span><a href="https://www.gr2sites.com.br" target="_blank">Site criado por GR2 sites e sistemas</a></span></p>
-  </footer>
-</div>
-
-
-<!-- ============================================================
-     PAGE CHECKOUT
-============================================================ -->
-<div class="page" id="pageCheckout">
-  <div class="checkout-wrap">
-
-    <button class="back-btn" onclick="showPage('home')">
-      <i class="bi bi-arrow-left"></i> Voltar às Compras
-    </button>
-
-    <div class="checkout-title">
-      <i class="bi bi-bag-check-fill"></i> Finalizar Pedido
-    </div>
-
-    <div class="row g-4">
-      <div class="col-lg-12">
-
-        <!-- Resumo -->
-        <div class="card-section">
-          <div class="card-section-title"><i class="bi bi-receipt-cutoff"></i> Resumo do Pedido</div>
-          <div id="checkoutItems"></div>
-          <div class="order-line" style="margin-top:.5rem">
-            <span>Subtotal</span><span id="subtotalVal">—</span>
-          </div>
-          <div class="order-line">
-            <span>Frete</span><span id="freteVal">—</span>
-          </div>
-          <div class="order-line total">
-            <span>Total</span><span id="totalVal">—</span>
-          </div>
-        </div>
-
-        <!-- Endereço & Frete -->
-        <div class="card-section">
-          <div class="card-section-title"><i class="bi bi-geo-alt-fill"></i> Endereço de Entrega</div>
-
-          <div class="row g-2 mb-2">
-            <div class="col-8">
-              <label class="form-label">CEP</label>
-              <input type="text" class="form-control" id="cepInput" placeholder="00000-000" maxlength="9"
-                oninput="maskCep(this)" onblur="autoBuscarCep()">
-            </div>
-            <div class="col-4 d-flex align-items-end">
-              <button class="btn btn-outline-warning w-100 fw-bold" onclick="openCepModal()"
-                style="border-radius:10px;padding:9px 0;font-size:.82rem;">
-                <i class="bi bi-question-circle"></i> Não sei
-              </button>
-            </div>
-          </div>
-
-          <div class="mb-2">
-            <label class="form-label">Logradouro</label>
-            <input type="text" class="form-control" id="logradouro" placeholder="Rua, Av...">
-          </div>
-          <div class="row g-2 mb-2">
-            <div class="col-4">
-              <label class="form-label">Número</label>
-              <input type="text" class="form-control" id="numero" placeholder="123">
-            </div>
-            <div class="col-8">
-              <label class="form-label">Complemento</label>
-              <input type="text" class="form-control" id="complemento" placeholder="Apto, Bloco...">
-            </div>
-          </div>
-          <div class="row g-2 mb-3">
-            <div class="col-6">
-              <label class="form-label">Bairro</label>
-              <input type="text" class="form-control" id="bairro" placeholder="Bairro">
-            </div>
-            <div class="col-6">
-              <label class="form-label">Cidade / UF</label>
-              <input type="text" class="form-control" id="cidadeUf" placeholder="Cidade - SP">
-            </div>
-          </div>
-
-          <!-- Dimensões do Pacote -->
-          <div class="dimensoes-box">
-            <div class="dimensoes-title">
-              <i class="bi bi-box-seam"></i> Dimensões do Pacote
-            </div>
-            <div class="row g-2">
-              <div class="col-6 col-md-3">
-                <label class="form-label"><i class="bi bi-arrow-left-right"></i> Comprimento (cm)</label>
-                <input type="number" class="form-control" id="packComprimento" placeholder="Ex: 30" value="30" step="0.5" min="1">
-              </div>
-              <div class="col-6 col-md-3">
-                <label class="form-label"><i class="bi bi-arrow-left-right"></i> Largura (cm)</label>
-                <input type="number" class="form-control" id="packLargura" placeholder="Ex: 30" value="30" step="0.5" min="1">
-              </div>
-              <div class="col-6 col-md-3">
-                <label class="form-label"><i class="bi bi-arrow-up-down"></i> Altura (cm)</label>
-                <input type="number" class="form-control" id="packAltura" placeholder="Ex: 15" value="15" step="0.5" min="1">
-              </div>
-              <div class="col-6 col-md-3">
-                <label class="form-label"><i class="bi bi-weight"></i> Peso (kg)</label>
-                <input type="number" class="form-control" id="packPeso" placeholder="Ex: 1.5" value="1.5" step="0.1" min="0.1">
-              </div>
-            </div>
-            <small class="text-muted d-block mt-2">
-              <i class="bi bi-info-circle"></i> Informe as dimensões da embalagem para um cálculo mais preciso do frete.
-            </small>
-          </div>
-
-          <div class="row g-2 align-items-end mt-2">
-            <div class="col-7">
-              <label class="form-label">Tipo de Frete</label>
-              <select class="form-select" id="servicoFrete">
-                <option value="04014">SEDEX à vista</option>
-                <option value="04510">PAC à vista</option>
-              </select>
-            </div>
-            <div class="col-5">
-              <button class="btn btn-warning w-100 fw-bold" style="border-radius:10px;padding:10px 0;" onclick="calcularFrete()">
-                <i class="bi bi-truck"></i> Calcular Frete
-              </button>
-            </div>
-          </div>
-
-          <div id="freteResultado"></div>
-        </div>
-
-        <!-- Dados Pessoais -->
-        <div class="card-section">
-          <div class="card-section-title"><i class="bi bi-person-fill"></i> Seus Dados</div>
-          <div class="row g-2">
-            <div class="col-12">
-              <label class="form-label">Nome Completo *</label>
-              <input type="text" class="form-control" id="nomeCliente" placeholder="Seu nome completo">
-            </div>
-            <div class="col-12 col-sm-7">
-              <label class="form-label">E-mail *</label>
-              <input type="email" class="form-control" id="emailCliente" placeholder="email@exemplo.com">
-            </div>
-            <div class="col-12 col-sm-5">
-              <label class="form-label">Telefone</label>
-              <input type="text" class="form-control" id="telefone" placeholder="(11) 99999-9999"
-                maxlength="15" oninput="maskPhone(this)">
-            </div>
-          </div>
-        </div>
-
-        <!-- Pagamento PIX -->
-        <div class="card-section">
-          <div class="card-section-title"><i class="bi bi-qr-code-scan"></i> Pagamento via PIX</div>
-
-          <div class="pix-block">
-            <p style="color:#64748b;font-size:.9rem;">Escaneie o QR Code abaixo para pagar</p>
-            <div class="pix-qr">
-              <img src="imagens/QRcode.png" alt="QR Code para pagamento PIX">
-            </div>
-            <button class="btn-copy" onclick="copyPix()">
-              <i class="bi bi-clipboard"></i> Copiar Chave PIX
-            </button>
-            <p style="color:var(--green);font-size:.82rem;margin-top:.8rem;">
-              <i class="bi bi-shield-lock-fill"></i> Pagamento instantâneo via Banco Central do Brasil
-            </p>
-          </div>
-        </div>
-
-        <button class="btn-confirm" onclick="finalizarPedido()">
-          <i class="bi bi-check-circle-fill"></i> Confirmar e Finalizar Pedido
-        </button>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ============================================================
-     PAGE SUCCESS
-============================================================ -->
-<div class="page" id="pageSuccess">
-  <div class="success-wrap">
-    <div class="success-icon"><i class="bi bi-check-circle-fill"></i></div>
-    <h2>Pedido Confirmado! 🎉</h2>
-    <p>Obrigado pela sua compra. Agora encaminhe todos os dados junto com o comprovante de pagamento para WhatsApp.</p>
-
-    <div class="card-section text-start mb-3">
-      <div class="card-section-title"><i class="bi bi-receipt"></i> Resumo do Pedido</div>
-      <div id="successItems"></div>
-      <div style="border-top:2px solid var(--gold);padding-top:.8rem;margin-top:.5rem;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-weight:800;color:var(--navy);">Total Pago:</span>
-        <span style="font-weight:800;color:var(--gold);font-size:1.2rem;" id="successTotal"></span>
-      </div>
-    </div>
-
-    <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
-      <i class="bi bi-whatsapp"></i> Enviar Pedido via WhatsApp
-    </button>
-
-    <button class="btn-gold w-100" style="justify-content:center;padding:14px;border-radius:12px;font-size:1rem;margin-top:1rem;" onclick="novaCompra()">
-      <i class="bi bi-arrow-repeat"></i> Fazer Novo Pedido
-    </button>
-  </div>
-</div>
-
-
-<!-- ============================================================
-     OFFCANVAS: CARRINHO
-============================================================ -->
+<!-- ===== OFFCANVAS: CARRINHO ===== -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width:400px;max-width:100%;">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title"><i class="bi bi-cart3" style="color:var(--gold)"></i> Meu Carrinho</h5>
@@ -966,60 +518,56 @@
       <button class="btn-checkout-main" onclick="goToCheckout()">
         <i class="bi bi-bag-check-fill"></i> Finalizar Compra
       </button>
-      <button class="back-btn w-100 mt-2 d-flex justify-content-center" data-bs-dismiss="offcanvas">
+      <button class="back-home-btn w-100 mt-2 d-flex justify-content-center" data-bs-dismiss="offcanvas">
         <i class="bi bi-arrow-left"></i> Continuar Comprando
       </button>
     </div>
   </div>
 </div>
 
-
-<!-- ============================================================
-     MODAL: BUSCAR CEP
-============================================================ -->
-<div class="modal fade" id="cepModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius:18px;overflow:hidden;">
-      <div class="modal-header" style="border-color:var(--border);">
-        <h5 class="modal-title fw-bold" style="color:var(--navy);">
-          <i class="bi bi-map-fill" style="color:var(--gold)"></i> Encontrar meu CEP
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p style="color:#64748b;font-size:.88rem;margin-bottom:.8rem;">
-          Digite seu endereço (rua e cidade) para encontrar o CEP:
-        </p>
-        <div class="input-group">
-          <input type="text" class="form-control" id="cepSearchInput"
-            placeholder="Ex: Rua das Flores, São Paulo"
-            onkeypress="if(event.key==='Enter')searchCep()">
-          <button class="btn btn-warning fw-bold px-3" onclick="searchCep()">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-        <div id="cepSearchResult" class="cep-search-result"></div>
-        <p style="font-size:.75rem;color:#94a3b8;margin-top:.8rem;">
-          Busca via ViaCEP · Dados fornecidos pelos Correios.
-        </p>
-      </div>
+<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+<main>
+  <div class="section">
+    <div class="section-title">
+      <h2><i class="bi bi-images" style="color: var(--gold);"></i> Nossa Galeria</h2>
+      <p>Conheça nosso trabalho e inspire-se com criações exclusivas em acrílico</p>
+      <div class="title-bar"></div>
     </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- As imagens serão carregadas dinamicamente via JavaScript -->
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="index.html" class="back-home-btn">
+        <i class="bi bi-arrow-left"></i> Voltar para a Loja
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Modal para visualização da galeria -->
+<div id="galleryModal" class="gallery-modal" onclick="closeGalleryModal()">
+  <div class="gallery-modal-content" onclick="event.stopPropagation()">
+    <span class="close-modal" onclick="closeGalleryModal()">&times;</span>
+    <img id="modalImage" src="" alt="">
+    <div id="modalCaption" class="modal-caption"></div>
   </div>
 </div>
 
+<footer class="site-footer">
+  <p><span>✦ SB Acrilicos</span> &copy; 2025 — Qualidade que você pode tocar.</p>
+  <p><span><a href="https://www.gr2sites.com.br" target="_blank">Site criado por GR2 sites e sistemas</a></span></p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 // ============================================================
-//  ESTADO
+//  CARRINHO (SISTEMA COMPARTILHADO COM O INDEX)
 // ============================================================
 let cart = {};
-let freightCost = 0;
-let ultimoPedidoData = null;
-const CEP_ORIGEM = '14780000';
-const NUMERO_WHATSAPP = '5516993987295';
 
-// Carregar carrinho do localStorage
+// Carregar carrinho do localStorage ao iniciar
 function loadCart() {
   const saved = localStorage.getItem('sbLaserCart');
   if (saved) {
@@ -1030,8 +578,91 @@ function loadCart() {
   updateCart();
 }
 
+// Salvar carrinho no localStorage
 function saveCart() {
   localStorage.setItem('sbLaserCart', JSON.stringify(cart));
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const totalQty = ids.reduce((s, k) => s + cart[k].qty, 0);
+  
+  // Atualiza badge flutuante
+  const badgeFloat = document.getElementById('cartBadgeFloat');
+  if (badgeFloat) badgeFloat.textContent = totalQty;
+
+  const cartItems = document.getElementById('cartItems');
+  const cartFooter = document.getElementById('cartFooter');
+
+  if (!cartItems) return;
+
+  if (!ids.length) {
+    cartItems.innerHTML = `<div class="cart-empty"><i class="bi bi-cart-x" style="color:#cbd5e1"></i><p>Carrinho vazio</p><small>Adicione produtos para continuar</small></div>`;
+    if (cartFooter) cartFooter.style.display = 'none';
+    saveCart();
+    return;
+  }
+
+  if (cartFooter) cartFooter.style.display = 'block';
+  cartItems.innerHTML = ids.map(k => {
+    const item = cart[k];
+    return `<div class="cart-item">
+      <div class="cart-item-emoji">${item.emoji || '🟦'}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-unit">R$ ${fmt(item.price)} / un.</div>
+        <div class="cart-item-price">R$ ${fmt(item.price * item.qty)}</div>
+        <div class="cart-qty-row">
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
+          <span class="cart-qty-val">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
+        </div>
+      </div>
+      <button class="btn-remove" onclick="removeFromCart('${k}')"><i class="bi bi-trash3"></i></button>
+    </div>`;
+  }).join('');
+
+  const total = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
+  const totalEl = document.getElementById('cartTotalVal');
+  if (totalEl) totalEl.textContent = 'R$ ' + fmt(total);
+  
+  saveCart();
+}
+
+function cartChangeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty = Math.max(1, cart[id].qty + delta);
+  updateCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  updateCart();
+}
+
+function openCart() {
+  updateCart();
+  new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
+}
+
+function goToCheckout() {
+  if (!Object.keys(cart).length) { toast('Carrinho vazio!', 'error'); return; }
+  window.location.href = 'index.html';
+}
+
+function fmt(n) {
+  return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function toast(msg, type = '') {
+  const c = document.getElementById('toastContainer');
+  if (!c) return;
+  const el = document.createElement('div');
+  el.className = 'toast-msg' + (type ? ' ' + type : '');
+  const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
+  el.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
+  c.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = '.3s'; setTimeout(() => el.remove(), 300); }, 2800);
 }
 
 // ============================================================
@@ -1054,490 +685,202 @@ function closeMobileMenu() {
 }
 
 // ============================================================
-//  PÁGINAS
+//  DADOS DA GALERIA
 // ============================================================
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const map = { home: 'pageHome', checkout: 'pageCheckout', success: 'pageSuccess' };
-  document.getElementById(map[name]).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ============================================================
-//  QUANTIDADE
-// ============================================================
-const pageQty = { p1: 1, p2: 1, p3: 1, p4: 1 };
-
-function changeQty(id, delta) {
-  pageQty[id] = Math.max(1, (pageQty[id] || 1) + delta);
-  document.getElementById('qty-' + id).textContent = pageQty[id];
-}
-
-// ============================================================
-//  CARRINHO
-// ============================================================
-function addToCart(id, name, price, emoji) {
-  const qty = pageQty[id] || 1;
-  if (cart[id]) cart[id].qty += qty;
-  else cart[id] = { name, price, qty, emoji };
-  updateCart();
-  saveCart();
-  toast(`${name} adicionado!`, 'success');
-  const btn = document.getElementById('btn-' + id);
-  btn.classList.add('added');
-  btn.innerHTML = '<i class="bi bi-check-lg"></i> Adicionado!';
-  setTimeout(() => {
-    btn.classList.remove('added');
-    btn.innerHTML = '<i class="bi bi-cart-plus-fill"></i> Adicionar ao Carrinho';
-  }, 2000);
-}
-
-function updateCart() {
-  const ids = Object.keys(cart);
-  const totalQty = ids.reduce((s, k) => s + cart[k].qty, 0);
-  
-  // Atualiza badge flutuante
-  const badgeFloat = document.getElementById('cartBadgeFloat');
-  if (badgeFloat) badgeFloat.textContent = totalQty;
-
-  const cartItems = document.getElementById('cartItems');
-  const cartFooter = document.getElementById('cartFooter');
-
-  if (!ids.length) {
-    if (cartItems) cartItems.innerHTML = `<div class="cart-empty"><i class="bi bi-cart-x" style="color:#cbd5e1"></i><p>Carrinho vazio</p><small>Adicione produtos para continuar</small></div>`;
-    if (cartFooter) cartFooter.style.display = 'none';
-    return;
+const galleryItems = [
+  // Formas (produtos)
+  {
+    id: 1,
+    title: "Forma Acrílica 30x10x10",
+    category: "formas",
+    image: "imagens/produto-01.jpeg",
+    description: "Forma cristal de alta transparência para produções de menor volume"
+  },
+  {
+    id: 2,
+    title: "Forma Acrílica 30x20x10",
+    category: "formas",
+    image: "imagens/produto-02.jpeg",
+    description: "Formato intermediário perfeito para produções variadas"
+  },
+  {
+    id: 3,
+    title: "Forma Acrílica 30x30x10",
+    category: "formas",
+    image: "imagens/produto-03.jpeg",
+    description: "Formato grande para produções de alto volume"
+  },
+  // Peças Prontas
+  {
+    id: 4,
+    title: "Fita de cetin personalizada",
+    category: "pecas",
+    image: "imagens/galeria-01.jfif",
+    description: "Peça exclusiva com acabamento premium e design moderno"
+  },
+  {
+    id: 5,
+    title: "Colher de madeira personalizada",
+    category: "pecas",
+    image: "imagens/galeria-02.jfif",
+    description: "Suporte elegante para eventos e confeitaria"
+  },
+  {
+    id: 6,
+    title: "Placa de sinalização",
+    category: "pecas",
+    image: "imagens/galeria-03.jfif",
+    description: "Organizador multifuncional com design sofisticado"
+  },
+  {
+    id: 7,
+    title: "Cake board",
+    category: "pecas",
+    image: "imagens/galeria-04.jfif",
+    description: "Letreiro personalizado para decoração de ambientes"
+  },
+  {
+    id: 8,
+    title: "Palito acrilico personalizado",
+    category: "pecas",
+    image: "imagens/galeria-05.jfif",
+    description: "Porta-retrato cristal com acabamento impecável"
+  },
+  // Detalhes e acabamentos
+  {
+    id: 9,
+    title: "Topo de bolo personalizado espeladado dourado",
+    category: "detalhes",
+    image: "imagens/galeria-06.jfif",
+    description: "Acabamento de alta transparência e brilho"
+  },
+  {
+    id: 10,
+    title: "Board formato personalizado",
+    category: "detalhes",
+    image: "imagens/galeria-07.jfif",
+    description: "Corte a laser com precisão milimétrica"
+  },
+  {
+    id: 11,
+    title: "Cake Board",
+    category: "detalhes",
+    image: "imagens/galeria-08.jfif",
+    description: "Polimento que garante acabamento perfeito"
+  },
+  {
+    id: 12,
+    title: "Fita de Cetin personalizada",
+    category: "detalhes",
+    image: "imagens/galeria-09.jfif",
+    description: "Capacidade para produções em larga escala"
   }
-
-  if (cartFooter) cartFooter.style.display = 'block';
-  if (cartItems) {
-    cartItems.innerHTML = ids.map(k => {
-      const item = cart[k];
-      return `<div class="cart-item">
-        <div class="cart-item-emoji">${item.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-unit">R$ ${fmt(item.price)} / un.</div>
-          <div class="cart-item-price">R$ ${fmt(item.price * item.qty)}</div>
-          <div class="cart-qty-row">
-            <button class="cart-qty-btn" onclick="cartChangeQty('${k}',-1)">−</button>
-            <span class="cart-qty-val">${item.qty}</span>
-            <button class="cart-qty-btn" onclick="cartChangeQty('${k}',1)">+</button>
-          </div>
-        </div>
-        <button class="btn-remove" onclick="removeFromCart('${k}')"><i class="bi bi-trash3"></i></button>
-      </div>`;
-    }).join('');
-  }
-
-  const total = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
-  const totalEl = document.getElementById('cartTotalVal');
-  if (totalEl) totalEl.textContent = 'R$ ' + fmt(total);
-}
-
-function cartChangeQty(id, delta) {
-  if (!cart[id]) return;
-  cart[id].qty = Math.max(1, cart[id].qty + delta);
-  updateCart();
-  saveCart();
-}
-
-function removeFromCart(id) {
-  delete cart[id];
-  updateCart();
-  saveCart();
-}
-
-function openCart() {
-  updateCart();
-  new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
-}
+];
 
 // ============================================================
-//  CHECKOUT
+//  FUNÇÕES DA GALERIA
 // ============================================================
-function goToCheckout() {
-  if (!Object.keys(cart).length) { toast('Carrinho vazio!', 'error'); return; }
-  const oc = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
-  if (oc) oc.hide();
-  freightCost = 0;
-  document.getElementById('freteResultado').innerHTML = '';
-  buildCheckoutSummary();
-  showPage('checkout');
-}
+let currentFilter = 'all';
 
-function buildCheckoutSummary() {
-  const ids = Object.keys(cart);
-  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
-
-  document.getElementById('checkoutItems').innerHTML = ids.map(k =>
-    `<div class="order-line">
-      <span>${cart[k].emoji} ${cart[k].name} <strong>×${cart[k].qty}</strong></span>
-      <span>R$ ${fmt(cart[k].price * cart[k].qty)}</span>
-    </div>`).join('');
-
-  const total = subtotal + freightCost;
-  document.getElementById('subtotalVal').textContent = 'R$ ' + fmt(subtotal);
-  document.getElementById('freteVal').textContent = freightCost > 0 ? 'R$ ' + fmt(freightCost) : '—';
-  document.getElementById('totalVal').textContent = 'R$ ' + fmt(total);
-}
-
-// ============================================================
-//  FUNÇÃO PARA CONSTRUIR MENSAGEM DO PEDIDO
-// ============================================================
-function construirMensagemPedido() {
-  const nome = document.getElementById('nomeCliente').value.trim();
-  const email = document.getElementById('emailCliente').value.trim();
-  const telefone = document.getElementById('telefone').value.trim();
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
   
-  const endereco = {
-    cep: document.getElementById('cepInput').value,
-    logradouro: document.getElementById('logradouro').value,
-    numero: document.getElementById('numero').value,
-    complemento: document.getElementById('complemento').value,
-    bairro: document.getElementById('bairro').value,
-    cidadeUf: document.getElementById('cidadeUf').value
-  };
-
-  const dimensoes = {
-    comprimento: document.getElementById('packComprimento').value,
-    largura: document.getElementById('packLargura').value,
-    altura: document.getElementById('packAltura').value,
-    peso: document.getElementById('packPeso').value
-  };
-
-  const servicoFrete = document.getElementById('servicoFrete').value;
-  const nomeFrete = servicoFrete === '04014' ? 'SEDEX' : 'PAC';
+  const filteredItems = currentFilter === 'all' 
+    ? galleryItems 
+    : galleryItems.filter(item => item.category === currentFilter);
   
-  const ids = Object.keys(ultimoPedidoData?.itens || {});
-  const subtotal = ultimoPedidoData?.subtotal || 0;
-  const total = ultimoPedidoData?.total || 0;
-
-  const now = new Date();
-  const dataHora = now.toLocaleString('pt-BR');
-
-  let mensagem = `🛍️ *NOVO PEDIDO - FORMAS DE ACRÍLICO* 🛍️\n`;
-  mensagem += `📅 Data: ${dataHora}\n`;
-  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  
-  mensagem += `👤 *DADOS DO CLIENTE*\n`;
-  mensagem += `Nome: ${nome}\n`;
-  mensagem += `E-mail: ${email}\n`;
-  if (telefone) mensagem += `Telefone: ${telefone}\n`;
-  mensagem += `\n`;
-  
-  mensagem += `📍 *ENDEREÇO DE ENTREGA*\n`;
-  mensagem += `CEP: ${endereco.cep || 'Não informado'}\n`;
-  mensagem += `Logradouro: ${endereco.logradouro || 'Não informado'}\n`;
-  mensagem += `Número: ${endereco.numero || 'Não informado'}\n`;
-  if (endereco.complemento) mensagem += `Complemento: ${endereco.complemento}\n`;
-  mensagem += `Bairro: ${endereco.bairro || 'Não informado'}\n`;
-  mensagem += `Cidade/UF: ${endereco.cidadeUf || 'Não informado'}\n`;
-  mensagem += `\n`;
-  
-  mensagem += `📦 *DIMENSÕES DO PACOTE*\n`;
-  mensagem += `Comprimento: ${dimensoes.comprimento} cm\n`;
-  mensagem += `Largura: ${dimensoes.largura} cm\n`;
-  mensagem += `Altura: ${dimensoes.altura} cm\n`;
-  mensagem += `Peso: ${dimensoes.peso} kg\n`;
-  mensagem += `\n`;
-  
-  mensagem += `🚚 *FRETE*\n`;
-  mensagem += `Tipo: ${nomeFrete}\n`;
-  mensagem += `Valor: R$ ${fmt(ultimoPedidoData?.freightCost || 0)}\n`;
-  mensagem += `\n`;
-  
-  mensagem += `🛒 *ITENS DO PEDIDO*\n`;
-  if (ultimoPedidoData?.itens) {
-    Object.keys(ultimoPedidoData.itens).forEach(k => {
-      const item = ultimoPedidoData.itens[k];
-      mensagem += `${item.emoji} ${item.name} x${item.qty} = R$ ${fmt(item.price * item.qty)}\n`;
-    });
-  }
-  mensagem += `\n`;
-  
-  mensagem += `💰 *RESUMO FINANCEIRO*\n`;
-  mensagem += `Subtotal: R$ ${fmt(subtotal)}\n`;
-  mensagem += `Frete: R$ ${fmt(ultimoPedidoData?.freightCost || 0)}\n`;
-  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n`;
-  mensagem += `*TOTAL DO PEDIDO: R$ ${fmt(total)}*\n`;
-  mensagem += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  
-  mensagem += `💳 *PAGAMENTO*\n`;
-  mensagem += `Forma: PIX\n`;
-  mensagem += `Chave PIX (CNPJ): 53361593000188\n`;
-  mensagem += `\n`;
-  
-  mensagem += `✅ *PRÓXIMOS PASSOS*\n`;
-  mensagem += `1. Realize o pagamento via PIX\n`;
-  mensagem += `2. Envie o comprovante anexado\n`;
-  mensagem += `3. Aguarde a confirmação do pedido\n`;
-  mensagem += `\n`;
-  mensagem += `📱 *EMPRESA: SB Acrilicos*\n`;
-  mensagem += `🔗 Site: www.sbacrilicos.com.br`;
-
-  return mensagem;
-}
-
-// ============================================================
-//  ENVIAR PEDIDO VIA WHATSAPP
-// ============================================================
-function enviarPedidoWhatsApp() {
-  if (!ultimoPedidoData) {
-    toast('Nenhum pedido encontrado para enviar.', 'error');
+  if (filteredItems.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+        <i class="bi bi-images" style="font-size: 3rem; color: var(--gold);"></i>
+        <p style="margin-top: 1rem; color: #64748b;">Nenhuma imagem encontrada nesta categoria.</p>
+      </div>
+    `;
     return;
   }
   
-  const mensagem = construirMensagemPedido();
-  const mensagemCodificada = encodeURIComponent(mensagem);
-  const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagemCodificada}`;
-  
-  window.open(urlWhatsApp, '_blank');
-  
-  toast('Abrindo WhatsApp para enviar o pedido!', 'success');
+  grid.innerHTML = filteredItems.map(item => `
+    <div class="gallery-item" onclick="openGalleryModal('${item.image}', '${item.title}', '${item.description}')">
+      <div class="gallery-img-wrap">
+        <img src="${item.image}" alt="${item.title}" 
+          onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'font-size:3rem;color:var(--gold);\\'><i class=\\'bi bi-image-fill\\'></i></div>'">
+      </div>
+      <div class="gallery-info">
+        <div class="gallery-category">${getCategoryName(item.category)}</div>
+        <div class="gallery-title">${item.title}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
-// ============================================================
-//  PAGAMENTO PIX
-// ============================================================
-function copyPix() {
-  const chavePix = '53361593000188';
-  navigator.clipboard.writeText(chavePix)
-    .then(() => toast('Chave PIX copiada!', 'success'))
-    .catch(() => toast('Erro ao copiar chave PIX', 'error'));
-}
-
-// ============================================================
-//  FINALIZAR
-// ============================================================
-function finalizarPedido() {
-  const nome = document.getElementById('nomeCliente').value.trim();
-  const email = document.getElementById('emailCliente').value.trim();
-  
-  if (!nome) { toast('Preencha o nome completo.', 'error'); return; }
-  if (!email) { toast('Preencha o e-mail.', 'error'); return; }
-
-  const ids = Object.keys(cart);
-  if (ids.length === 0) { toast('Carrinho vazio!', 'error'); return; }
-
-  const subtotal = ids.reduce((s, k) => s + cart[k].price * cart[k].qty, 0);
-  const total = subtotal + freightCost;
-
-  ultimoPedidoData = {
-    nome: nome,
-    email: email,
-    telefone: document.getElementById('telefone').value,
-    endereco: {
-      cep: document.getElementById('cepInput').value,
-      logradouro: document.getElementById('logradouro').value,
-      numero: document.getElementById('numero').value,
-      complemento: document.getElementById('complemento').value,
-      bairro: document.getElementById('bairro').value,
-      cidadeUf: document.getElementById('cidadeUf').value
-    },
-    dimensoes: {
-      comprimento: document.getElementById('packComprimento').value,
-      largura: document.getElementById('packLargura').value,
-      altura: document.getElementById('packAltura').value,
-      peso: document.getElementById('packPeso').value
-    },
-    servicoFrete: document.getElementById('servicoFrete').value,
-    freightCost: freightCost,
-    itens: { ...cart },
-    subtotal: subtotal,
-    total: total
+function getCategoryName(category) {
+  const names = {
+    'formas': '📦 Formas',
+    'pecas': '✨ Peças Prontas',
+    'detalhes': '🔍 Detalhes'
   };
+  return names[category] || category;
+}
 
-  document.getElementById('successItems').innerHTML = ids.map(k =>
-    `<div style="display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.9rem;">
-      <span>${cart[k].emoji} ${cart[k].name} ×${cart[k].qty}</span>
-      <span style="color:var(--gold);font-weight:700">R$ ${fmt(cart[k].price * cart[k].qty)}</span>
-    </div>`).join('');
-  document.getElementById('successTotal').textContent = 'R$ ' + fmt(total);
-
-  cart = {};
-  freightCost = 0;
-  updateCart();
-  saveCart();
+function filterGallery(category) {
+  currentFilter = category;
   
-  showPage('success');
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
   
-  setTimeout(() => {
-    enviarPedidoWhatsApp();
-  }, 2000);
+  renderGallery();
 }
 
-function novaCompra() { 
-  ultimoPedidoData = null;
-  showPage('home'); 
-}
-
-// ============================================================
-//  FRETE
-// ============================================================
-function calcularFrete() {
-  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
-  if (cep.length < 8) { toast('Digite um CEP válido.', 'error'); return; }
+function openGalleryModal(imageSrc, title, description) {
+  const modal = document.getElementById('galleryModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
   
-  let comprimento = parseFloat(document.getElementById('packComprimento').value);
-  let largura = parseFloat(document.getElementById('packLargura').value);
-  let altura = parseFloat(document.getElementById('packAltura').value);
-  let peso = parseFloat(document.getElementById('packPeso').value);
+  modalImage.src = imageSrc;
+  modalImage.alt = title;
+  modalCaption.innerHTML = `<strong>${title}</strong><br>${description}`;
   
-  if (isNaN(comprimento) || comprimento < 1) comprimento = 30;
-  if (isNaN(largura) || largura < 1) largura = 30;
-  if (isNaN(altura) || altura < 1) altura = 15;
-  if (isNaN(peso) || peso < 0.1) peso = 1.5;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGalleryModal() {
+  const modal = document.getElementById('galleryModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeGalleryModal();
+  }
+});
+
+// ============================================================
+//  INICIALIZAÇÃO
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  loadCart();
+  renderGallery();
   
-  const servico = document.getElementById('servicoFrete').value;
-  const resultEl = document.getElementById('freteResultado');
-  resultEl.innerHTML = '<div style="color:#64748b;padding:.7rem;font-style:italic"><i class="bi bi-arrow-repeat"></i> Calculando frete...</div>';
-
-  setTimeout(() => {
-    try {
-      const isSedex = servico === '04014';
-      const volume = (comprimento * largura * altura) / 1000;
-      const pesoCubico = volume * 250;
-      const pesoFinal = Math.max(peso, pesoCubico);
-      
-      let base = isSedex ? 29.90 : 18.50;
-      const fatorVolume = Math.min(2.5, Math.max(1, volume / 5));
-      const fatorPeso = Math.min(2, Math.max(1, pesoFinal / 1.5));
-      const fatorDimensoes = (comprimento + largura + altura) / 60;
-      const regionDiff = Math.abs(parseInt(CEP_ORIGEM[0]) - parseInt(cep[0]));
-      
-      let total = base;
-      total = total * fatorVolume;
-      total = total * fatorPeso;
-      total = total * (0.8 + fatorDimensoes * 0.4);
-      total = total + (regionDiff * 8.50);
-      
-      total = Math.round(total * 100) / 100;
-      
-      const prazoMin = isSedex ? Math.max(1, Math.ceil(regionDiff / 1.5)) : (3 + Math.ceil(regionDiff / 1.5));
-      const prazoMax = prazoMin + (isSedex ? 1 : 3);
-      
-      freightCost = total;
-      
-      resultEl.innerHTML = `
-        <div class="frete-box">
-          <div class="frete-servico"><i class="bi bi-truck"></i> ${isSedex ? 'SEDEX à Vista' : 'PAC à Vista'}</div>
-          <div class="frete-price">R$ ${fmt(total)}</div>
-          <div class="frete-prazo">${prazoMin} a ${prazoMax} dias úteis</div>
-          <div style="font-size:.75rem;color:#94a3b8;margin-top:.4rem">
-            <i class="bi bi-box-seam"></i> Dimensões: ${comprimento}×${largura}×${altura} cm | Peso: ${peso.toFixed(1)} kg
-          </div>
-        </div>`;
-      buildCheckoutSummary();
-    } catch(e) {
-      resultEl.innerHTML = `<div class="frete-error"><i class="bi bi-exclamation-triangle"></i> Erro ao calcular. Verifique os dados.</div>`;
-    }
-  }, 1200);
-}
-
-// ============================================================
-//  VIACEP
-// ============================================================
-function autoBuscarCep() {
-  const cep = document.getElementById('cepInput').value.replace(/\D/g,'');
-  if (cep.length === 8) preencherEndereco(cep);
-}
-
-function preencherEndereco(cep) {
-  fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    .then(r => r.json())
-    .then(d => {
-      if (d.erro) { toast('CEP não encontrado.', 'error'); return; }
-      document.getElementById('logradouro').value = d.logradouro || '';
-      document.getElementById('bairro').value     = d.bairro || '';
-      document.getElementById('cidadeUf').value   = `${d.localidade} - ${d.uf}`;
-      toast('Endereço preenchido automaticamente!', 'success');
-    })
-    .catch(() => toast('Não foi possível consultar o CEP.', 'error'));
-}
-
-// ============================================================
-//  MODAL CEP
-// ============================================================
-function openCepModal() {
-  document.getElementById('cepSearchInput').value = '';
-  document.getElementById('cepSearchResult').innerHTML = '';
-  new bootstrap.Modal(document.getElementById('cepModal')).show();
-}
-
-function searchCep() {
-  const q = document.getElementById('cepSearchInput').value.trim();
-  if (!q) return;
-  const res = document.getElementById('cepSearchResult');
-  res.innerHTML = '<div style="padding:.6rem;color:#64748b">Buscando...</div>';
-
-  fetch(`https://viacep.com.br/ws/${encodeURIComponent(q)}/json/`)
-    .then(r => r.json())
-    .then(data => {
-      const arr = Array.isArray(data) ? data : (data.erro ? [] : [data]);
-      if (!arr.length) {
-        res.innerHTML = '<div style="padding:.6rem;color:var(--red)">Nenhum resultado. Tente: "Rua das Flores, São Paulo - SP".</div>';
-        return;
+  const urlParams = new URLSearchParams(window.location.search);
+  const filter = urlParams.get('categoria');
+  if (filter && ['formas', 'pecas', 'detalhes'].includes(filter)) {
+    currentFilter = filter;
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+      if (btn.textContent.toLowerCase().includes(filter)) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
       }
-      res.innerHTML = arr.slice(0, 8).map(d =>
-        `<div class="cep-result-item" onclick="selectCep('${d.cep}','${d.logradouro||''}','${d.bairro||''}','${d.localidade}','${d.uf}')">
-          <strong>${d.cep}</strong> — ${d.logradouro ? d.logradouro + ', ' : ''}${d.bairro||''}<br>
-          <small style="color:#64748b">${d.localidade} / ${d.uf}</small>
-        </div>`).join('');
-    })
-    .catch(() => {
-      res.innerHTML = '<div style="padding:.6rem;color:#64748b">Acesse <a href="https://buscacepinter.correios.com.br" target="_blank" style="color:var(--gold)">correios.com.br</a> para localizar seu CEP.</div>';
     });
-}
-
-function selectCep(cep, logr, bairro, cidade, uf) {
-  document.getElementById('cepInput').value   = cep.replace(/(\d{5})(\d{3})/, '$1-$2');
-  document.getElementById('logradouro').value = logr;
-  document.getElementById('bairro').value     = bairro;
-  document.getElementById('cidadeUf').value   = `${cidade} - ${uf}`;
-  bootstrap.Modal.getInstance(document.getElementById('cepModal'))?.hide();
-  toast('CEP selecionado!', 'success');
-}
-
-// ============================================================
-//  MÁSCARAS
-// ============================================================
-function maskCep(el) {
-  let v = el.value.replace(/\D/g,'');
-  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
-  el.value = v;
-}
-
-function maskPhone(el) {
-  let v = el.value.replace(/\D/g,'').slice(0,11);
-  if (v.length > 10) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-  else if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,6)}-${v.slice(6)}`;
-  else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
-  el.value = v;
-}
-
-// ============================================================
-//  TOAST
-// ============================================================
-function toast(msg, type = '') {
-  const c = document.getElementById('toastContainer');
-  const el = document.createElement('div');
-  el.className = 'toast-msg' + (type ? ' ' + type : '');
-  const icon = type === 'success' ? 'check-circle-fill' : type === 'error' ? 'x-circle-fill' : 'info-circle-fill';
-  el.innerHTML = `<i class="bi bi-${icon}"></i> ${msg}`;
-  c.appendChild(el);
-  setTimeout(() => { el.style.opacity='0'; el.style.transition='.3s'; setTimeout(()=>el.remove(),300); }, 2800);
-}
-
-// ============================================================
-//  UTIL
-// ============================================================
-function fmt(n) {
-  return n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-// Init
-loadCart();
+    renderGallery();
+  }
+});
 </script>
 </body>
 </html>
